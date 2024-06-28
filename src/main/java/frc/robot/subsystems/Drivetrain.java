@@ -7,26 +7,29 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+import com.ctre.phoenix6.hardware.TalonFX;
+
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.constants.Constants;
+import frc.robot.constants.DriveConstants;
+import frc.robot.constants.FieldConstants;
 import frc.robot.util.MotorFactory;
 
 public class Drivetrain extends SubsystemBase {
 
-  private final WPI_TalonFX m_leftMotor1;
-  private final WPI_TalonFX m_leftMotor2;
-  private final WPI_TalonFX m_rightMotor1;
-  private final WPI_TalonFX m_rightMotor2;
+  private final TalonFX m_leftMotor1;
+  private final TalonFX m_leftMotor2;
+  private final TalonFX m_rightMotor1;
+  private final TalonFX m_rightMotor2;
 
   public Drivetrain() {
 
-    m_leftMotor1 = MotorFactory.createTalonFX(Constants.drive.kLeftMotor1, Constants.kRioCAN);
-    m_leftMotor2 = MotorFactory.createTalonFX(Constants.drive.kLeftMotor2, Constants.kRioCAN);
-    m_rightMotor1 = MotorFactory.createTalonFX(Constants.drive.kRightMotor1, Constants.kRioCAN);
-    m_rightMotor2 = MotorFactory.createTalonFX(Constants.drive.kRightMotor2, Constants.kRioCAN);
+    m_leftMotor1 = MotorFactory.createTalonFX(DriveConstants.kLeftMotor1, Constants.RIO_CAN);
+    m_leftMotor2 = MotorFactory.createTalonFX(DriveConstants.kLeftMotor2, Constants.RIO_CAN);
+    m_rightMotor1 = MotorFactory.createTalonFX(DriveConstants.kRightMotor1, Constants.RIO_CAN);
+    m_rightMotor2 = MotorFactory.createTalonFX(DriveConstants.kRightMotor2, Constants.RIO_CAN);
 
     SupplyCurrentLimitConfiguration supplyCurrentLimit = new SupplyCurrentLimitConfiguration(true, 40, 45, 1);
 
@@ -60,5 +63,9 @@ public class Drivetrain extends SubsystemBase {
   public void arcadeDrive(double throttle, double turn) {
     m_leftMotor1.set(ControlMode.PercentOutput, throttle + turn);
     m_rightMotor1.set(ControlMode.PercentOutput, throttle - turn);
+  }
+
+  public Pose2d getPose(){
+    return new Pose2d(FieldConstants.FIELD_LENGTH/2, FieldConstants.FIELD_WIDTH/2, new Rotation2d());
   }
 }

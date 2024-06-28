@@ -12,7 +12,7 @@ import frc.robot.controls.Driver;
 import frc.robot.controls.Operator;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.util.PathGroupLoader;
-import frc.robot.util.ShuffleboardManager;
+import frc.robot.util.ShuffleBoard.ShuffleBoardManager;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -22,7 +22,7 @@ import frc.robot.util.ShuffleboardManager;
  */
 public class Robot extends TimedRobot {
   private Command m_autoCommand;
-  public static ShuffleboardManager shuffleboard;
+  public static ShuffleBoardManager shuffleboard;
   public static Drivetrain drive;
 
   private static boolean isTestMode = false;
@@ -41,10 +41,8 @@ public class Robot extends TimedRobot {
     PathGroupLoader.loadPathGroups();
 
     // make subsystems
-    shuffleboard = new ShuffleboardManager();
+    shuffleboard = new ShuffleBoardManager(drive);
     drive = new Drivetrain();
-
-    shuffleboard.setup();
 
     Driver.configureControls();
     Operator.configureControls();
@@ -64,6 +62,9 @@ public class Robot extends TimedRobot {
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
+    
+    // Update Shuffleboard
+    shuffleboard.update();
   }
 
   /** This function is called once each time the robot enters Disabled mode. */
@@ -129,7 +130,7 @@ public class Robot extends TimedRobot {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    return shuffleboard.getAutonomousCommand();
+    return shuffleboard.getSelectedCommand();
   }
 
   public static boolean isTestMode() {
