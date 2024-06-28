@@ -68,4 +68,5 @@ public class Drivetrain extends SubsystemBase {
   public Pose2d getPose(){
     return new Pose2d(FieldConstants.FIELD_LENGTH/2, FieldConstants.FIELD_WIDTH/2, new Rotation2d());
   }
+  public void resetOdometry(Pose2d newPose){}
 }
