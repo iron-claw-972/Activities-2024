@@ -20,62 +20,16 @@ public class DriveTab extends ShuffleBoardTabs {
     
     private Drivetrain drive;
 
-    private Module[] modules;
-
     private GenericEntry xOdemetry;
     private GenericEntry yOdemetry;
     private GenericEntry rotOdemetry;
-    private GenericEntry[] steerSpeed = new GenericEntry[4];
-    private GenericEntry[] driveSpeed = new GenericEntry[4];
-    private GenericEntry[] driveAccel = new GenericEntry[4];
-    private GenericEntry[] rotationalPosition = new GenericEntry[4];
-    private GenericEntry[] voltage = new GenericEntry[4];
-    private GenericEntry[] current = new GenericEntry[4];
-
-    private ShuffleboardLayout[] driveLayouts = new ShuffleboardLayout[4];
 
     public DriveTab(Drivetrain drive){
         this.drive = drive;
-        modules = this.drive.getModules();
     }
 
     public void createEntries(){
         tab = Shuffleboard.getTab("Drive");
-        for(int i = 0; i<modules.length; i++){
-            String moduleName = modules[i].getModuleType().name();
-            
-            driveLayouts[i] = tab.getLayout(moduleName+" drive module", BuiltInLayouts.kList).withSize(2, 2).withPosition(2*i, 0);
-
-            steerSpeed[i] = driveLayouts[i]
-            .add("steer Speed", 0)
-            .withPosition(0, 0)
-            .getEntry();
-
-            driveSpeed[i] = driveLayouts[i]
-            .add("drive Speed", 0)
-            .withPosition(0, 1)
-            .getEntry();
-
-            rotationalPosition[i] = driveLayouts[i]
-            .add("rotation position", 0)
-            .withPosition(0, 2)
-            .getEntry();
-
-            voltage[i] = driveLayouts[i]
-            .add("voltage", 0)
-            .withPosition(0, 3)
-            .getEntry();
-
-            current[i] = driveLayouts[i]
-            .add("current", 0)
-            .withPosition(0, 4)
-            .getEntry();
-            
-            driveAccel[i] = driveLayouts[i]
-            .add("drive accel", 0)
-            .withPosition(0, 4)
-            .getEntry();
-        }
 
         xOdemetry = tab.add("x odemetry", 0).withPosition(0, 3).getEntry();
         yOdemetry = tab.add("y odemetry", 0).withPosition(1, 3).getEntry();
@@ -84,17 +38,6 @@ public class DriveTab extends ShuffleBoardTabs {
 
 
     public void update(){
-        for(int i = 0; i<modules.length; i++){
-            steerSpeed[i].setDouble(truncate(modules[i].getSteerVelocity()));
-            driveSpeed[i].setDouble(truncate(modules[i].getDriveVelocity()));
-            rotationalPosition[i].setDouble(truncate(MathUtil.inputModulus(modules[i].getAngle().getDegrees(), 0, 360)));
-            voltage[i].setDouble(truncate(drive.getModules()[i].getDriveVoltage()));
-            current[i].setDouble(truncate(drive.getModules()[i].getDriveStatorCurrent()));
-            if(RobotBase.isReal()){
-                driveAccel[i].setDouble(modules[i].getDriveMotor().getAcceleration().getValueAsDouble());
-            }
-
-        }
         xOdemetry.setDouble(truncate(drive.getPose().getX()));
         yOdemetry.setDouble(truncate(drive.getPose().getY()));
         rotOdemetry.setDouble(truncate(drive.getPose().getRotation().getDegrees()));

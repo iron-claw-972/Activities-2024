@@ -26,16 +26,10 @@ public class SysIDDriveCommand extends SequentialCommandGroup {
             Units.Seconds.of(5),
             (x)->SignalLogger.writeString("state", x.toString())
         );
-        Rotation2d[] angles = {
-            Rotation2d.fromDegrees(0),//-45-180
-            Rotation2d.fromDegrees(0),//45
-            Rotation2d.fromDegrees(0),//45+180
-            Rotation2d.fromDegrees(0),//-45
-        };
         sysId = new SysId(
             "Drivetrain",
             x ->{
-                    drive.tankDrive(x, x);
+                    drive.tankDriveVolts(x, x);
                 },
             drive,
             config
@@ -48,7 +42,7 @@ public class SysIDDriveCommand extends SequentialCommandGroup {
             sysId.runDynamic(Direction.kForward),
             new WaitCommand(0.5),
             sysId.runDynamic(Direction.kReverse)
-            );
+        );
     }
 
     

@@ -65,6 +65,10 @@ public class Drivetrain extends SubsystemBase {
     m_rightMotor1.set(ControlMode.PercentOutput, throttle - turn);
   }
 
+  public void tankDriveVolts(double left, double right){
+    kLeftMotor1.setVoltage(left);
+    kRightMotor1.setVoltage(right);
+  }
   public Pose2d getPose(){
     return new Pose2d(FieldConstants.FIELD_LENGTH/2, FieldConstants.FIELD_WIDTH/2, new Rotation2d());
   }
