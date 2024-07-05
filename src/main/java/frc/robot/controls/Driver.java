@@ -14,11 +14,11 @@ public class Driver {
   public static void configureControls() {
     
     // example button binding implementation
-    driver.get(Button.A).whenActive(new DoNothing());
+    driver.get(Button.A).onTrue(new DoNothing());
 
     // example test type implementation
     // tests drivetrain, when in TEST_DRIVE test mode and 
-    driver.get(Button.B).whenActive(
+    driver.get(Button.B).onTrue(
       new SequentialCommandGroup(
         new RunCommand(() -> Robot.drive.tankDrive(0.5, 0.5), Robot.drive).withTimeout(1),
         new RunCommand(() -> Robot.drive.tankDrive(-0.5, -0.5), Robot.drive).withTimeout(1),

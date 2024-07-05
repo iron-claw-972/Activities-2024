@@ -7,6 +7,8 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
+import com.ctre.phoenix6.controls.Follower;
 import com.ctre.phoenix6.hardware.TalonFX;
 
 import edu.wpi.first.math.geometry.Pose2d;
@@ -31,15 +33,15 @@ public class Drivetrain extends SubsystemBase {
     m_rightMotor1 = MotorFactory.createTalonFX(DriveConstants.kRightMotor1, Constants.RIO_CAN);
     m_rightMotor2 = MotorFactory.createTalonFX(DriveConstants.kRightMotor2, Constants.RIO_CAN);
 
-    SupplyCurrentLimitConfiguration supplyCurrentLimit = new SupplyCurrentLimitConfiguration(true, 40, 45, 1);
+    CurrentLimitsConfigs supplyCurrentLimit = new CurrentLimitsConfigs().withSupplyCurrentLimitEnable(true).withSupplyCurrentLimit(40).withSupplyCurrentThreshold(45).withSupplyTimeThreshold(1);
 
-    m_leftMotor1.configSupplyCurrentLimit(supplyCurrentLimit);
-    m_leftMotor2.configSupplyCurrentLimit(supplyCurrentLimit);
-    m_rightMotor1.configSupplyCurrentLimit(supplyCurrentLimit);
-    m_rightMotor2.configSupplyCurrentLimit(supplyCurrentLimit);
+    m_leftMotor1.getConfigurator().apply(supplyCurrentLimit);
+    m_leftMotor2.getConfigurator().apply(supplyCurrentLimit);
+    m_rightMotor1.getConfigurator().apply(supplyCurrentLimit);
+    m_rightMotor2.getConfigurator().apply(supplyCurrentLimit);
 
-    m_leftMotor2.follow(m_leftMotor1);
-    m_rightMotor2.follow(m_rightMotor1);
+    m_leftMotor2.setControl(new Follower(m_leftMotor1.getDeviceID(), false));
+    m_rightMotor2.setControl(new Follower(m_rightMotor1.getDeviceID(), false));
   }
 
   /**
@@ -50,8 +52,8 @@ public class Drivetrain extends SubsystemBase {
    * @param rightPower the commanded power to the right motors
    */
   public void tankDrive(double leftPower, double rightPower) {
-    m_leftMotor1.set(ControlMode.PercentOutput, leftPower);
-    m_rightMotor1.set(ControlMode.PercentOutput, rightPower);
+    m_leftMotor1.set(leftPower);
+    m_rightMotor1.set(rightPower);
   }
 
   /**
@@ -61,13 +63,13 @@ public class Drivetrain extends SubsystemBase {
    * @param turn the commanded turn rotation
    */
   public void arcadeDrive(double throttle, double turn) {
-    m_leftMotor1.set(ControlMode.PercentOutput, throttle + turn);
-    m_rightMotor1.set(ControlMode.PercentOutput, throttle - turn);
+    m_leftMotor1.set(throttle + turn);
+    m_rightMotor1.set(throttle - turn);
   }
 
   public void tankDriveVolts(double left, double right){
-    kLeftMotor1.setVoltage(left);
-    kRightMotor1.setVoltage(right);
+    m_leftMotor1.setVoltage(left);
+    m_rightMotor1.setVoltage(right);
   }
   public Pose2d getPose(){
     return new Pose2d(FieldConstants.FIELD_LENGTH/2, FieldConstants.FIELD_WIDTH/2, new Rotation2d());

@@ -5,7 +5,6 @@
 package frc.robot.commands;
 
 import com.ctre.phoenix6.SignalLogger;
-import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.units.Units;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
@@ -29,7 +28,7 @@ public class SysIDDriveCommand extends SequentialCommandGroup {
         sysId = new SysId(
             "Drivetrain",
             x ->{
-                    drive.tankDriveVolts(x, x);
+                    drive.tankDriveVolts(x.magnitude(), x.magnitude());
                 },
             drive,
             config
