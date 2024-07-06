@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.controls.Driver;
 import frc.robot.controls.Operator;
 import frc.robot.subsystems.Drivetrain;
-import frc.robot.util.PathGroupLoader;
 import frc.robot.util.ShuffleBoard.ShuffleBoardManager;
 
 /**
@@ -36,9 +35,6 @@ public class Robot extends TimedRobot {
 
     // This is really annoying so it's disabled
     DriverStation.silenceJoystickConnectionWarning(true);
-
-    // load paths before auto starts
-    PathGroupLoader.loadPathGroups();
 
     // make subsystems
     shuffleboard = new ShuffleBoardManager(drive);

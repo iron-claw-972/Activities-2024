@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.PrintCommand;
-import frc.robot.commands.auto_comm.FollowPathCommand;
+import edu.wpi.first.wpilibj2.command.RunCommand;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.util.ShuffleBoard.ShuffleBoardTabs;
 
@@ -26,10 +26,10 @@ public class AutoTab extends ShuffleBoardTabs {
     public void createEntries(){  
         tab = Shuffleboard.getTab("Auto");
     
-        // Previous Autos (Some will keep and still have to fix)
+        // Default auto
         autoCommand.setDefaultOption("Do Nothing", new PrintCommand("This will do nothing!"));
-        autoCommand.addOption("Example Path", new FollowPathCommand("Example Path",true, drive));
-        autoCommand.addOption("Accuracy", new FollowPathCommand("Accuracy",true, drive));
+        // Add auto commands here
+        autoCommand.addOption("Spin", new RunCommand(()->drive.arcadeDrive(0, 0.2), drive));
         
         tab.add(autoCommand);
     }
