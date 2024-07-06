@@ -9,8 +9,8 @@ These are the things we are going to be checking your PR has, if it doesn't your
 This PR will..
 
 
-## Design Doc
-<!-- Link your approved design doc. We will be checking that the code fits everything in the design doc. If the PR is only meant to address part of the deisgn doc, note here what is not yet implemented from the Design Doc -->
+## Activity Finished
+<!-- The activity you finished before making this PR -->
 
 
 ## Tests Ran
