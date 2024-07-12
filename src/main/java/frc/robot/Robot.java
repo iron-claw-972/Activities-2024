@@ -8,7 +8,8 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.controls.Driver;
+import frc.robot.controls.BaseDriverConfig;
+import frc.robot.controls.GameControllerDriverConfig;
 import frc.robot.controls.Operator;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.util.ShuffleBoard.ShuffleBoardManager;
@@ -20,9 +21,12 @@ import frc.robot.util.ShuffleBoard.ShuffleBoardManager;
  * project.
  */
 public class Robot extends TimedRobot {
-  private Command m_autoCommand;
+  private Command autoCommand;
   public static ShuffleBoardManager shuffleboard;
   public static Drivetrain drive;
+  // TODO 2.3.9: Create variable for your subsystem
+  public static BaseDriverConfig driver;
+  public static Operator operator;
 
   private static boolean isTestMode = false;
 
@@ -37,11 +41,18 @@ public class Robot extends TimedRobot {
     DriverStation.silenceJoystickConnectionWarning(true);
 
     // make subsystems
-    shuffleboard = new ShuffleBoardManager(drive);
     drive = new Drivetrain();
+    // TODO 2.3.10: Create your subsystem
+    
+    shuffleboard = new ShuffleBoardManager(drive);
+    driver = new GameControllerDriverConfig(drive);
+    operator = new Operator();
 
-    Driver.configureControls();
-    Operator.configureControls();
+    driver.configureControls();
+    operator.configureControls();
+
+    // TODO 2.1.6: Set the drivetrain's default command
+
   }
 
   /**
@@ -72,15 +83,15 @@ public class Robot extends TimedRobot {
 
   @Override
   public void disabledPeriodic() {
-    m_autoCommand = getAutonomousCommand();
+    autoCommand = getAutonomousCommand();
   }
 
   /** This autonomous runs the autonomous command selected by your {@link Robot} class. */
   @Override
   public void autonomousInit() {
     isTestMode = false;
-    if (m_autoCommand != null) {
-      m_autoCommand.schedule();
+    if (autoCommand != null) {
+      autoCommand.schedule();
     }
   }
 
@@ -94,8 +105,8 @@ public class Robot extends TimedRobot {
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
     // this line or comment it out.
-    if (m_autoCommand != null) {
-      m_autoCommand.cancel();
+    if (autoCommand != null) {
+      autoCommand.cancel();
     }
     isTestMode = false;
   }
