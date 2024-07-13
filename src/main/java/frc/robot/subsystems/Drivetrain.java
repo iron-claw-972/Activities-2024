@@ -1,10 +1,3 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2018-2019 FIRST. All Rights Reserved.                        */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 package frc.robot.subsystems;
 
 import com.ctre.phoenix6.hardware.TalonFX;
@@ -20,6 +13,11 @@ public class Drivetrain extends SubsystemBase {
   private final TalonFX leftMotor2;
   private final TalonFX rightMotor1;
   private final TalonFX rightMotor2;
+
+  // TODO 5.1.5: Create FeedForward and PIDs
+
+  // TODO 5.2.1: Create DifferentialDriveKinematics
+
 
   public Drivetrain() {
     // TODO 1.1.2: Initialize motors
@@ -82,8 +80,24 @@ public class Drivetrain extends SubsystemBase {
     return 0;
   }
 
-  // TODO 5.?.?: Implement this
   public void tankDriveVolts(double left, double right){
+    // TODO 5.1.1: Implement this
+
+  }
+
+  // TODO 5.2.2: 
+  public double getLeftSpeed(){
+    return 0;
+  }
+  public double getRightSpeed(){
+    return 0;
+  }
+
+  public void feedForwardDrive(double throttle, double turn){
+    // TODO 5.2.3: Create wheel speeds
+
+    // TODO 5.2.4: Calculate voltages and call tankDriveVolts()
+
   }
 
   // Another method we might use later

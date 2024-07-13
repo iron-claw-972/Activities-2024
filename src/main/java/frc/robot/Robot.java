@@ -53,6 +53,8 @@ public class Robot extends TimedRobot {
 
     // TODO 2.1.6: Set the drivetrain's default command
 
+    // TODO 3.2.1: Change default command to use RunCommand with a lambda expression
+    // TODO 5.3.1: Change to FeedForward command
   }
 
   /**
