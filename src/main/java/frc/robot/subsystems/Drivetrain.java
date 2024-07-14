@@ -26,7 +26,9 @@ public class Drivetrain extends SubsystemBase {
     leftMotor2 = null;
     rightMotor2 = null;
 
-    // TODO 1.1.3: Make motor2s follow motor1s
+    // TODO 1.1.3: Set motors to brake mode
+
+    // TODO 1.1.4: Make motor2s follow motor1s
 
     // TODO 1.2.4: Invert motors if necessary
 
