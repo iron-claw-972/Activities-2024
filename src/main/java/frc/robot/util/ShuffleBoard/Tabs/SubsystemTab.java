@@ -9,14 +9,14 @@ public class SubsystemTab extends ShuffleBoardTabs {
     // TODO 2.3.11: Create variable for subsystem
 
     public SubsystemTab(){
-        
+        // TODO 2.4.7: Add Mechanism2d
     }
 
     public void createEntries(){
         tab = Shuffleboard.getTab("Subsystem");
 
-        // TODO 4.3.1: Add PID
-        
+        // TODO 5.3.1: Add PID
+
     }
 
 

@@ -28,11 +28,11 @@ public class AutoTab extends ShuffleBoardTabs {
         // Default auto
         autoCommand.setDefaultOption("Do Nothing", new PrintCommand("This will do nothing!"));
         // Add auto commands here
-        // TODO 2.2.7: Add your auto command here
+        // TODO 3.2.7: Add your auto command here
 
-        // TODO 2.3.9: Add your Bang-Bang drive command here
+        // TODO 3.3.8: Add your Bang-Bang drive command here
 
-        // TODO: 2.3.12: Add your Bang-Bang command for your subsystem here
+        // TODO 3.3.11: Add your Bang-Bang command for your subsystem here
         
         tab.add(autoCommand);
     }

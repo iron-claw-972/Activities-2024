@@ -19,15 +19,15 @@ public class GameControllerDriverConfig extends BaseDriverConfig {
 
   @Override
   public void configureControls() {
-    // TODO 3.1.1: Change to your auto command
+    // TODO 4.1.1: Change to your auto command
     controller.get(Button.A).onTrue(new DoNothing());
-    // TODO 3.1.3: Add Bang-Bang drive command
+    // TODO 4.1.3: Add Bang-Bang drive command
 
-    // TODO 3.1.4: Add subsystem Bang-Bangs
+    // TODO 4.1.4: Add subsystem Bang-Bangs
 
-    // TODO 3.2.2: Make robot spin while a button is pressed
+    // TODO 4.2.2: Make robot spin while a button is pressed
 
-    // TODO 3.3.1: Add more triggers
+    // TODO 4.3.1: Add more triggers
   }
 
   @Override

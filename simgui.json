@@ -1,0 +1,32 @@
+{
+  "NTProvider": {
+    "types": {
+      "/FMSInfo": "FMSInfo",
+      "/Shuffleboard/Auto/SendableChooser[0]": "String Chooser",
+      "/Shuffleboard/Drive/Characterize": "Command",
+      "/Shuffleboard/Drive/Field": "Field2d",
+      "/Shuffleboard/Drive/flywheel": "Mechanism2d"
+    },
+    "windows": {
+      "/Shuffleboard/Drive/Field": {
+        "bottom": 1476,
+        "height": 8.210550308227539,
+        "left": 150,
+        "right": 2961,
+        "top": 79,
+        "width": 16.541748046875,
+        "window": {
+          "visible": true
+        }
+      },
+      "/Shuffleboard/Drive/flywheel": {
+        "window": {
+          "visible": true
+        }
+      }
+    }
+  },
+  "NetworkTables Info": {
+    "visible": true
+  }
+}

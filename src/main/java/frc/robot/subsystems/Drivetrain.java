@@ -2,35 +2,42 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix6.hardware.TalonFX;
 
+import edu.wpi.first.math.VecBuilder;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.wpilibj.simulation.DifferentialDrivetrainSim;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.constants.FieldConstants;
 
 public class Drivetrain extends SubsystemBase {
   
-  private final TalonFX leftMotor1;
-  private final TalonFX leftMotor2;
-  private final TalonFX rightMotor1;
-  private final TalonFX rightMotor2;
+  private TalonFX leftMotor1;
+  private TalonFX leftMotor2;
+  private TalonFX rightMotor1;
+  private TalonFX rightMotor2;
+  static{
+    DifferentialDrivetrainSim sim = new DifferentialDrivetrainSim(null, 0, 0, 0, 0, 0, null);
+    sim.setState(VecBuilder.fill(0, 0, sim.getHeading().getRadians(), sim.getLeftVelocityMetersPerSecond(), sim.getRightVelocityMetersPerSecond(), 0, 0));
+  }
 
-  // TODO 5.1.5: Create FeedForward and PIDs
+  // TODO 2.2.1: Create gyro (AHRS)
 
-  // TODO 5.2.1: Create DifferentialDriveKinematics
+  // TODO 2.2.3: Create DifferentialDriveKinematics
+
+  // TODO 2.2.4: Create DifferentialDrivePoseEstimator
+
+  // TODO 6.1.5: Create Feedforward and PIDs
 
 
   public Drivetrain() {
     // TODO 1.1.2: Initialize motors
-    leftMotor1 = null;
-    rightMotor1 = null;
-    leftMotor2 = null;
-    rightMotor2 = null;
 
     // TODO 1.1.3: Set motors to brake mode
 
     // TODO 1.1.4: Make motor2s follow motor1s
 
     // TODO 1.2.4: Invert motors if necessary
+
+    // TODO 2.1.1: Create DifferentialDriveSim if the robot isn't real
 
   }
 
@@ -39,9 +46,14 @@ public class Drivetrain extends SubsystemBase {
    */
   @Override
   public void periodic(){
+    // TODO 2.2.5: Update odometry
+
     // TODO 1.2.2: Call tankDrive()
+
+    // TODO 3.1.1: Remove all of the tank drive code in this method
+
+    // TODO 2.1.3: Update sim if in simulation
     
-    // TODO 2.1.1: Remove all of the code in this method
   }
 
   /**
@@ -53,7 +65,9 @@ public class Drivetrain extends SubsystemBase {
    */
   public void tankDrive(double leftPower, double rightPower) {
     // TODO 1.2.1: Implement tankDrive
-    
+
+    // TODO 2.1.2: If in sim, set sim inputs
+
   }
 
   /**
@@ -63,15 +77,21 @@ public class Drivetrain extends SubsystemBase {
    * @param turn the commanded turn rotation
    */
   public void arcadeDrive(double throttle, double turn) {
-    // TODO 2.1.2: Implement arcadeDrive
+    // TODO 3.1.2: Implement arcadeDrive
+    
+  }
+
+  public Pose2d getPose(){
+    // TODO 2.2.6: Implement this method
+    return new Pose2d();
   }
 
   public void resetEncoders(){
-    // TODO 2.3.7: Reset encoders
+    // TODO 3.3.7: Reset encoders
 
   }
 
-  // TODO 2.3.8: Implement these
+  // TODO 2.2.2: Implement these 4 methods
   public double getLeftPosition(){
     return 0;
   }
@@ -81,13 +101,16 @@ public class Drivetrain extends SubsystemBase {
   public double getAveragePosition(){
     return 0;
   }
+  public Rotation2d getGyroAngle(){
+    return null;
+  }
 
   public void tankDriveVolts(double left, double right){
-    // TODO 5.1.1: Implement this
+    // TODO 6.1.1: Implement this
 
   }
 
-  // TODO 5.2.2: 
+  // TODO 6.2.1: Implement these 2 methods
   public double getLeftSpeed(){
     return 0;
   }
@@ -95,15 +118,10 @@ public class Drivetrain extends SubsystemBase {
     return 0;
   }
 
-  public void feedForwardDrive(double throttle, double turn){
-    // TODO 5.2.3: Create wheel speeds
+  public void feedforwardDrive(double throttle, double turn){
+    // TODO 6.2.2: Create wheel speeds
 
-    // TODO 5.2.4: Calculate voltages and call tankDriveVolts()
+    // TODO 6.2.3: Calculate voltages and call tankDriveVolts()
 
-  }
-
-  // Another method we might use later
-  public Pose2d getPose(){
-    return new Pose2d(FieldConstants.FIELD_LENGTH/2, FieldConstants.FIELD_WIDTH/2, new Rotation2d());
   }
 }
