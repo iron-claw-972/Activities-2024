@@ -15,6 +15,8 @@ public class SubsystemTab extends ShuffleBoardTabs {
     public void createEntries(){
         tab = Shuffleboard.getTab("Subsystem");
 
+        // TODO 3.3.13: Add command buttons
+
         // TODO 5.3.1: Add PID
 
     }

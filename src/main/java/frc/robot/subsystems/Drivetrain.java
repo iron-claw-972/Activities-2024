@@ -2,10 +2,8 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix6.hardware.TalonFX;
 
-import edu.wpi.first.math.VecBuilder;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.wpilibj.simulation.DifferentialDrivetrainSim;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Drivetrain extends SubsystemBase {
@@ -14,10 +12,6 @@ public class Drivetrain extends SubsystemBase {
   private TalonFX leftMotor2;
   private TalonFX rightMotor1;
   private TalonFX rightMotor2;
-  static{
-    DifferentialDrivetrainSim sim = new DifferentialDrivetrainSim(null, 0, 0, 0, 0, 0, null);
-    sim.setState(VecBuilder.fill(0, 0, sim.getHeading().getRadians(), sim.getLeftVelocityMetersPerSecond(), sim.getRightVelocityMetersPerSecond(), 0, 0));
-  }
 
   // TODO 2.2.1: Create gyro (AHRS)
 
