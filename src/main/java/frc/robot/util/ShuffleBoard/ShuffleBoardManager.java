@@ -1,7 +1,11 @@
 package frc.robot.util.ShuffleBoard;
 
 import java.util.ArrayList;
+
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.util.ShuffleBoard.Tabs.AutoTab;
 import frc.robot.util.ShuffleBoard.Tabs.DriveTab;
@@ -31,6 +35,10 @@ public class ShuffleBoardManager {
         }
         
         feild = new Field(drive);
+
+        // This doesn't need to be stored in its own class
+        Shuffleboard.getTab("Scheduler").add("Command Scheduler", CommandScheduler.getInstance());
+        SmartDashboard.putData("Command Scheduler", CommandScheduler.getInstance());
     }
 
     public void update(){

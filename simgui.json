@@ -5,7 +5,10 @@
       "/Shuffleboard/Auto/SendableChooser[0]": "String Chooser",
       "/Shuffleboard/Drive/Characterize": "Command",
       "/Shuffleboard/Drive/Field": "Field2d",
-      "/Shuffleboard/Drive/flywheel": "Mechanism2d"
+      "/Shuffleboard/Drive/flywheel": "Mechanism2d",
+      "/Shuffleboard/Scheduler/Command Scheduler": "Scheduler",
+      "/Shuffleboard/Scheduler/Scheduler": "Scheduler",
+      "/SmartDashboard/Command Scheduler": "Scheduler"
     },
     "windows": {
       "/Shuffleboard/Drive/Field": {
@@ -15,11 +18,6 @@
         "right": 2961,
         "top": 79,
         "width": 16.541748046875,
-        "window": {
-          "visible": true
-        }
-      },
-      "/Shuffleboard/Drive/flywheel": {
         "window": {
           "visible": true
         }
