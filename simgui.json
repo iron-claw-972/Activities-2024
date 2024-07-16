@@ -8,6 +8,7 @@
       "/Shuffleboard/Drive/flywheel": "Mechanism2d",
       "/Shuffleboard/Scheduler/Command Scheduler": "Scheduler",
       "/Shuffleboard/Scheduler/Scheduler": "Scheduler",
+      "/Shuffleboard/Subsystem/TEST MECHANISM": "Mechanism2d",
       "/SmartDashboard/Command Scheduler": "Scheduler"
     },
     "windows": {
