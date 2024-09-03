@@ -2,6 +2,9 @@ package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
 
+import frc.robot.constants.DriveConstants;
+import frc.robot.constants.Constants;
+
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -23,8 +26,8 @@ public class Drivetrain extends SubsystemBase {
 
 
   public Drivetrain() {
-    leftMotor1 = new CANSparkMax(11, Constants.RIO_CAN);
-    rightMotor1 = new CANSparkMax(6, Constants.RIO_CAN);
+    leftMotor1 = new CANSparkMax(11, MotorType.kBrushless);
+    rightMotor1 = new CANSparkMax(6, MotorType.kBrushless);
 
     setNeutralMode();
 
