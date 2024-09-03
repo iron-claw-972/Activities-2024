@@ -1,10 +1,14 @@
 package frc.robot.subsystems;
 
+import com.ctre.phoenix6.hardware.TalonFX;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkLowLevel.MotorType;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.constants.Constants;
+import frc.robot.constants.DriveConstants;
 
 public class Drivetrain extends SubsystemBase {
   
@@ -13,6 +17,8 @@ public class Drivetrain extends SubsystemBase {
   private CANSparkMax rightMotor1;
   private CANSparkMax rightMotor2;
 
+
+  
   // TODO 2.2.1: Create gyro (AHRS)
 
   // TODO 2.2.3: Create DifferentialDriveKinematics
@@ -23,10 +29,13 @@ public class Drivetrain extends SubsystemBase {
 
 
   public Drivetrain() {
+
     // TODO 1.1.2: Initialize motors
+    leftMotor1 = new CANSparkMax(DriveConstants.LEFT_MOTOR_1_ID, MotorType.kBrushless);
+    rightMotor1 = new CANSparkMax(DriveConstants.RIGHT_MOTOR_1_ID, MotorType.kBrushless);
 
     // TODO 1.1.3: Set motors to brake mode
-
+  
     // TODO 1.1.4: Make motor2s follow motor1s
 
     // TODO 1.2.4: Invert motors if necessary
