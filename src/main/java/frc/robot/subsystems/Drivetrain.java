@@ -1,16 +1,17 @@
 package frc.robot.subsystems;
 
-import com.ctre.phoenix6.hardware.TalonFX;
+import com.revrobotics.CANSparkMax;
+
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Drivetrain extends SubsystemBase {
   
-  private TalonFX leftMotor1;
-  private TalonFX leftMotor2;
-  private TalonFX rightMotor1;
-  private TalonFX rightMotor2;
+  private CANSparkMax leftMotor1;
+  private CANSparkMax leftMotor2;
+  private CANSparkMax rightMotor1;
+  private CANSparkMax rightMotor2;
 
   // TODO 2.2.1: Create gyro (AHRS)
 
