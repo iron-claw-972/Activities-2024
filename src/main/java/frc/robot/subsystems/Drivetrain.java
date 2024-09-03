@@ -23,7 +23,8 @@ public class Drivetrain extends SubsystemBase {
 
 
   public Drivetrain() {
-    // TODO 1.1.2: Initialize motors
+    leftMotor1 = new CANSparkMax(11, Constants.RIO_CAN);
+    rightMotor1 = new CANSparkMax(6, Constants.RIO_CAN)
 
     setNeutralMode();
 
