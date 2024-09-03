@@ -25,9 +25,9 @@ public class Drivetrain extends SubsystemBase {
   public Drivetrain() {
     // TODO 1.1.2: Initialize motors
 
-    // TODO 1.1.3: Set motors to brake mode
+    setNeutralMode();
 
-    // TODO 1.1.4: Make motor2s follow motor1s
+    motorName.setControl(new Follower(otherMotor.getDeviceID(), false));
 
     // TODO 1.2.4: Invert motors if necessary
 
@@ -42,7 +42,7 @@ public class Drivetrain extends SubsystemBase {
   public void periodic(){
     // TODO 2.2.5: Update odometry
 
-    // TODO 1.2.2: Call tankDrive()
+    tankDrive(Robot.driver.getLeftSpeed() * .25, Robot.driver.getRightSpeed() * .25)
 
     // TODO 3.1.1: Remove all of the tank drive code in this method
 
@@ -58,7 +58,8 @@ public class Drivetrain extends SubsystemBase {
    * @param rightPower the commanded power to the right motors (-1 to 1)
    */
   public void tankDrive(double leftPower, double rightPower) {
-    // TODO 1.2.1: Implement tankDrive
+    leftMotor1 = leftPower;
+    rightMotor1 = rightPower;
 
     // TODO 2.1.2: If in sim, set sim inputs
 
