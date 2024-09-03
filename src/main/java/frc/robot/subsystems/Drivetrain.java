@@ -24,7 +24,7 @@ public class Drivetrain extends SubsystemBase {
 
   public Drivetrain() {
     leftMotor1 = new CANSparkMax(11, Constants.RIO_CAN);
-    rightMotor1 = new CANSparkMax(6, Constants.RIO_CAN)
+    rightMotor1 = new CANSparkMax(6, Constants.RIO_CAN);
 
     setNeutralMode();
 
@@ -43,7 +43,7 @@ public class Drivetrain extends SubsystemBase {
   public void periodic(){
     // TODO 2.2.5: Update odometry
 
-    tankDrive(Robot.driver.getLeftSpeed() * .25, Robot.driver.getRightSpeed() * .25)
+    tankDrive(Robot.driver.getLeftSpeed() * .25, Robot.driver.getRightSpeed() * .25);
 
     // TODO 3.1.1: Remove all of the tank drive code in this method
 
@@ -59,8 +59,8 @@ public class Drivetrain extends SubsystemBase {
    * @param rightPower the commanded power to the right motors (-1 to 1)
    */
   public void tankDrive(double leftPower, double rightPower) {
-    leftMotor1 = leftPower;
-    rightMotor1 = rightPower;
+    leftMotor1.set(leftPower);
+    rightMotor1.set(rightPower);
 
     // TODO 2.1.2: If in sim, set sim inputs
 
