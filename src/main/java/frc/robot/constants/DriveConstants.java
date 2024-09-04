@@ -13,9 +13,9 @@ import edu.wpi.first.math.util.Units;
 public class DriveConstants {
 
   // TODO 1.1.1: Set these
-  public static final int LEFT_MOTOR_1_ID = 11;
+  public static final int LEFT_MOTOR_1_ID = -1;
   public static final int LEFT_MOTOR_2_ID = -1;
-  public static final int RIGHT_MOTOR_1_ID = 6;
+  public static final int RIGHT_MOTOR_1_ID = -1;
   public static final int RIGHT_MOTOR_2_ID = -1;
 
   // TODO 6.1.3: Add FF and PID constants
@@ -32,7 +32,7 @@ public class DriveConstants {
 
   // The motor type and amount, used for simulation
   @SuppressWarnings("unused")
-  public static final DCMotor MOTOR = DCMotor.getFalcon500(LEFT_MOTOR_2_ID < 0 ? 1 : 2);
+  public static final DCMotor MOTOR = DCMotor.getNEO(LEFT_MOTOR_2_ID < 0 ? 1 : 2);
 
   // Drivetrain dynamics, used for simulation
   public static final LinearSystem<N2, N2, N2> DRIVETRAIN_PLANT = LinearSystemId.createDrivetrainVelocitySystem(
