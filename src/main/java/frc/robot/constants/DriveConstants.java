@@ -32,7 +32,7 @@ public class DriveConstants {
 
   // The motor type and amount, used for simulation
   @SuppressWarnings("unused")
-  public static final DCMotor MOTOR = DCMotor.getFalcon500(LEFT_MOTOR_2_ID < 0 ? 1 : 2);
+  public static final DCMotor MOTOR = DCMotor.getNEO(LEFT_MOTOR_2_ID < 0 ? 1 : 2);
 
   // Drivetrain dynamics, used for simulation
   public static final LinearSystem<N2, N2, N2> DRIVETRAIN_PLANT = LinearSystemId.createDrivetrainVelocitySystem(
