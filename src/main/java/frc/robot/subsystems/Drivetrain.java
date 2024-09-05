@@ -4,6 +4,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
 import frc.robot.constants.DriveConstants;
+import frc.robot.Robot;
 import frc.robot.constants.Constants;
 
 import edu.wpi.first.math.geometry.Pose2d;
@@ -49,7 +50,7 @@ public class Drivetrain extends SubsystemBase {
   public void periodic(){
     // TODO 2.2.5: Update odometry
 
-    tankDrive(Robot.driver.getLeftSpeed() * .25, Robot.driver.getRightSpeed() * .25);
+    tankDrive(Robot.driver.getRawLeftTranslation() * .25, Robot.driver.getRawRightTranslation() * .25);
 
     // TODO 3.1.1: Remove all of the tank drive code in this method
 
