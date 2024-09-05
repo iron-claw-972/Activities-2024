@@ -1,10 +1,19 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
+<<<<<<< Updated upstream
+=======
+import com.revrobotics.CANSparkBase.IdleMode;
+import com.revrobotics.CANSparkLowLevel.MotorType;
+>>>>>>> Stashed changes
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+<<<<<<< Updated upstream
+=======
+import frc.robot.constants.DriveConstants;
+>>>>>>> Stashed changes
 
 public class Drivetrain extends SubsystemBase {
   
@@ -24,8 +33,16 @@ public class Drivetrain extends SubsystemBase {
 
   public Drivetrain() {
     // TODO 1.1.2: Initialize motors
+<<<<<<< Updated upstream
 
     // TODO 1.1.3: Set motors to brake mode
+=======
+        CANSparkMax motorLeft = new CANSparkMax(DriveConstants.LEFT_MOTOR_1_ID, MotorType.kBrushless);
+        CANSparkMax motorRight = new CANSparkMax(DriveConstants.RIGHT_MOTOR_1_ID, MotorType.kBrushless);
+    // TODO 1.1.3: Set motors to brake mode
+      motorLeft.setIdleMode(IdleMode.kBrake);
+      motorRight.setIdleMode(IdleMode.kBrake);
+>>>>>>> Stashed changes
 
     // TODO 1.1.4: Make motor2s follow motor1s
 
@@ -59,7 +76,7 @@ public class Drivetrain extends SubsystemBase {
    */
   public void tankDrive(double leftPower, double rightPower) {
     // TODO 1.2.1: Implement tankDrive
-
+    
     // TODO 2.1.2: If in sim, set sim inputs
 
   }
