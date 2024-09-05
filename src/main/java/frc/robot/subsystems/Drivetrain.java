@@ -1,21 +1,15 @@
 package frc.robot.subsystems;
 
-<<<<<<< HEAD
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkBase.IdleMode;
-=======
 import com.revrobotics.CANSparkMax;
->>>>>>> main
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-<<<<<<< HEAD
-=======
-import frc.robot.constants.Constants;
->>>>>>> main
+import frc.robot.Robot;
 import frc.robot.constants.DriveConstants;
 
 public class Drivetrain extends SubsystemBase {
@@ -35,17 +29,14 @@ public class Drivetrain extends SubsystemBase {
 
 
   public Drivetrain() {
-
     // TODO 1.1.2: Initialize motors
       CANSparkMax motorLeft = new CANSparkMax (DriveConstants.LEFT_MOTOR_1_ID, MotorType.kBrushless);
       CANSparkMax motorRight = new CANSparkMax (DriveConstants.RIGHT_MOTOR_1_ID, MotorType.kBrushless);
     // TODO 1.1.3: Set motors to brake mode
-<<<<<<< HEAD
-      motorLeft.setIdleMode(IdleMode.kBrake);
-      motorRight.setIdleMode(IdleMode.kBrake);
-=======
-  
->>>>>>> main
+    leftMotor1.setIdleMode(IdleMode.kBrake);
+    rightMotor1.setIdleMode(IdleMode.kBrake);
+
+      
     // TODO 1.1.4: Make motor2s follow motor1s
 
     // TODO 1.2.4: Invert motors if necessary
@@ -54,7 +45,7 @@ public class Drivetrain extends SubsystemBase {
 
   }
 
-   /**
+  /**
    * This will be called every 20ms, or 50 times per second
    */
   @Override
@@ -62,7 +53,9 @@ public class Drivetrain extends SubsystemBase {
     // TODO 2.2.5: Update odometry
 
     // TODO 1.2.2: Call tankDrive()
-
+    double leftPower = Robot.driver.getLeftTranslation();
+    double rightPower = Robot.driver.getRightTranslation();
+    tankDrive(leftPower, rightPower);
     // TODO 3.1.1: Remove all of the tank drive code in this method
 
     // TODO 2.1.3: Update sim if in simulation
@@ -78,7 +71,9 @@ public class Drivetrain extends SubsystemBase {
    */
   public void tankDrive(double leftPower, double rightPower) {
     // TODO 1.2.1: Implement tankDrive
-      
+    leftMotor1.set(leftPower*0.25);
+    rightMotor1.set(rightPower*0.25);
+
     // TODO 2.1.2: If in sim, set sim inputs
 
   }
@@ -120,7 +115,7 @@ public class Drivetrain extends SubsystemBase {
 
   public void tankDriveVolts(double left, double right){
     // TODO 6.1.1: Implement this
-
+    
   }
 
   // TODO 6.2.1: Implement these 2 methods
