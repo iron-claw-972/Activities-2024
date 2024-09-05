@@ -34,6 +34,8 @@ public class Drivetrain extends SubsystemBase {
     rightMotor1 = new CANSparkMax(DriveConstants.RIGHT_MOTOR_1_ID, MotorType.kBrushless);
     // TODO 1.1.3: Set motors to brake mode
     leftMotor1.setIdleMode(IdleMode.kBrake);
+    rightMotor1.setInverted(true);
+
     // TODO 1.1.4: Make motor2s follow motor1s
 
     // TODO 1.2.4: Invert motors if necessary
@@ -69,7 +71,6 @@ public class Drivetrain extends SubsystemBase {
     // TODO 1.2.1: Implement tankDrive
     leftMotor1.set(leftPower * .25);
     rightMotor1.set(rightPower * .25);
-    
     // TODO 2.1.2: If in sim, set sim inputs
 
   }
