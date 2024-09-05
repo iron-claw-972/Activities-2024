@@ -1,6 +1,9 @@
 package frc.robot.subsystems;
 
+import java.net.CacheRequest;
+
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
 import frc.robot.constants.DriveConstants;
@@ -31,9 +34,11 @@ public class Drivetrain extends SubsystemBase {
 
   public Drivetrain() {
 
-    // TODO 1.1.2: Initialize motors
+    leftMotor1 = new CANSparkMax(DriveConstants.LEFT_MOTOR_1_ID,MotorType.kBrushless);
+    rightMotor1 = new CANSparkMax(DriveConstants.RIGHT_MOTOR_1_ID,MotorType.kBrushless);
 
-    // TODO 1.1.3: Set motors to brake mode
+    leftMotor1.setIdleMode(IdleMode.kBrake);
+    rightMotor1.setIdleMode(IdleMode.kBrake);
   
     // TODO 1.1.4: Make motor2s follow motor1s
 
