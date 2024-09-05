@@ -25,7 +25,7 @@ public class Robot extends TimedRobot {
   public static ShuffleBoardManager shuffleboard;
   public static Drivetrain drive;
   // TODO 2.3.9: Create variable for your subsystem
-  public static BaseDriverConfig driver;
+  public static GameControllerDriverConfig driver;
   public static Operator operator;
 
   private static boolean isTestMode = false;
