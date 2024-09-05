@@ -1,21 +1,29 @@
 package frc.robot.subsystems;
 
+<<<<<<< HEAD
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkBase.IdleMode;
+=======
+import com.revrobotics.CANSparkMax;
+>>>>>>> main
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+<<<<<<< HEAD
+=======
+import frc.robot.constants.Constants;
+>>>>>>> main
 import frc.robot.constants.DriveConstants;
 
 public class Drivetrain extends SubsystemBase {
   
-  private TalonFX leftMotor1;
-  private TalonFX leftMotor2;
-  private TalonFX rightMotor1;
-  private TalonFX rightMotor2;
+  private CANSparkMax leftMotor1;
+  private CANSparkMax leftMotor2;
+  private CANSparkMax rightMotor1;
+  private CANSparkMax rightMotor2;
 
   // TODO 2.2.1: Create gyro (AHRS)
 
@@ -27,12 +35,17 @@ public class Drivetrain extends SubsystemBase {
 
 
   public Drivetrain() {
+
     // TODO 1.1.2: Initialize motors
       CANSparkMax motorLeft = new CANSparkMax (DriveConstants.LEFT_MOTOR_1_ID, MotorType.kBrushless);
       CANSparkMax motorRight = new CANSparkMax (DriveConstants.RIGHT_MOTOR_1_ID, MotorType.kBrushless);
     // TODO 1.1.3: Set motors to brake mode
+<<<<<<< HEAD
       motorLeft.setIdleMode(IdleMode.kBrake);
       motorRight.setIdleMode(IdleMode.kBrake);
+=======
+  
+>>>>>>> main
     // TODO 1.1.4: Make motor2s follow motor1s
 
     // TODO 1.2.4: Invert motors if necessary
@@ -41,7 +54,7 @@ public class Drivetrain extends SubsystemBase {
 
   }
 
-  /**
+   /**
    * This will be called every 20ms, or 50 times per second
    */
   @Override
