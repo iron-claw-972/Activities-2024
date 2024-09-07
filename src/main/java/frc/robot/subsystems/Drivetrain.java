@@ -2,13 +2,16 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix6.controls.Follower;
 import com.ctre.phoenix6.hardware.TalonFX;
+import com.kauailabs.navx.frc.AHRS;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
+import edu.wpi.first.math.estimator.DifferentialDrivePoseEstimator;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.RobotBase;
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.simulation.DifferentialDrivetrainSim;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Robot;
@@ -29,7 +32,7 @@ public class Drivetrain extends SubsystemBase {
   // TODO 2.2.1: Create gyro (AHRS)
 
   // TODO 2.2.3: Create DifferentialDriveKinematics
-
+  AHRS abortionLaws = new   AHRS(SPI.Port.kMXP);
   // TODO 2.2.4: Create DifferentialDrivePoseEstimator
 
   // TODO 6.1.5: Create Feedforward and PIDs
@@ -121,7 +124,7 @@ public class Drivetrain extends SubsystemBase {
 
   // TODO 2.2.2: Implement these 4 methods
   public double getLeftPosition(){
-    return 0;
+    return leftMotor1.getPosition().getValue();
   }
   public double getRightPosition(){
     return 0;
