@@ -34,6 +34,8 @@ public class Drivetrain extends SubsystemBase {
     rightMotor1 = new CANSparkMax(DriveConstants.RIGHT_MOTOR_1_ID, MotorType.kBrushless);
     // TODO 1.1.3: Set motors to brake mode
     leftMotor1.setIdleMode(IdleMode.kBrake);
+    rightMotor1.setIdleMode(IdleMode.kBrake);
+    
     rightMotor1.setInverted(true);
 
     // TODO 1.1.4: Make motor2s follow motor1s
