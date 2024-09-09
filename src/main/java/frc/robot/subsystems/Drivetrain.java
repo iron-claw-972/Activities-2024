@@ -50,7 +50,7 @@ public class Drivetrain extends SubsystemBase {
   public void periodic(){
     // TODO 2.2.5: Update odometry
 
-    tankDrive(Robot.driver.getRawLeftTranslation() * .25, Robot.driver.getRawRightTranslation() * .25);
+    tankDrive(Robot.driver.getRawLeftTranslation(), Robot.driver.getRawRightTranslation());
 
     // TODO 3.1.1: Remove all of the tank drive code in this method
 
@@ -66,8 +66,8 @@ public class Drivetrain extends SubsystemBase {
    * @param rightPower the commanded power to the right motors (-1 to 1)
    */
   public void tankDrive(double leftPower, double rightPower) {
-    leftMotor1.set(leftPower);
-    rightMotor1.set(rightPower);
+    leftMotor1.set(leftPower * .25);
+    rightMotor1.set(rightPower * .25);
 
     // TODO 2.1.2: If in sim, set sim inputs
 
