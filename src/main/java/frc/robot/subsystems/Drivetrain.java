@@ -6,6 +6,8 @@ import com.revrobotics.CANSparkLowLevel.MotorType;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.units.Velocity;
+import edu.wpi.first.wpilibj.simulation.DifferentialDrivetrainSim;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Robot;
 import frc.robot.constants.DriveConstants;
@@ -18,7 +20,7 @@ public class Drivetrain extends SubsystemBase {
   private CANSparkMax rightMotor2;
 
   // TODO 2.2.1: Create gyro (AHRS)
-
+      
   // TODO 2.2.3: Create DifferentialDriveKinematics
 
   // TODO 2.2.4: Create DifferentialDrivePoseEstimator
@@ -39,7 +41,7 @@ public class Drivetrain extends SubsystemBase {
     // TODO 1.2.4: Invert motors if necessary
 
     // TODO 2.1.1: Create DifferentialDriveSim if the robot isn't real
-
+      DifferentialDrivetrainSim burrito;
   }
 
   /**
@@ -71,6 +73,8 @@ public class Drivetrain extends SubsystemBase {
       leftMotor1.set(leftPower*0.25);
       rightMotor1.set(rightPower*0.25);
     // TODO 2.1.2: If in sim, set sim inputs
+    //Roxy was here
+    
 
   }
 
