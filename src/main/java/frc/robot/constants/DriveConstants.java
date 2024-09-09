@@ -18,7 +18,7 @@ public class DriveConstants {
   public static final int LEFT_MOTOR_2_ID = -1;
   public static final int RIGHT_MOTOR_2_ID = -1;
 
-  // TODO 6.1.3: Add FF and PID constants pooplear
+  // TODO 6.1.3: Add FF and PID constants
 
 
   // The gear ratio on the drivetrain
