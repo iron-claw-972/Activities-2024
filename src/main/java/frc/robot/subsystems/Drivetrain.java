@@ -14,9 +14,9 @@ import frc.robot.constants.DriveConstants;
 
 public class Drivetrain extends SubsystemBase {
   
-  private CANSparkMax leftMotor1;
+ 
   private CANSparkMax leftMotor2;
-  private CANSparkMax rightMotor1;
+
   private CANSparkMax rightMotor2;
 
   // TODO 2.2.1: Create gyro (AHRS)
@@ -30,8 +30,8 @@ public class Drivetrain extends SubsystemBase {
 
   public Drivetrain() {
     // TODO 1.1.2: Initialize motors
-      CANSparkMax motorLeft = new CANSparkMax (DriveConstants.LEFT_MOTOR_1_ID, MotorType.kBrushless);
-      CANSparkMax motorRight = new CANSparkMax (DriveConstants.RIGHT_MOTOR_1_ID, MotorType.kBrushless);
+      CANSparkMax leftMotor1 = new CANSparkMax (DriveConstants.LEFT_MOTOR_1_ID, MotorType.kBrushless);
+      CANSparkMax rightMotor1 = new CANSparkMax (DriveConstants.RIGHT_MOTOR_1_ID, MotorType.kBrushless);
     // TODO 1.1.3: Set motors to brake mode
     leftMotor1.setIdleMode(IdleMode.kBrake);
     rightMotor1.setIdleMode(IdleMode.kBrake);
@@ -42,7 +42,7 @@ public class Drivetrain extends SubsystemBase {
     // TODO 1.2.4: Invert motors if necessary
 
     // TODO 2.1.1: Create DifferentialDriveSim if the robot isn't real
-
+    
   }
 
   /**
