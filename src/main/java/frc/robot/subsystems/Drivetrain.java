@@ -7,8 +7,10 @@ import com.revrobotics.CANSparkLowLevel.MotorType;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.wpilibj.simulation.DifferentialDrivetrainSim;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Robot;
+import frc.robot.constants.Constants;
 import frc.robot.constants.DriveConstants;
 
 public class Drivetrain extends SubsystemBase {
@@ -17,6 +19,7 @@ public class Drivetrain extends SubsystemBase {
   private CANSparkMax leftMotor2;
   private CANSparkMax rightMotor1;
   private CANSparkMax rightMotor2;
+  private DifferentialDrivetrainSim driveSim;
 
   // TODO 2.2.1: Create gyro (AHRS)
 
@@ -28,6 +31,7 @@ public class Drivetrain extends SubsystemBase {
 
 
   public Drivetrain() {
+    if (Robot.isReal()){
     // TODO 1.1.2: Initialize motors
        leftMotor1 = new CANSparkMax (DriveConstants.LEFT_MOTOR_1_ID, MotorType.kBrushless);
        rightMotor1 = new CANSparkMax (DriveConstants.RIGHT_MOTOR_1_ID, MotorType.kBrushless);
@@ -41,9 +45,17 @@ public class Drivetrain extends SubsystemBase {
     // TODO 1.2.4: Invert motors if necessary
         leftMotor1.setInverted(false);
         rightMotor1.setInverted(false);
+    }
     // TODO 2.1.1: Create DifferentialDriveSim if the robot isn't real
+    else{
+      driveSim = new DifferentialDrivetrainSim(DriveConstants.DRIVETRAIN_PLANT, 
+        DriveConstants.MOTOR, DriveConstants.GEAR_RATIO, DriveConstants.TRACK_WIDTH, 
+        DriveConstants.WHEEL_DIAMETER/2, DriveConstants.MEASUREMENT_STD_DEVS);
+    }
     
+      
   }
+
 
   /**
    * This will be called every 20ms, or 50 times per second
@@ -71,11 +83,15 @@ public class Drivetrain extends SubsystemBase {
    */
   public void tankDrive(double leftPower, double rightPower) {
     // TODO 1.2.1: Implement tankDrive
+    if (Robot.isReal()){
     leftMotor1.set(leftPower*0.25);
     rightMotor1.set(rightPower*0.25);
-
+    }
+    else {
+      driveSim.setInputs(leftPower*0.25*Constants.ROBOT_VOLTAGE, rightPower*0.25*Constants.ROBOT_VOLTAGE);
+    }
     // TODO 2.1.2: If in sim, set sim inputs
-
+    
   }
 
   /**
