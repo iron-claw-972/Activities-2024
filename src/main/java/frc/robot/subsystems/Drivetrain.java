@@ -10,6 +10,7 @@ import com.revrobotics.CANSparkLowLevel.MotorType;
 import edu.wpi.first.math.estimator.DifferentialDrivePoseEstimator;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.simulation.DifferentialDrivetrainSim;
@@ -30,11 +31,14 @@ public class Drivetrain extends SubsystemBase {
   DifferentialDrivetrainSim driveTrainSim;
 
   // TODO 2.2.1: Create gyro (AHRS)
-
+  
   // TODO 2.2.3: Create DifferentialDriveKinematics
-  AHRS ahrs = new AHRS(SPI.Port.kMXP);
+  AHRS ahrs = new AHRS(SPI.Port.kMXP); 
+  DifferentialDriveKinematics kinematics = new DifferentialDriveKinematics(DriveConstants.TRACK_WIDTH);
+  Rotation2d rotation2d = new Rotation2d();
+  Pose2d pose2d = new Pose2d();
   // TODO 2.2.4: Create DifferentialDrivePoseEstimator
-  DifferentialDrivePoseEstimator drivePoseEstimator = new DifferentialDrivePoseEstimator(null, getGyroAngle(), getLeftPosition(), getAveragePosition(), getPose());
+  DifferentialDrivePoseEstimator drivePoseEstimator = new DifferentialDrivePoseEstimator(kinematics, rotation2d, 0, 0, pose2d);
   // TODO 6.1.5: Create Feedforward and PIDs
 
 
@@ -76,7 +80,7 @@ public class Drivetrain extends SubsystemBase {
     // TODO 3.1.1: Remove all of the tank drive code in this method
 
     // TODO 2.1.3: Update sim if in simulation
-    if (RobotBase.isSimulation() == false) {
+    if (RobotBase.isSimulation()) {
       driveTrainSim.update(Constants.LOOP_TIME);
     }
   }
@@ -124,10 +128,20 @@ public class Drivetrain extends SubsystemBase {
 
   // TODO 2.2.2: Implement these 4 methods
   public double getLeftPosition(){
-    return (leftMotor1.getEncoder().getPosition()) * (Math.PI * DriveConstants.WHEEL_DIAMETER);
+    if(RobotBase.isReal()) {
+      return (leftMotor1.getEncoder().getPosition()) * (Math.PI * DriveConstants.WHEEL_DIAMETER);
+    }
+    else {
+     return  driveTrainSim.getLeftPositionMeters();
+    }
   }
   public double getRightPosition(){
-    return rightMotor1.getEncoder().getPosition() * (Math.PI * DriveConstants.WHEEL_DIAMETER);
+    if(RobotBase.isReal()) {
+      return (rightMotor1.getEncoder().getPosition()) * (Math.PI * DriveConstants.WHEEL_DIAMETER);
+    }
+    else {
+      return driveTrainSim.getRightPositionMeters();
+    }
   }
   public double getAveragePosition(){
     return 0;
