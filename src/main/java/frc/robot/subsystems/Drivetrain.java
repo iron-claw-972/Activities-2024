@@ -1,9 +1,8 @@
 package frc.robot.subsystems;
 
-import com.ctre.phoenix6.hardware.TalonFX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkBase.IdleMode;
-import com.revrobotics.CANSparkMax;
+
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
 import edu.wpi.first.math.geometry.Pose2d;
@@ -40,8 +39,8 @@ public class Drivetrain extends SubsystemBase {
     // TODO 1.1.4: Make motor2s follow motor1s
 
     // TODO 1.2.4: Invert motors if necessary
-        leftMotor1.setInverted(true);
-        rightMotor1.setInverted(true);
+        leftMotor1.setInverted(false);
+        rightMotor1.setInverted(false);
     // TODO 2.1.1: Create DifferentialDriveSim if the robot isn't real
     
   }
