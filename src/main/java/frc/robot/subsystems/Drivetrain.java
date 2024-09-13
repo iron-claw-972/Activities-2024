@@ -27,14 +27,14 @@ public class Drivetrain extends SubsystemBase {
   CANSparkMax leftMotor1;
   CANSparkMax rightMotor1;
 
-  DifferentialDrivetrainSim cakeOrFake;
+  DifferentialDrivetrainSim driveTrainSim;
 
   // TODO 2.2.1: Create gyro (AHRS)
 
   // TODO 2.2.3: Create DifferentialDriveKinematics
-  AHRS abortionLaws = new   AHRS(SPI.Port.kMXP);
+  AHRS ahrs = new AHRS(SPI.Port.kMXP);
   // TODO 2.2.4: Create DifferentialDrivePoseEstimator
-
+  DifferentialDrivePoseEstimator drivePoseEstimator = new DifferentialDrivePoseEstimator(null, getGyroAngle(), getLeftPosition(), getAveragePosition(), getPose());
   // TODO 6.1.5: Create Feedforward and PIDs
 
 
@@ -53,7 +53,7 @@ public class Drivetrain extends SubsystemBase {
 
     // TODO 2.1.1: Create DifferentialDriveSim if the robot isn't real
     else {
-        cakeOrFake = new DifferentialDrivetrainSim(
+        driveTrainSim = new DifferentialDrivetrainSim(
         DriveConstants.DRIVETRAIN_PLANT,
         DriveConstants.MOTOR, 
         DriveConstants.GEAR_RATIO, 
@@ -70,14 +70,14 @@ public class Drivetrain extends SubsystemBase {
   @Override
   public void periodic() {
     // TODO 2.2.5: Update odometry
-
+    drivePoseEstimator.update(getGyroAngle(), getLeftPosition(), getRightPosition());
     // TODO 1.2.2: Call tankDrive()
-    tankDrive(Robot.driver.getLeftTranslation() * .25, Robot.driver.getRightTranslation() * .25);
+    tankDrive(Robot.driver.getLeftTranslation(), Robot.driver.getRightTranslation());
     // TODO 3.1.1: Remove all of the tank drive code in this method
 
     // TODO 2.1.3: Update sim if in simulation
     if (RobotBase.isSimulation() == false) {
-      cakeOrFake.update(Constants.LOOP_TIME);
+      driveTrainSim.update(Constants.LOOP_TIME);
     }
   }
 
@@ -91,12 +91,12 @@ public class Drivetrain extends SubsystemBase {
   public void tankDrive(double leftPower, double rightPower) {
     // TODO 1.2.1: Implement tankDrive
     if (RobotBase.isReal()) {
-      leftMotor1.set(leftPower);
-      rightMotor1.set(rightPower);
+      leftMotor1.set((leftPower) * .25);
+      rightMotor1.set((rightPower) * .25);
     }
 
     else {
-      cakeOrFake.setInputs(leftPower * Constants.ROBOT_VOLTAGE, rightPower * Constants.ROBOT_VOLTAGE);
+      driveTrainSim.setInputs(leftPower * Constants.ROBOT_VOLTAGE, rightPower * Constants.ROBOT_VOLTAGE);
     }
     // TODO 2.1.2: If in sim, set sim inputs    
   }
@@ -124,16 +124,21 @@ public class Drivetrain extends SubsystemBase {
 
   // TODO 2.2.2: Implement these 4 methods
   public double getLeftPosition(){
-    return leftMotor1.getPosition().getValue();
+    return (leftMotor1.getEncoder().getPosition()) * (Math.PI * DriveConstants.WHEEL_DIAMETER);
   }
   public double getRightPosition(){
-    return 0;
+    return rightMotor1.getEncoder().getPosition() * (Math.PI * DriveConstants.WHEEL_DIAMETER);
   }
   public double getAveragePosition(){
     return 0;
   }
   public Rotation2d getGyroAngle(){
-    return null;
+    if (RobotBase.isReal()) {
+      return ahrs.getRotation2d();
+    }
+    else {
+      return driveTrainSim.getHeading();
+    }
   }
 
   public void tankDriveVolts(double left, double right){
