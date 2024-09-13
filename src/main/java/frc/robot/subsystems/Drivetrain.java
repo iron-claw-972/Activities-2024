@@ -6,6 +6,8 @@ import com.revrobotics.CANSparkLowLevel.MotorType;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.system.LinearSystem;
+import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.units.Velocity;
 import edu.wpi.first.wpilibj.simulation.DifferentialDrivetrainSim;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -41,7 +43,8 @@ public class Drivetrain extends SubsystemBase {
     // TODO 1.2.4: Invert motors if necessary
 
     // TODO 2.1.1: Create DifferentialDriveSim if the robot isn't real
-      DifferentialDrivetrainSim burrito;
+      DifferentialDrivetrainSim driveSim = new DifferentialDrivetrainSim(DriveConstants.DRIVETRAIN_PLANT, DriveConstants.MOTOR, DriveConstants.GEAR_RATIO, DriveConstants.TRACK_WIDTH, DriveConstants.WHEEL_DIAMETER/2, DriveConstants.MEASUREMENT_STD_DEVS);
+      if ()
   }
 
   /**
@@ -73,7 +76,6 @@ public class Drivetrain extends SubsystemBase {
       leftMotor1.set(leftPower*0.25);
       rightMotor1.set(rightPower*0.25);
     // TODO 2.1.2: If in sim, set sim inputs
-    //Roxy was here
     
 
   }
