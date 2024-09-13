@@ -2,7 +2,6 @@ package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkBase.IdleMode;
-import com.revrobotics.CANSparkLowLevel.MotorType;
 
 import frc.robot.constants.DriveConstants;
 import frc.robot.Robot;
@@ -17,6 +16,8 @@ public class Drivetrain extends SubsystemBase {
   private CANSparkMax leftMotor2;
   private CANSparkMax rightMotor1;
   private CANSparkMax rightMotor2;
+
+  // TODO 2.1.1: Create DifferentialDrivetrainSim object (don't define it here)
 
   // TODO 2.2.1: Create gyro (AHRS)
 
@@ -39,7 +40,7 @@ public class Drivetrain extends SubsystemBase {
 
     rightMotor1.setInverted(true);
 
-    // TODO 2.1.1: Create DifferentialDriveSim if the robot isn't real
+    // TODO 2.1.1: Define DifferentialDrivetrainSim if the robot isn't real
 
   }
 
