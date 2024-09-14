@@ -7,7 +7,7 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Drivetrain extends SubsystemBase {
-  
+
   private CANSparkMax leftMotor1;
   private CANSparkMax leftMotor2;
   private CANSparkMax rightMotor1;
