@@ -8,7 +8,6 @@
       "/Shuffleboard/Drive/flywheel": "Mechanism2d",
       "/Shuffleboard/Scheduler/Command Scheduler": "Scheduler",
       "/Shuffleboard/Scheduler/Scheduler": "Scheduler",
-      "/Shuffleboard/Subsystem/Subsystem": "Mechanism2d",
       "/Shuffleboard/Subsystem/TEST MECHANISM": "Mechanism2d",
       "/SmartDashboard/Command Scheduler": "Scheduler"
     },
@@ -20,11 +19,6 @@
         "right": 2961,
         "top": 79,
         "width": 16.541748046875,
-        "window": {
-          "visible": true
-        }
-      },
-      "/Shuffleboard/Subsystem/Subsystem": {
         "window": {
           "visible": true
         }
