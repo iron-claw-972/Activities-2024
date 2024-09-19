@@ -32,7 +32,7 @@ public class Drivetrain extends SubsystemBase {
 
   DifferentialDriveKinematics driveKinematics = new DifferentialDriveKinematics(DriveConstants.TRACK_WIDTH);
 
-  DifferentialDrivePoseEstimator drivePose = new DifferentialDrivePoseEstimator(driveKinematics, getGyroAngle(), getLeftPosition(), getAveragePosition(), new Pose2d());
+  DifferentialDrivePoseEstimator drivePose;
 
   // TODO 6.1.5: Create Feedforward and PIDs
 
@@ -50,7 +50,8 @@ public class Drivetrain extends SubsystemBase {
     rightMotor1.setInverted(true);
 
     if (!RobotBase.isReal()) {
-      DifferentialDrivetrainSim driveSim = new DifferentialDrivetrainSim(DriveConstants.DRIVETRAIN_PLANT, DriveConstants.MOTOR, DriveConstants.GEAR_RATIO, DriveConstants.TRACK_WIDTH, DriveConstants.WHEEL_DIAMETER / 2, DriveConstants.MEASUREMENT_STD_DEVS);
+      driveSim = new DifferentialDrivetrainSim(DriveConstants.DRIVETRAIN_PLANT, DriveConstants.MOTOR, DriveConstants.GEAR_RATIO, DriveConstants.TRACK_WIDTH, DriveConstants.WHEEL_DIAMETER / 2, DriveConstants.MEASUREMENT_STD_DEVS);
+      drivePose = new DifferentialDrivePoseEstimator(driveKinematics, getGyroAngle(), getLeftPosition(), getAveragePosition(), new Pose2d());
 
     }
 
@@ -91,10 +92,10 @@ public class Drivetrain extends SubsystemBase {
     // TODO 2.1.2: If in sim, set sim inputs
 
     if (RobotBase.isReal()){
-      leftMotor1.set(leftPower * .25);
-      rightMotor1.set(rightPower * .25);
+      leftMotor1.set(leftPower * 10);
+      rightMotor1.set(rightPower * 10);
     }else{
-      driveSim.setInputs(leftPower * .25 * Constants.ROBOT_VOLTAGE, rightPower * .25 * Constants.ROBOT_VOLTAGE);
+      driveSim.setInputs(leftPower * 10 * Constants.ROBOT_VOLTAGE, rightPower * 10 * Constants.ROBOT_VOLTAGE);
     }
   }
 
