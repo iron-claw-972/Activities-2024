@@ -1,15 +1,17 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
+import com.ctre.phoenix6.controls.DifferentialFollower;
 import com.kauailabs.navx.frc.AHRS;
 import com.revrobotics.CANSparkBase.IdleMode;
 
 import frc.robot.constants.Constants;
 import frc.robot.constants.DriveConstants;
 import frc.robot.Robot;
-
+import edu.wpi.first.math.estimator.DifferentialDrivePoseEstimator;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
@@ -26,11 +28,11 @@ public class Drivetrain extends SubsystemBase {
 
   DifferentialDrivetrainSim driveSim;
 
-  AHRS ahrs = new AHRS(SPI.Port.kMXP);
+  AHRS gyro = new AHRS(SPI.Port.kMXP);
 
-  // TODO 2.2.3: Create DifferentialDriveKinematics
+  DifferentialDriveKinematics driveKinematics = new DifferentialDriveKinematics(DriveConstants.TRACK_WIDTH);
 
-  // TODO 2.2.4: Create DifferentialDrivePoseEstimator
+  DifferentialDrivePoseEstimator drivePose = new DifferentialDrivePoseEstimator(driveKinematics, getGyroAngle(), getLeftPosition(), getAveragePosition(), new Pose2d());
 
   // TODO 6.1.5: Create Feedforward and PIDs
 
@@ -60,15 +62,18 @@ public class Drivetrain extends SubsystemBase {
   @Override
   public void periodic(){
     // TODO 2.2.5: Update odometry
-      tankDrive(Robot.driver.getRawLeftTranslation(), Robot.driver.getRawRightTranslation());
-
+    tankDrive(Robot.driver.getRawLeftTranslation(), Robot.driver.getRawRightTranslation());
+    
+    drivePose.update(getGyroAngle(), getLeftPosition(), getRightPosition());
 
     // TODO 3.1.1: Remove all of the tank drive code in this method
 
 
     // TODO 2.1.3: Update sim if in simulation
 
-    if (RobotBase.isReal()) {}else{
+    if (RobotBase.isReal()) {
+
+    }else{
       driveSim.update(Constants.LOOP_TIME);
     }
     
@@ -106,7 +111,7 @@ public class Drivetrain extends SubsystemBase {
 
   public Pose2d getPose(){
     // TODO 2.2.6: Implement this method
-    return new Pose2d();
+    return drivePose.getEstimatedPosition();
   }
 
   public void resetEncoders(){
@@ -134,7 +139,7 @@ public class Drivetrain extends SubsystemBase {
   }
   public Rotation2d getGyroAngle(){
     if (RobotBase.isReal()){
-      return ahrs.getRotation2d();
+      return gyro.getRotation2d();
     }else{
       return driveSim.getHeading();
     }
