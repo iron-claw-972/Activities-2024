@@ -3,12 +3,16 @@ package frc.robot.subsystems;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkBase.IdleMode;
 
+import frc.robot.constants.Constants;
 import frc.robot.constants.DriveConstants;
 import frc.robot.Robot;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.wpilibj.RobotBase;
+import edu.wpi.first.wpilibj.simulation.DifferentialDrivetrainSim;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import com.revrobotics.CANSparkLowLevel.MotorType;
 
 public class Drivetrain extends SubsystemBase {
   
@@ -17,7 +21,7 @@ public class Drivetrain extends SubsystemBase {
   private CANSparkMax rightMotor1;
   private CANSparkMax rightMotor2;
 
-  // TODO 2.1.1: Create DifferentialDrivetrainSim object (don't define it here)
+  DifferentialDrivetrainSim driveSim;
 
   // TODO 2.2.1: Create gyro (AHRS)
 
@@ -40,7 +44,10 @@ public class Drivetrain extends SubsystemBase {
 
     rightMotor1.setInverted(true);
 
-    // TODO 2.1.1: Define DifferentialDrivetrainSim if the robot isn't real
+    if (!RobotBase.isReal()) {
+      DifferentialDrivetrainSim driveSim = new DifferentialDrivetrainSim(DriveConstants.DRIVETRAIN_PLANT, DriveConstants.MOTOR, DriveConstants.GEAR_RATIO, DriveConstants.TRACK_WIDTH, DriveConstants.WHEEL_DIAMETER / 2, DriveConstants.MEASUREMENT_STD_DEVS);
+
+    }
 
   }
 
@@ -55,7 +62,12 @@ public class Drivetrain extends SubsystemBase {
 
     // TODO 3.1.1: Remove all of the tank drive code in this method
 
+
     // TODO 2.1.3: Update sim if in simulation
+
+    if (RobotBase.isSimulation()) {
+      driveSim.update(Constants.LOOP_TIME);
+    }
     
   }
 
@@ -71,7 +83,9 @@ public class Drivetrain extends SubsystemBase {
     rightMotor1.set(rightPower * .25);
 
     // TODO 2.1.2: If in sim, set sim inputs
-
+    if (!RobotBase.isReal()){
+      driveSim.setInputs(leftPower * .25 * Constants.ROBOT_VOLTAGE, rightPower * .25 * Constants.ROBOT_VOLTAGE);
+    }
   }
 
   /**
