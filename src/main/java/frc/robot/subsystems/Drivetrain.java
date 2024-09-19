@@ -1,6 +1,7 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
+import com.kauailabs.navx.frc.AHRS;
 import com.revrobotics.CANSparkBase.IdleMode;
 
 import frc.robot.constants.Constants;
@@ -10,6 +11,8 @@ import frc.robot.Robot;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.RobotBase;
+import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.simulation.DifferentialDrivetrainSim;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.revrobotics.CANSparkLowLevel.MotorType;
@@ -23,7 +26,7 @@ public class Drivetrain extends SubsystemBase {
 
   DifferentialDrivetrainSim driveSim;
 
-  // TODO 2.2.1: Create gyro (AHRS)
+  AHRS ahrs = new AHRS(SPI.Port.kMXP);
 
   // TODO 2.2.3: Create DifferentialDriveKinematics
 
@@ -57,15 +60,15 @@ public class Drivetrain extends SubsystemBase {
   @Override
   public void periodic(){
     // TODO 2.2.5: Update odometry
+      tankDrive(Robot.driver.getRawLeftTranslation(), Robot.driver.getRawRightTranslation());
 
-    tankDrive(Robot.driver.getRawLeftTranslation(), Robot.driver.getRawRightTranslation());
 
     // TODO 3.1.1: Remove all of the tank drive code in this method
 
 
     // TODO 2.1.3: Update sim if in simulation
 
-    if (RobotBase.isSimulation()) {
+    if (RobotBase.isReal()) {}else{
       driveSim.update(Constants.LOOP_TIME);
     }
     
@@ -79,11 +82,13 @@ public class Drivetrain extends SubsystemBase {
    * @param rightPower the commanded power to the right motors (-1 to 1)
    */
   public void tankDrive(double leftPower, double rightPower) {
-    leftMotor1.set(leftPower * .25);
-    rightMotor1.set(rightPower * .25);
 
     // TODO 2.1.2: If in sim, set sim inputs
-    if (!RobotBase.isReal()){
+
+    if (RobotBase.isReal()){
+      leftMotor1.set(leftPower * .25);
+      rightMotor1.set(rightPower * .25);
+    }else{
       driveSim.setInputs(leftPower * .25 * Constants.ROBOT_VOLTAGE, rightPower * .25 * Constants.ROBOT_VOLTAGE);
     }
   }
@@ -111,18 +116,29 @@ public class Drivetrain extends SubsystemBase {
 
   // TODO 2.2.2: Implement these 4 methods
   public double getLeftPosition(){
-    return 0;
+    if (RobotBase.isReal()){
+      return Math.PI * DriveConstants.WHEEL_DIAMETER * leftMotor1.getEncoder().getPosition();
+    }else{
+      return Math.PI * DriveConstants.WHEEL_DIAMETER * driveSim.getLeftPositionMeters();
+    }
   }
   public double getRightPosition(){
-    return 0;
+    if (RobotBase.isReal()){
+      return Math.PI * DriveConstants.WHEEL_DIAMETER * leftMotor1.getEncoder().getPosition();
+    }else{
+      return Math.PI * DriveConstants.WHEEL_DIAMETER * driveSim.getRightPositionMeters();
+    }
   }
   public double getAveragePosition(){
-    return 0;
+    return (getLeftPosition() + getRightPosition()) / 2;
   }
   public Rotation2d getGyroAngle(){
-    return null;
+    if (RobotBase.isReal()){
+      return ahrs.getRotation2d();
+    }else{
+      return driveSim.getHeading();
+    }
   }
-
   public void tankDriveVolts(double left, double right){
     // TODO 6.1.1: Implement this
 
