@@ -92,10 +92,10 @@ public class Drivetrain extends SubsystemBase {
     // TODO 2.1.2: If in sim, set sim inputs
 
     if (RobotBase.isReal()){
-      leftMotor1.set(leftPower * .25);
-      rightMotor1.set(rightPower * .25);
+      leftMotor1.set(leftPower * 1);
+      rightMotor1.set(rightPower * 1);
     }else{
-      driveSim.setInputs(leftPower * .25 * Constants.ROBOT_VOLTAGE, rightPower * .25 * Constants.ROBOT_VOLTAGE);
+      driveSim.setInputs(leftPower * 1 * Constants.ROBOT_VOLTAGE, rightPower * 1 * Constants.ROBOT_VOLTAGE);
     }
   }
 
