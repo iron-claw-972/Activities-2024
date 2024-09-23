@@ -9,7 +9,8 @@
       "/Shuffleboard/Scheduler/Command Scheduler": "Scheduler",
       "/Shuffleboard/Scheduler/Scheduler": "Scheduler",
       "/Shuffleboard/Subsystem/TEST MECHANISM": "Mechanism2d",
-      "/SmartDashboard/Command Scheduler": "Scheduler"
+      "/SmartDashboard/Command Scheduler": "Scheduler",
+      "/SmartDashboard/Sim Display": "Mechanism2d"
     },
     "windows": {
       "/Shuffleboard/Drive/Field": {
@@ -18,7 +19,15 @@
         "left": 150,
         "right": 2961,
         "top": 79,
-        "width": 16.541748046875
+        "width": 16.541748046875,
+        "window": {
+          "visible": true
+        }
+      },
+      "/SmartDashboard/Sim Display": {
+        "window": {
+          "visible": true
+        }
       }
     }
   },

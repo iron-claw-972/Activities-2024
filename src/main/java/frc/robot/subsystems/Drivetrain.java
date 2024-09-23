@@ -8,6 +8,7 @@ import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
 import edu.wpi.first.math.estimator.DifferentialDrivePoseEstimator;
+import edu.wpi.first.math.estimator.PoseEstimator;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
@@ -38,7 +39,12 @@ public class Drivetrain extends SubsystemBase {
   Rotation2d rotation2d = new Rotation2d();
   Pose2d pose2d = new Pose2d();
   // TODO 2.2.4: Create DifferentialDrivePoseEstimator
-  DifferentialDrivePoseEstimator drivePoseEstimator = new DifferentialDrivePoseEstimator(kinematics, rotation2d, 0, 0, pose2d);
+  DifferentialDrivePoseEstimator drivePoseEstimator = new DifferentialDrivePoseEstimator(
+    kinematics, 
+    rotation2d, 
+    0,
+    0, 
+    pose2d);
   // TODO 6.1.5: Create Feedforward and PIDs
 
 
@@ -118,7 +124,7 @@ public class Drivetrain extends SubsystemBase {
 
   public Pose2d getPose(){
     // TODO 2.2.6: Implement this method
-    return new Pose2d();
+    return drivePoseEstimator.getEstimatedPosition();
   }
 
   public void resetEncoders(){
