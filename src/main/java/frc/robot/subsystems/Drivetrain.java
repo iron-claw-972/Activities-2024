@@ -92,10 +92,10 @@ public class Drivetrain extends SubsystemBase {
     // TODO 2.1.2: If in sim, set sim inputs
 
     if (RobotBase.isReal()){
-      leftMotor1.set(leftPower * 10);
-      rightMotor1.set(rightPower * 10);
+      leftMotor1.set(leftPower * .25);
+      rightMotor1.set(rightPower * .25);
     }else{
-      driveSim.setInputs(leftPower * 10 * Constants.ROBOT_VOLTAGE, rightPower * 10 * Constants.ROBOT_VOLTAGE);
+      driveSim.setInputs(leftPower * .25 * Constants.ROBOT_VOLTAGE, rightPower * .25 * Constants.ROBOT_VOLTAGE);
     }
   }
 
@@ -123,16 +123,16 @@ public class Drivetrain extends SubsystemBase {
   // TODO 2.2.2: Implement these 4 methods
   public double getLeftPosition(){
     if (RobotBase.isReal()){
-      return Math.PI * DriveConstants.WHEEL_DIAMETER * leftMotor1.getEncoder().getPosition();
+      return leftMotor1.getEncoder().getPosition();
     }else{
-      return Math.PI * DriveConstants.WHEEL_DIAMETER * driveSim.getLeftPositionMeters();
+      return driveSim.getLeftPositionMeters();
     }
   }
   public double getRightPosition(){
     if (RobotBase.isReal()){
-      return Math.PI * DriveConstants.WHEEL_DIAMETER * leftMotor1.getEncoder().getPosition();
+      return leftMotor1.getEncoder().getPosition();
     }else{
-      return Math.PI * DriveConstants.WHEEL_DIAMETER * driveSim.getRightPositionMeters();
+      return driveSim.getRightPositionMeters();
     }
   }
   public double getAveragePosition(){
