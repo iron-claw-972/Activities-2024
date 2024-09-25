@@ -12,6 +12,7 @@ import frc.robot.controls.BaseDriverConfig;
 import frc.robot.controls.GameControllerDriverConfig;
 import frc.robot.controls.Operator;
 import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.Ting;
 import frc.robot.util.ShuffleBoard.ShuffleBoardManager;
 
 /**
@@ -27,6 +28,7 @@ public class Robot extends TimedRobot {
   // TODO 2.3.9: Create variable for your subsystem
   public static BaseDriverConfig driver;
   public static Operator operator;
+  public static Ting ting;
 
   private static boolean isTestMode = false;
 
@@ -50,6 +52,8 @@ public class Robot extends TimedRobot {
 
     driver.configureControls();
     operator.configureControls();
+
+    ting = new Ting(0);
 
     // TODO 3.1.6: Set the drivetrain's default command
 

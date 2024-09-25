@@ -25,7 +25,7 @@ public class ShuffleBoardManager {
     public ShuffleBoardManager(Drivetrain drive){
         driveTab = new DriveTab(drive);
         autoTab = new AutoTab(drive);
-        subsystemTab = new SubsystemTab();
+        subsystemTab = new SubsystemTab(0);
         tabs.add(driveTab);
         tabs.add(autoTab);
         tabs.add(subsystemTab);
