@@ -1,18 +1,18 @@
 package frc.robot.subsystems;
 
-import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkBase.IdleMode;
-
-import frc.robot.constants.Constants;
-import frc.robot.constants.DriveConstants;
-import frc.robot.Robot;
+import com.revrobotics.CANSparkLowLevel.MotorType;
+import com.kauailabs.navx.frc.AHRS;
+import com.revrobotics.CANSparkMax;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.simulation.DifferentialDrivetrainSim;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import com.revrobotics.CANSparkLowLevel.MotorType;
+import frc.robot.Robot;
+import frc.robot.constants.Constants;
+import frc.robot.constants.DriveConstants;
 
 public class Drivetrain extends SubsystemBase {
   
@@ -24,6 +24,7 @@ public class Drivetrain extends SubsystemBase {
   DifferentialDrivetrainSim driveSim;
 
   // TODO 2.2.1: Create gyro (AHRS)
+  AHRS ahrs;
 
   // TODO 2.2.3: Create DifferentialDriveKinematics
 
@@ -44,8 +45,10 @@ public class Drivetrain extends SubsystemBase {
 
     rightMotor1.setInverted(true);
 
+    ahrs = new AHRS();
+
     if (!RobotBase.isReal()) {
-      DifferentialDrivetrainSim driveSim = new DifferentialDrivetrainSim(DriveConstants.DRIVETRAIN_PLANT, DriveConstants.MOTOR, DriveConstants.GEAR_RATIO, DriveConstants.TRACK_WIDTH, DriveConstants.WHEEL_DIAMETER / 2, DriveConstants.MEASUREMENT_STD_DEVS);
+      driveSim = new DifferentialDrivetrainSim(DriveConstants.DRIVETRAIN_PLANT, DriveConstants.MOTOR, DriveConstants.GEAR_RATIO, DriveConstants.TRACK_WIDTH, DriveConstants.WHEEL_DIAMETER / 2, DriveConstants.MEASUREMENT_STD_DEVS);
 
     }
 
@@ -110,33 +113,36 @@ public class Drivetrain extends SubsystemBase {
   }
 
   // TODO 2.2.2: Implement these 4 methods
-  public double getLeftPosition(){
-    return 0;
+ public double getLeftPosition(){
+
+    if (RobotBase.isReal()){
+      return Math.PI * DriveConstants.WHEEL_DIAMETER * leftMotor1.getEncoder().getPosition();
+    }else{
+      return Math.PI * DriveConstants.WHEEL_DIAMETER * driveSim.getLeftPositionMeters();
+    }
   }
   public double getRightPosition(){
-    return 0;
+
+    if (RobotBase.isReal()){
+      return Math.PI * DriveConstants.WHEEL_DIAMETER * leftMotor1.getEncoder().getPosition();
+    }else{
+      return Math.PI * DriveConstants.WHEEL_DIAMETER * driveSim.getRightPositionMeters();
+    }
   }
   public double getAveragePosition(){
-    return 0;
+
+    return (getLeftPosition() + getRightPosition()) / 2;
   }
   public Rotation2d getGyroAngle(){
-    return null;
+
+    if (RobotBase.isReal()){
+      return ahrs.getRotation2d();
+    }else{
+      return driveSim.getHeading();
+    }
   }
 
   public void tankDriveVolts(double left, double right){
-    // TODO 6.1.1: Implement this
-
-  }
-
-  // TODO 6.2.1: Implement these 2 methods
-  public double getLeftSpeed(){
-    return 0;
-  }
-  public double getRightSpeed(){
-    return 0;
-  }
-
-  public void feedforwardDrive(double throttle, double turn){
     // TODO 6.2.2: Create wheel speeds
 
     // TODO 6.2.3: Calculate voltages and call tankDriveVolts()
