@@ -82,7 +82,7 @@ public class Drivetrain extends SubsystemBase {
     // TODO 2.2.5: Update odometry
     drivePoseEstimator.update(getGyroAngle(), getLeftPosition(), getRightPosition());
     // TODO 1.2.2: Call tankDrive()
-    tankDrive(Robot.driver.getLeftTranslation(), Robot.driver.getRightTranslation());
+
     // TODO 3.1.1: Remove all of the tank drive code in this method
 
     // TODO 2.1.3: Update sim if in simulation
@@ -119,7 +119,7 @@ public class Drivetrain extends SubsystemBase {
    */
   public void arcadeDrive(double throttle, double turn) {
     // TODO 3.1.2: Implement arcadeDrive
-    
+    tankDrive(Robot.driver.getLeftTranslation(), Robot.driver.getRightTranslation());
   }
 
   public Pose2d getPose(){

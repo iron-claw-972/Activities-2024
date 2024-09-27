@@ -54,12 +54,13 @@ public class Motor extends SubsystemBase {
         if(RobotBase.isSimulation()) {
             return motor.getEncoder().getPosition() * 360;
         }
-        return 0;    
+        return 0;
     }
 
     public void periodic() {
         mechanismLigament2d.setAngle(getMotorPosition());
         if (RobotBase.isSimulation()) {
+            System.out.println(mechanismLigament2d.getAngle());
             setMotorSpeed(0.005);
         }
     }

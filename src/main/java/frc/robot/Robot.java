@@ -54,7 +54,7 @@ public class Robot extends TimedRobot {
     operator.configureControls();
 
     // TODO 3.1.6: Set the drivetrain's default command
-
+    drive.setDefaultCommand(autoCommand);
     // TODO 4.2.1: Change default command to use RunCommand with a lambda expression
     // TODO 6.3.1: Change to Feedforward command
   }
