@@ -22,9 +22,9 @@ import frc.robot.constants.DriveConstants;
 
 public class Drivetrain extends SubsystemBase {
   
-  private CANSparkMax leftMotor1;
+  CANSparkMax leftMotor1;
   private CANSparkMax leftMotor2;
-  private CANSparkMax rightMotor1;
+  CANSparkMax rightMotor1;
   private CANSparkMax rightMotor2;
   private DifferentialDrivetrainSim driveSim;
 
@@ -35,6 +35,7 @@ public class Drivetrain extends SubsystemBase {
   private DifferentialDriveKinematics driveKinematics = new DifferentialDriveKinematics(DriveConstants.TRACK_WIDTH);
   // TODO 2.2.4: Create DifferentialDrivePoseEstimator
   private DifferentialDrivePoseEstimator poseEstimator;
+
   // TODO 6.1.5: Create Feedforward and PID
 
 
@@ -59,9 +60,9 @@ public class Drivetrain extends SubsystemBase {
       driveSim = new DifferentialDrivetrainSim(DriveConstants.DRIVETRAIN_PLANT, 
         DriveConstants.MOTOR, DriveConstants.GEAR_RATIO, DriveConstants.TRACK_WIDTH, 
         DriveConstants.WHEEL_DIAMETER/2, DriveConstants.MEASUREMENT_STD_DEVS);
-      poseEstimator = new DifferentialDrivePoseEstimator(driveKinematics, getGyroAngle(), getLeftPosition(), getRightPosition(), new Pose2d());
+      
     }
-    
+    poseEstimator = new DifferentialDrivePoseEstimator(driveKinematics, getGyroAngle(), getLeftPosition(), getRightPosition(), new Pose2d());
       
   }
 
@@ -72,8 +73,10 @@ public class Drivetrain extends SubsystemBase {
   @Override
   public void periodic(){
     // TODO 2.2.5: Update odometry
-    poseEstimator.update(getGyroAngle(), getLeftPosition(), getRightPosition());    
+     tankDrive(Robot.driver.getRawLeftTranslation(), Robot.driver.getRawRightTranslation());
+     poseEstimator.update(getGyroAngle(), getLeftPosition(), getRightPosition());    
     // TODO 1.2.2: Call tankDrive()
+    
     double leftPower = Robot.driver.getLeftTranslation();
     double rightPower = Robot.driver.getRightTranslation();
     tankDrive(leftPower, rightPower);
