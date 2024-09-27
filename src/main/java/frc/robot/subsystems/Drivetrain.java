@@ -130,7 +130,7 @@ public class Drivetrain extends SubsystemBase {
   }
   public double getRightPosition(){
     if (RobotBase.isReal()){
-      return leftMotor1.getEncoder().getPosition();
+      return rightMotor1.getEncoder().getPosition();
     }else{
       return driveSim.getRightPositionMeters();
     }
