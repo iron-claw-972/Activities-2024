@@ -6,6 +6,7 @@
       "/Shuffleboard/Drive/Characterize": "Command",
       "/Shuffleboard/Drive/Field": "Field2d",
       "/Shuffleboard/Scheduler/Command Scheduler": "Scheduler",
+      "/Shuffleboard/Subsystem/Ting": "Mechanism2d",
       "/SmartDashboard/Command Scheduler": "Scheduler"
     },
     "windows": {
