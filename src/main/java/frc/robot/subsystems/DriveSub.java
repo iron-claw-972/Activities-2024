@@ -29,6 +29,11 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
         //method to get encoder position
         public double getPosition() {
             return motor.getEncoder().getPosition();
+
         }
+         //periodic method
+         public void periodic() {
+            setSpeed(0.05);
+         }
 
     }

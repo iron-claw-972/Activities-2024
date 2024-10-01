@@ -20,6 +20,14 @@ import frc.robot.util.ShuffleBoard.ShuffleBoardManager;
  * the package after creating this project, you must also update the build.gradle file in the
  * project.
  */
+public static DriveSub driveSub;
+
+@Override
+public void robotInit() {
+  driveSub = new DriveSub(DriveConstants.NEW_MOTOR_ID)
+}
+
+
 public class Robot extends TimedRobot {
   private Command autoCommand;
   public static ShuffleBoardManager shuffleboard;
