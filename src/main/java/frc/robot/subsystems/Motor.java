@@ -40,28 +40,38 @@ public class Motor extends SubsystemBase {
 
     public void setMotorSpeed(double speed) {
         if (RobotBase.isSimulation()) {
+            armSim.setInput(speed * Constants.ROBOT_VOLTAGE);
+        }
+        else {
             motor.set(speed * Constants.ROBOT_VOLTAGE);
         }
     }
 
     public void stopMotor() {
         if(RobotBase.isSimulation()) {
-            setMotorSpeed(0);
+            armSim.setInput(0);
         }
+        setMotorSpeed(0);
+
     }
 
     public double getMotorPosition() {
         if(RobotBase.isSimulation()) {
+            return Math.toDegrees(armSim.getAngleRads());
+        }
+        else {
             return motor.getEncoder().getPosition() * 360;
         }
-        return 0;
     }
 
     public void periodic() {
-        mechanismLigament2d.setAngle(getMotorPosition());
         if (RobotBase.isSimulation()) {
-            System.out.println(mechanismLigament2d.getAngle());
+            armSim.update(0.01);
+            mechanismLigament2d.setAngle(Math.toDegrees(armSim.getAngleRads()));
             setMotorSpeed(0.005);
+        }
+        else {
+            mechanismLigament2d.setAngle(getMotorPosition());
         }
     }
 
