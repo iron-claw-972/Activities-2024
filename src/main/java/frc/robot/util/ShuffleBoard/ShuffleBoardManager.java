@@ -15,7 +15,7 @@ import frc.robot.util.ShuffleBoard.Tabs.SubsystemTab;
 public class ShuffleBoardManager {
 
     private ArrayList<ShuffleBoardTabs> tabs = new ArrayList<>();
-    
+
     private Field feild;
 
     private DriveTab driveTab;
@@ -23,7 +23,7 @@ public class ShuffleBoardManager {
     private SubsystemTab subsystemTab;
 
     // TODO 2.3.12: Add parameter to constructor
-    public ShuffleBoardManager(Drivetrain drive){
+    public ShuffleBoardManager(Drivetrain drive) {
         driveTab = new DriveTab(drive);
         autoTab = new AutoTab(drive);
         subsystemTab = new SubsystemTab(new Ting(12));
@@ -31,10 +31,10 @@ public class ShuffleBoardManager {
         tabs.add(autoTab);
         tabs.add(subsystemTab);
 
-        for (ShuffleBoardTabs tab : tabs){
+        for (ShuffleBoardTabs tab : tabs) {
             tab.createEntries();
         }
-        
+
         feild = new Field(drive);
 
         // This doesn't need to be stored in its own class
@@ -42,14 +42,14 @@ public class ShuffleBoardManager {
         SmartDashboard.putData("Command Scheduler", CommandScheduler.getInstance());
     }
 
-    public void update(){
-        for (ShuffleBoardTabs tab : tabs){
+    public void update() {
+        for (ShuffleBoardTabs tab : tabs) {
             tab.update();
         }
         feild.updateFeild();
     }
 
-    public Command getSelectedCommand(){
+    public Command getSelectedCommand() {
         return autoTab.getChooser().getSelected();
     }
 }
