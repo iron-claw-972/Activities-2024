@@ -9,8 +9,8 @@ import frc.robot.util.ShuffleBoard.ShuffleBoardTabs;
 public class SubsystemTab extends ShuffleBoardTabs {
     Ting ting;
 
-    public SubsystemTab(int motorId){
-        ting = new Ting(motorId);
+    public SubsystemTab(Ting tingy){
+        ting = tingy;
     }
 
     public void createEntries(){

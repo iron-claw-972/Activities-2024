@@ -3,6 +3,7 @@ package frc.robot.subsystems;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
+import edu.wpi.first.hal.simulation.ConstBufferCallback;
 import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.RobotBase;
@@ -10,6 +11,7 @@ import edu.wpi.first.wpilibj.simulation.SingleJointedArmSim;
 import edu.wpi.first.wpilibj.smartdashboard.Mechanism2d;
 import edu.wpi.first.wpilibj.smartdashboard.MechanismLigament2d;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.constants.Constants;
 
 public class Ting extends SubsystemBase {
     CANSparkMax motor;
@@ -31,15 +33,15 @@ public class Ting extends SubsystemBase {
     public void periodic(){
         if (RobotBase.isReal()){
             setMotor(.05);
+            ligma.setAngle(getPos());
         }else{
             ligma.setAngle(getPos() + .005);
         }
     }
 
     public void setMotor(double speed){
-        motor.set(speed);
         if (RobotBase.isSimulation()){
-            arm.setInput(3,3,3);
+            arm.setInputVoltage(Constants.ROBOT_VOLTAGE);
         }else{
             motor.set(speed);
         }
@@ -52,7 +54,7 @@ public class Ting extends SubsystemBase {
 
     public double getPos(){
         if (RobotBase.isReal()){
-            return motor.getEncoder().getPosition();
+            return Units.rotationsToDegrees(motor.getEncoder().getPosition());
         }else{
             return Units.radiansToDegrees(arm.getAngleRads());
         }

@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.Ting;
 import frc.robot.util.ShuffleBoard.Tabs.AutoTab;
 import frc.robot.util.ShuffleBoard.Tabs.DriveTab;
 import frc.robot.util.ShuffleBoard.Tabs.SubsystemTab;
@@ -25,7 +26,7 @@ public class ShuffleBoardManager {
     public ShuffleBoardManager(Drivetrain drive){
         driveTab = new DriveTab(drive);
         autoTab = new AutoTab(drive);
-        subsystemTab = new SubsystemTab(0);
+        subsystemTab = new SubsystemTab(new Ting(12));
         tabs.add(driveTab);
         tabs.add(autoTab);
         tabs.add(subsystemTab);
