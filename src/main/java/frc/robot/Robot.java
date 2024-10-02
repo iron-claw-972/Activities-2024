@@ -46,15 +46,15 @@ public class Robot extends TimedRobot {
     // make subsystems
     drive = new Drivetrain();
     // TODO 2.3.10: Create your subsystem
-    
-    shuffleboard = new ShuffleBoardManager(drive);
+    ting = new Ting(15);
+
+    shuffleboard = new ShuffleBoardManager(drive, ting);
     driver = new GameControllerDriverConfig(drive);
     operator = new Operator();
 
     driver.configureControls();
     operator.configureControls();
 
-    ting = new Ting(15);
 
     // TODO 3.1.6: Set the drivetrain's default command
     drive.setDefaultCommand(new ArcadeDriveCommand(drive));

@@ -61,8 +61,6 @@ public class Drivetrain extends SubsystemBase {
   @Override
   public void periodic(){
     // TODO 2.2.5: Update odometry
-    arcadeDrive(Robot.driver.getForwardTranslation(), Robot.driver.getTurn());
-    
     drivePose.update(getGyroAngle(), getLeftPosition(), getRightPosition());
 
     // TODO 3.1.1: Remove all of the tank drive code in this method

@@ -23,10 +23,10 @@ public class ShuffleBoardManager {
     private SubsystemTab subsystemTab;
 
     // TODO 2.3.12: Add parameter to constructor
-    public ShuffleBoardManager(Drivetrain drive) {
+    public ShuffleBoardManager(Drivetrain drive, Ting ting) {
         driveTab = new DriveTab(drive);
         autoTab = new AutoTab(drive);
-        subsystemTab = new SubsystemTab(new Ting(12));
+        subsystemTab = new SubsystemTab(ting);
         tabs.add(driveTab);
         tabs.add(autoTab);
         tabs.add(subsystemTab);
