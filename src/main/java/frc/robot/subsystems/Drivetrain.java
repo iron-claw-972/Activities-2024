@@ -48,10 +48,10 @@ public class Drivetrain extends SubsystemBase {
     // TODO 1.1.4: Make motor2s follow motor1s
 
     rightMotor1.setInverted(true);
-    drivePose = new DifferentialDrivePoseEstimator(driveKinematics, getGyroAngle(), getLeftPosition(), getRightPosition(), new Pose2d());
     if (!RobotBase.isReal()) {
       driveSim = new DifferentialDrivetrainSim(DriveConstants.DRIVETRAIN_PLANT, DriveConstants.MOTOR, DriveConstants.GEAR_RATIO, DriveConstants.TRACK_WIDTH, DriveConstants.WHEEL_DIAMETER / 2, DriveConstants.MEASUREMENT_STD_DEVS);
     }
+    drivePose = new DifferentialDrivePoseEstimator(driveKinematics, getGyroAngle(), getLeftPosition(), getRightPosition(), new Pose2d());
 
   }
 

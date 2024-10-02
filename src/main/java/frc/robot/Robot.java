@@ -54,7 +54,7 @@ public class Robot extends TimedRobot {
     driver.configureControls();
     operator.configureControls();
 
-    ting = new Ting(12);
+    ting = new Ting(15);
 
     // TODO 3.1.6: Set the drivetrain's default command
     drive.setDefaultCommand(new ArcadeDriveCommand(drive));
