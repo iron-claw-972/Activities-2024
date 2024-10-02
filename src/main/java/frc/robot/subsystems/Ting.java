@@ -31,17 +31,13 @@ public class Ting extends SubsystemBase {
     }
 
     public void periodic(){
-        if (RobotBase.isReal()){
-            setMotor(.05);
-            ligma.setAngle(getPos());
-        }else{
-            ligma.setAngle(getPos() + .005);
-        }
+        setMotor(.05);
+        ligma.setAngle(getPos());
     }
 
     public void setMotor(double speed){
         if (RobotBase.isSimulation()){
-            arm.setInputVoltage(Constants.ROBOT_VOLTAGE);
+            arm.setInputVoltage(speed * Constants.ROBOT_VOLTAGE);
         }else{
             motor.set(speed);
         }

@@ -61,7 +61,7 @@ public class Drivetrain extends SubsystemBase {
   @Override
   public void periodic(){
     // TODO 2.2.5: Update odometry
-    tankDrive(Robot.driver.getLeftTranslation(), Robot.driver.getRightTranslation());
+    arcadeDrive(Robot.driver.getLeftTranslation(), Robot.driver.getRightTranslation());
     
     drivePose.update(getGyroAngle(), getLeftPosition(), getRightPosition());
 
@@ -102,7 +102,9 @@ public class Drivetrain extends SubsystemBase {
    * @param turn the commanded turn rotation
    */
   public void arcadeDrive(double throttle, double turn) {
-    // TODO 3.1.2: Implement arcadeDrive
+    double left = throttle + turn;
+    double right = throttle - turn;
+    tankDrive(left, right);
     
   }
 
@@ -126,7 +128,7 @@ public class Drivetrain extends SubsystemBase {
   }
   public double getRightPosition(){
     if (RobotBase.isReal()){
-      return rightMotor1.getEncoder().getPosition();
+      return rightMotor1.getEncoder().getPosition()  / DriveConstants.GEAR_RATIO) * (DriveConstants.WHEEL_DIAMETER * Math.PI));
     }else{
       return driveSim.getRightPositionMeters();
     }
