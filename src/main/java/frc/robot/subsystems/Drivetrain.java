@@ -128,7 +128,7 @@ public class Drivetrain extends SubsystemBase {
   }
   public double getRightPosition(){
     if (RobotBase.isReal()){
-      return rightMotor1.getEncoder().getPosition()  / DriveConstants.GEAR_RATIO) * (DriveConstants.WHEEL_DIAMETER * Math.PI));
+      return ((rightMotor1.getEncoder().getPosition()  / DriveConstants.GEAR_RATIO) * (DriveConstants.WHEEL_DIAMETER * Math.PI));
     }else{
       return driveSim.getRightPositionMeters();
     }

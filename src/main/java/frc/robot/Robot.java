@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.commands.ArcadeDriveCommand;
 import frc.robot.controls.BaseDriverConfig;
 import frc.robot.controls.GameControllerDriverConfig;
 import frc.robot.controls.Operator;
@@ -56,6 +57,7 @@ public class Robot extends TimedRobot {
     ting = new Ting(12);
 
     // TODO 3.1.6: Set the drivetrain's default command
+    drive.setDefaultCommand(new ArcadeDriveCommand(drive));
 
     // TODO 4.2.1: Change default command to use RunCommand with a lambda expression
     // TODO 6.3.1: Change to Feedforward command
