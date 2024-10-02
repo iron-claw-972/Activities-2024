@@ -9,6 +9,7 @@ public class FunnyCommand extends Command{
     Drivetrain driv;
     Ting ting;
     int tim = 0;
+    int timmy = 0;
     public FunnyCommand(Drivetrain drev, Ting tingy){
         driv = drev;
         ting = tingy;
@@ -25,6 +26,7 @@ public class FunnyCommand extends Command{
     @Override
     public void execute(){
         tim++;
+        timmy++;
         tim = tim % 100;
         if (50 >= tim){
             driv.arcadeDrive(1, 1);
@@ -43,7 +45,7 @@ public class FunnyCommand extends Command{
 
     @Override
     public boolean isFinished(){
-        if (tim > 160){
+        if (timmy > 1000){
             return true;
         }
         return false;
