@@ -8,10 +8,12 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.commands.ArcadeDriveCommand;
 import frc.robot.controls.BaseDriverConfig;
 import frc.robot.controls.GameControllerDriverConfig;
 import frc.robot.controls.Operator;
 import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.Ting;
 import frc.robot.util.ShuffleBoard.ShuffleBoardManager;
 
 /**
@@ -27,6 +29,7 @@ public class Robot extends TimedRobot {
   // TODO 2.3.9: Create variable for your subsystem
   public static BaseDriverConfig driver;
   public static Operator operator;
+  public static Ting ting;
 
   private static boolean isTestMode = false;
 
@@ -43,15 +46,18 @@ public class Robot extends TimedRobot {
     // make subsystems
     drive = new Drivetrain();
     // TODO 2.3.10: Create your subsystem
-    
-    shuffleboard = new ShuffleBoardManager(drive);
+    ting = new Ting(15);
+
+    shuffleboard = new ShuffleBoardManager(drive, ting);
     driver = new GameControllerDriverConfig(drive);
     operator = new Operator();
 
     driver.configureControls();
     operator.configureControls();
 
+
     // TODO 3.1.6: Set the drivetrain's default command
+    drive.setDefaultCommand(new ArcadeDriveCommand(drive));
 
     // TODO 4.2.1: Change default command to use RunCommand with a lambda expression
     // TODO 6.3.1: Change to Feedforward command
