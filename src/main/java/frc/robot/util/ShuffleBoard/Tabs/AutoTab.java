@@ -2,6 +2,8 @@ package frc.robot.util.ShuffleBoard.Tabs;
 
 import java.awt.geom.Point2D;
 
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -35,7 +37,7 @@ public class AutoTab extends ShuffleBoardTabs {
 
         // TODO 3.3.8: Add your Bang-Bang drive command here
 
-        autoCommand.addOption("bingbongboom", new BangBangDriveCommand(drive, new Point2D.Double(1,1)));
+        autoCommand.addOption("bingbongboom", new BangBangDriveCommand(drive, new Pose2d(5,5, new Rotation2d(0,0))));
         // TODO 3.3.11: Add your Bang-Bang command for your subsystem here
         
         tab.add(autoCommand);

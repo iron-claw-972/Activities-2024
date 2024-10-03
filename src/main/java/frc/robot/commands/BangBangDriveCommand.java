@@ -1,6 +1,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.math.Pair;
+import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.constants.DriveConstants;
 import frc.robot.subsystems.Drivetrain;
@@ -8,9 +9,9 @@ import java.awt.geom.Point2D;
 
 public class BangBangDriveCommand extends Command{
     Drivetrain driv;
-    Point2D setpoint;
+    Pose2d setpoint;
     int tim;
-    public BangBangDriveCommand(Drivetrain drev, Point2D setpoint){
+    public BangBangDriveCommand(Drivetrain drev, Pose2d setpoint){
         driv = drev;
         this.setpoint = setpoint;
     }
@@ -37,12 +38,11 @@ public class BangBangDriveCommand extends Command{
         driv.arcadeDrive(0, 0);
     }
 
-    public static double calculateTurnAngle(Point2D target, double startingAngle) {
+    public static double calculateTurnAngle(Pose2d target, double startingAngle) {
         double targetAngle = Math.toDegrees(Math.atan2(target.getY(), target.getX()));
         
         double turnAngle = targetAngle - startingAngle;
 
-        // normalize
         while (turnAngle > 180) {
             turnAngle -= 360;
         }
@@ -62,14 +62,11 @@ public class BangBangDriveCommand extends Command{
     }
 
     public static double normalize(double value, double min, double max) {
-        
-        double normalized = (value - min) / (max - min);
-        
-        return normalized * 2 - 1;
+        return Math.max(-1, Math.min(1, value));
     }
 
 
     private double getDistance(){
-        return setpoint.distance(0, 0);
+        return Math.sqrt(setpoint.getX() * setpoint.getX() + setpoint.getY() * setpoint.getY());
     }
 }
