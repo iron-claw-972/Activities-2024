@@ -8,7 +8,7 @@ import frc.robot.util.ShuffleBoard.ShuffleBoardTabs;
 
 public class SubsystemTab extends ShuffleBoardTabs {
     // TODO 2.3.11: Create variable for subsystem
-    Orange orange;
+    private Orange orange;
 
     public SubsystemTab(Orange orange){
         this.orange = orange;
@@ -16,7 +16,7 @@ public class SubsystemTab extends ShuffleBoardTabs {
 
     public void createEntries(){
         tab = Shuffleboard.getTab("Subsystem");
-        tab.add("jeff", orange.getMechanism2d());
+        tab.add("Getting mechanism2d", orange.getMechanism2d());
         // TODO 2.4.7: Add Mechanism2d
 
         // TODO 3.3.13: Add command buttons

@@ -73,13 +73,14 @@ public class Drivetrain extends SubsystemBase {
   @Override
   public void periodic(){
     // TODO 2.2.5: Update odometry
-     tankDrive(Robot.driver.getRawLeftTranslation(), Robot.driver.getRawRightTranslation());
+    //tankDrive(Robot.driver.getRawLeftTranslation(), Robot.driver.getRawRightTranslation());
      poseEstimator.update(getGyroAngle(), getLeftPosition(), getRightPosition());    
     // TODO 1.2.2: Call tankDrive()
     
-    double leftPower = Robot.driver.getLeftTranslation();
+    /*double leftPower = Robot.driver.getLeftTranslation();
     double rightPower = Robot.driver.getRightTranslation();
-    tankDrive(leftPower, rightPower);
+    tankDrive(leftPower, rightPower);*/
+
     // TODO 3.1.1: Remove all of the tank drive code in this method
 
     // TODO 2.1.3: Update sim if in simulation
@@ -119,6 +120,7 @@ public class Drivetrain extends SubsystemBase {
   public void arcadeDrive(double throttle, double turn) {
     // TODO 3.1.2: Implement arcadeDrive
     
+    tankDrive(throttle+turn, throttle-turn);
   }
 
   public Pose2d getPose(){

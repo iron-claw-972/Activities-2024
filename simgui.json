@@ -8,6 +8,7 @@
       "/Shuffleboard/Drive/flywheel": "Mechanism2d",
       "/Shuffleboard/Scheduler/Command Scheduler": "Scheduler",
       "/Shuffleboard/Scheduler/Scheduler": "Scheduler",
+      "/Shuffleboard/Subsystem/Getting mechanism2d": "Mechanism2d",
       "/Shuffleboard/Subsystem/TEST MECHANISM": "Mechanism2d",
       "/Shuffleboard/Subsystem/jeff": "Mechanism2d",
       "/SmartDashboard/Command Scheduler": "Scheduler"
@@ -23,11 +24,16 @@
         "window": {
           "visible": true
         }
+      }
+    }
+  },
+  "NetworkTables": {
+    "transitory": {
+      "Shuffleboard": {
+        "open": true
       },
-      "/Shuffleboard/Subsystem/jeff": {
-        "window": {
-          "visible": true
-        }
+      "SmartDashboard": {
+        "open": true
       }
     }
   },
