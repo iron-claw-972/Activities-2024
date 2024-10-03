@@ -8,10 +8,12 @@ import com.revrobotics.CANSparkBase.IdleMode;
 import frc.robot.constants.Constants;
 import frc.robot.constants.DriveConstants;
 import frc.robot.Robot;
+import edu.wpi.first.math.VecBuilder;
 import edu.wpi.first.math.estimator.DifferentialDrivePoseEstimator;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
+import edu.wpi.first.math.kinematics.DifferentialDriveWheelPositions;
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
@@ -112,8 +114,11 @@ public class Drivetrain extends SubsystemBase {
   }
 
   public void resetEncoders(){
-    // TODO 3.3.7: Reset encoders
-
+    tankDrive(0, 0);
+    if (RobotBase.isSimulation()){
+      driveSim.setState(VecBuilder.fill(0, 0, driveSim.getHeading().getRadians(), driveSim.getLeftVelocityMetersPerSecond(), driveSim.getRightVelocityMetersPerSecond(), 0, 0));
+      drivePose.resetPosition(getGyroAngle(), new DifferentialDriveWheelPositions(getLeftPosition(), getRightPosition()), getPose());
+    }
   }
 
   // TODO 2.2.2: Implement these 4 methods
