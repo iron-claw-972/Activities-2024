@@ -5,13 +5,15 @@
       "/Shuffleboard/Auto/SendableChooser[0]": "String Chooser",
       "/Shuffleboard/Drive/Characterize": "Command",
       "/Shuffleboard/Drive/Field": "Field2d",
-      "/Shuffleboard/Drive/flywheel": "Mechanism2d",
       "/Shuffleboard/Scheduler/Command Scheduler": "Scheduler",
-      "/Shuffleboard/Scheduler/Scheduler": "Scheduler",
-      "/Shuffleboard/Subsystem/TEST MECHANISM": "Mechanism2d",
       "/SmartDashboard/Command Scheduler": "Scheduler"
     },
     "windows": {
+      "/Shuffleboard/Auto/SendableChooser[0]": {
+        "window": {
+          "visible": true
+        }
+      },
       "/Shuffleboard/Drive/Field": {
         "bottom": 1476,
         "height": 8.210550308227539,
@@ -26,6 +28,17 @@
     }
   },
   "NetworkTables Info": {
-    "visible": true
+    "Connections": {
+      "open": true
+    },
+    "Server": {
+      "Publishers": {
+        "open": true
+      },
+      "open": true
+    }
+  },
+  "NetworkTables View": {
+    "visible": false
   }
 }

@@ -94,7 +94,7 @@ public class DriveSub extends SubsystemBase {
         if (isReal) {
             setSpeed(0.05); // temp. speed setting for real robot
         } else {
-            setSpeed(0.005); // slower speed for sim
+            setSpeed(.005); // slower speed for sim
             // update ligament angle based on the simulated wheel position
             wheelLigament.setAngle(getPosition());
         }

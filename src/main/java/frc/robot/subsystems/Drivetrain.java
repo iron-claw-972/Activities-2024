@@ -39,8 +39,8 @@ public class Drivetrain extends SubsystemBase {
 
   // TODO 6.1.5: Create Feedforward and PIDs
 
-
-  public Drivetrain() {
+  //constructor
+  public Drivetrain() { 
 
     leftMotor1 = new CANSparkMax(DriveConstants.LEFT_MOTOR_1_ID,MotorType.kBrushless);
     rightMotor1 = new CANSparkMax(DriveConstants.RIGHT_MOTOR_1_ID,MotorType.kBrushless);
