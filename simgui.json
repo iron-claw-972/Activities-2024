@@ -6,10 +6,17 @@
       "/Shuffleboard/Drive/Characterize": "Command",
       "/Shuffleboard/Drive/Field": "Field2d",
       "/Shuffleboard/Scheduler/Command Scheduler": "Scheduler",
+      "/Shuffleboard/Subsystem/Motor Visualization": "Mechanism2d",
+      "/Shuffleboard/Subsystem/Spin Motor": "Command",
       "/SmartDashboard/Command Scheduler": "Scheduler"
     },
     "windows": {
       "/Shuffleboard/Auto/SendableChooser[0]": {
+        "window": {
+          "visible": true
+        }
+      },
+      "/Shuffleboard/Drive/Characterize": {
         "window": {
           "visible": true
         }
@@ -21,6 +28,11 @@
         "right": 2961,
         "top": 79,
         "width": 16.541748046875,
+        "window": {
+          "visible": true
+        }
+      },
+      "/Shuffleboard/Scheduler/Command Scheduler": {
         "window": {
           "visible": true
         }

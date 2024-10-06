@@ -6,11 +6,11 @@ import frc.robot.subsystems.Drivetrain;
 
 public class AutoForwardCommand extends Command {
     private final Drivetrain drivetrain; 
-    private final double speed; //speed forward
-    private final double duration; //time forward sec
-    private final Timer timer = new Timer(); //time track command duration
+    private final double speed; // speed forward
+    private final double duration; // time forward sec
+    private final Timer timer = new Timer(); // time track command duration
     
-    //constructor
+    // constructor
     public AutoForwardCommand(Drivetrain drivetrain, double speed, double duration)  { 
         this.drivetrain = drivetrain;
         this.speed = speed;
@@ -18,7 +18,7 @@ public class AutoForwardCommand extends Command {
         addRequirements(drivetrain); //reserve drivetrain for this command
     }
 
-    //called when comman is initally sceduled
+    // called when comman is initally sceduled
     @Override
     public void initialize() {
         timer.reset();
@@ -26,19 +26,19 @@ public class AutoForwardCommand extends Command {
         drivetrain.tankDrive(speed, speed);
     }
 
-    //called every 20 millsecodnds while command is runnning
+    // called every 20 millsecodnds while command is runnning
     public void execute() {
 
     }
 
-    //callled once command ends
+    // callled once command ends
     @Override
     public void end(boolean interrupted) {
         drivetrain.tankDrive(0, 0);
         timer.stop();
     }
 
-    //return true when the command should end
+    // return true when the command should end
 
     @Override
     public boolean isFinished() {

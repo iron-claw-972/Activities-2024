@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.smartdashboard.Mechanism2d;
 
 public class DriveSub extends SubsystemBase {
 
-    private CANSparkMax motor;
+    public CANSparkMax motor;
     private SingleJointedArmSim armSim;
     private Mechanism2d mech2d;
     private MechanismLigament2d wheelLigament;
@@ -98,5 +98,6 @@ public class DriveSub extends SubsystemBase {
             // update ligament angle based on the simulated wheel position
             wheelLigament.setAngle(getPosition());
         }
+        
     }
 }

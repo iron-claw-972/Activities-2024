@@ -5,6 +5,7 @@ import com.revrobotics.CANSparkLowLevel.MotorType;
 import com.kauailabs.navx.frc.AHRS;
 import com.revrobotics.CANSparkMax;
 
+import edu.wpi.first.math.VecBuilder;
 import edu.wpi.first.math.estimator.DifferentialDrivePoseEstimator;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -123,6 +124,18 @@ public class Drivetrain extends SubsystemBase {
 
   public void resetEncoders(){
     // TODO 3.3.7: Reset encoders
+
+      if (RobotBase.isReal()) {
+        // reset encoder positions for real robot
+        leftMotor1.getEncoder().setPosition(0);
+        rightMotor1.getEncoder().setPosition(0);
+      } else {
+        // reset sim state for simulation
+        driveSim.setState(VecBuilder.fill(0, 0, driveSim.getHeading().getRadians(), 0, 0, 0, 0));
+      }
+      
+      // reset pose estimator
+      drivePose.resetPosition(getGyroAngle(), 0, 0, new Pose2d());
 
   }
 
