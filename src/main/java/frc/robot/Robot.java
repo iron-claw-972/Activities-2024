@@ -46,7 +46,7 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
 
-    driveSub = new DriveSub(DriveConstants.SUB_SYSTEM_MOTOR, false);
+    driveSub = new DriveSub(DriveConstants.SUB_SYSTEM_MOTOR);
 
     // This is really annoying so it's disabled
     DriverStation.silenceJoystickConnectionWarning(true);

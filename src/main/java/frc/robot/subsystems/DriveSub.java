@@ -3,8 +3,10 @@ package frc.robot.subsystems;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.constants.Constants;
 import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.math.util.Units;
+import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.simulation.SingleJointedArmSim;
 import edu.wpi.first.wpilibj.smartdashboard.MechanismLigament2d;
 import edu.wpi.first.wpilibj.smartdashboard.Mechanism2d;
@@ -16,16 +18,14 @@ public class DriveSub extends SubsystemBase {
     private Mechanism2d mech2d;
     private MechanismLigament2d wheelLigament;
     
-    private boolean isReal = false; // check is real or simulated
-
     // Constructor
-    public DriveSub(int motorID, boolean isReal) {
-        this.isReal = isReal;
+    public DriveSub(int motorID) {
+
         motor = new CANSparkMax(motorID, MotorType.kBrushless);
 
         armSim = new SingleJointedArmSim(
             DCMotor.getFalcon500(1), // assuming Falcon500 motor
-            1.0,                     // gear ratio of 1:1
+    1.0,                     // gear ratio of 1:1
             getMomentOfInertia(),     //method for inertia
             getWheelRadius(),         // method for wheel radius
             Double.NEGATIVE_INFINITY, // min angle 
@@ -42,7 +42,7 @@ public class DriveSub extends SubsystemBase {
         mech2d.getRoot("pivot", 50, 50).append(wheelLigament);
 
         // Reset encoder to 0 if the robot is real
-        if (isReal) {
+        if (RobotBase.isReal()) {
             motor.getEncoder().setPosition(0);
         }
     }
@@ -54,11 +54,11 @@ public class DriveSub extends SubsystemBase {
 
     // method motor speed
     public void setSpeed(double speed) {
-        if (isReal) {
+        if (RobotBase.isReal()) {
             motor.set(speed);
         } else {
-            armSim.setInput(speed * 12.0); // multiply robot voltage
-            armSim.update(0.02); // update the simulation
+            armSim.setInput(Constants.ROBOT_VOLTAGE); // multiply robot voltage
+            armSim.update(Constants.LOOP_TIME); // update the simulation
         }
     }
 
@@ -69,7 +69,7 @@ public class DriveSub extends SubsystemBase {
 
     // method encoder position
     public double getPosition() {
-        if (isReal) {
+        if (RobotBase.isReal()) {
             return motor.getEncoder().getPosition();
         } else {
 
@@ -91,7 +91,7 @@ public class DriveSub extends SubsystemBase {
     // periodic method
     @Override
     public void periodic() {
-        if (isReal) {
+        if (RobotBase.isReal()) {
             setSpeed(0.05); // temp. speed setting for real robot
         } else {
             setSpeed(.005); // slower speed for sim
