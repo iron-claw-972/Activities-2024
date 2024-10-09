@@ -26,12 +26,12 @@ public class BangBangSubsystemCommand extends Command{
 
     @Override
     public void end(boolean interrupted) {
-        subsystem.motor.set(0); // Stop the motor
+        subsystem.motor.set(0); // stop the motor
     }
 
     @Override
     public boolean isFinished() {
         double currentPosition = subsystem.getPosition();
-        return Math.abs(currentPosition - setpoint) < 0.05; // adjust tolerance as needed
+        return Math.abs(currentPosition - setpoint) < 0.1; // tolerance
     }
 }

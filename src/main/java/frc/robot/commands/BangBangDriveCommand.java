@@ -37,6 +37,6 @@ public class BangBangDriveCommand extends Command{
     @Override
     public boolean isFinished() {
         double currentPosition = drivetrain.getAveragePosition();
-        return Math.abs(currentPosition - setpoint) < 0.05; // finish within 5 cm of setpoint
+        return Math.abs(currentPosition - setpoint) < 0.005; // finish within 5 mm of setpoint
     }
 }
