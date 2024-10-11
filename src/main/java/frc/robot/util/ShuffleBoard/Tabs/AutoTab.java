@@ -1,7 +1,5 @@
 package frc.robot.util.ShuffleBoard.Tabs;
 
-import java.awt.geom.Point2D;
-
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
@@ -12,7 +10,6 @@ import frc.robot.Robot;
 import frc.robot.commands.BangBangDriveCommand;
 import frc.robot.commands.FunnyCommand;
 import frc.robot.subsystems.Drivetrain;
-import frc.robot.subsystems.Ting;
 import frc.robot.util.ShuffleBoard.ShuffleBoardTabs;
 
 public class AutoTab extends ShuffleBoardTabs {

@@ -6,7 +6,7 @@ import frc.robot.subsystems.Drivetrain;
 
 public class ArcadeDriveCommand extends Command{
     
-    Drivetrain driv;
+    private Drivetrain driv;
     public ArcadeDriveCommand(Drivetrain drev){
         driv = drev;
         addRequirements(driv);
