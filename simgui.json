@@ -6,6 +6,7 @@
       "/Shuffleboard/Drive/Characterize": "Command",
       "/Shuffleboard/Drive/Field": "Field2d",
       "/Shuffleboard/Scheduler/Command Scheduler": "Scheduler",
+      "/Shuffleboard/Subsystem/Bang Bang Command": "Command",
       "/Shuffleboard/Subsystem/Motor Visualization": "Mechanism2d",
       "/Shuffleboard/Subsystem/Spin Motor": "Command",
       "/SmartDashboard/Command Scheduler": "Scheduler"
@@ -33,6 +34,16 @@
         }
       },
       "/Shuffleboard/Scheduler/Command Scheduler": {
+        "window": {
+          "visible": true
+        }
+      },
+      "/Shuffleboard/Subsystem/Bang Bang Command": {
+        "window": {
+          "visible": true
+        }
+      },
+      "/Shuffleboard/Subsystem/Spin Motor": {
         "window": {
           "visible": true
         }

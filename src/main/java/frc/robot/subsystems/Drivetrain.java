@@ -28,7 +28,7 @@ public class Drivetrain extends SubsystemBase {
   DifferentialDrivetrainSim driveSim;
 
   // TODO 2.2.1: Create gyro (AHRS)
-  AHRS ahrs = new AHRS(SPI.Port.kMXP);
+  private AHRS ahrs = new AHRS(SPI.Port.kMXP);
 
   DifferentialDrivePoseEstimator drivePose;
 
@@ -56,9 +56,8 @@ public class Drivetrain extends SubsystemBase {
 
     if (!RobotBase.isReal()) {
     driveSim = new DifferentialDrivetrainSim(DriveConstants.DRIVETRAIN_PLANT, DriveConstants.MOTOR, DriveConstants.GEAR_RATIO, DriveConstants.TRACK_WIDTH, DriveConstants.WHEEL_DIAMETER / 2, DriveConstants.MEASUREMENT_STD_DEVS);
-    drivePose = new DifferentialDrivePoseEstimator(driveKinematics, getGyroAngle(), getLeftPosition(), getRightPosition(), new Pose2d());
     }
-
+    drivePose = new DifferentialDrivePoseEstimator(driveKinematics, getGyroAngle(), getLeftPosition(), getRightPosition(), new Pose2d());
   }
 
    /**
@@ -76,9 +75,7 @@ public class Drivetrain extends SubsystemBase {
 
     // TODO 2.1.3: Update sim if in simulation
 
-    if (RobotBase.isReal()) {
-      
-    } else {
+    if (!RobotBase.isReal()) {
       driveSim.update(Constants.LOOP_TIME);
     }
     
@@ -92,8 +89,6 @@ public class Drivetrain extends SubsystemBase {
    * @param rightPower the commanded power to the right motors (-1 to 1)
    */
   public void tankDrive(double leftPower, double rightPower) {
-    leftMotor1.set(leftPower * .25);
-    rightMotor1.set(rightPower * .25);
 
     // TODO 2.1.2: If in sim, set sim inputs
     if (RobotBase.isReal()){
@@ -143,7 +138,7 @@ public class Drivetrain extends SubsystemBase {
  public double getLeftPosition(){
 
     if (RobotBase.isReal()){
-      return leftMotor1.getEncoder().getPosition();
+      return leftMotor1.getEncoder().getPosition() / DriveConstants.GEAR_RATIO * DriveConstants.WHEEL_DIAMETER * Math.PI;
     }else {
 
       return driveSim.getLeftPositionMeters();

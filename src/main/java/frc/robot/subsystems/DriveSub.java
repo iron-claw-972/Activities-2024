@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+import com.ctre.phoenix6.hardware.TalonFX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -13,7 +14,7 @@ import edu.wpi.first.wpilibj.smartdashboard.Mechanism2d;
 
 public class DriveSub extends SubsystemBase {
 
-    private CANSparkMax motor;
+    private TalonFX motor;
     private SingleJointedArmSim armSim;
     private Mechanism2d mech2d;
     private MechanismLigament2d wheelLigament;
@@ -21,7 +22,7 @@ public class DriveSub extends SubsystemBase {
     // Constructor
     public DriveSub(int motorID) {
 
-        motor = new CANSparkMax(motorID, MotorType.kBrushless);
+        motor = new TalonFX(motorID);
 
         armSim = new SingleJointedArmSim(
             DCMotor.getFalcon500(1), // assuming Falcon500 motor
@@ -41,15 +42,19 @@ public class DriveSub extends SubsystemBase {
         // add the wheel ligament to the Mechanism2d
         mech2d.getRoot("pivot", 50, 50).append(wheelLigament);
 
-        // Reset encoder to 0 if the robot is real
+        // reset encoder to 0 if the robot is real
         if (RobotBase.isReal()) {
-            motor.getEncoder().setPosition(0);
+            motor.setPosition(0);
         }
     }
 
-    // Method to get the Mechanism2d object
+    // method to get the Mechanism2d object
     public Mechanism2d getMechanism() {
         return mech2d;
+    }
+
+    public void setPosition(double rotations) {
+        motor.setPosition(rotations);
     }
 
     // method motor speed
@@ -57,8 +62,8 @@ public class DriveSub extends SubsystemBase {
         if (RobotBase.isReal()) {
             motor.set(speed);
         } else {
-            armSim.setInput(Constants.ROBOT_VOLTAGE); // multiply robot voltage
-            armSim.update(Constants.LOOP_TIME); // update the simulation
+            armSim.setInput(Constants.ROBOT_VOLTAGE * speed); // multiply robot voltage by speed
+            armSim.update(Constants.LOOP_TIME); // update simulation
         }
     }
 
@@ -69,11 +74,12 @@ public class DriveSub extends SubsystemBase {
 
     // method encoder position
     public double getPosition() {
+        
         if (RobotBase.isReal()) {
-            return motor.getEncoder().getPosition();
+            return motor.getPosition().getValue();
         } else {
 
-            // Convert radians to degrees
+            // convert radians to degrees
             return Units.radiansToDegrees(armSim.getAngleRads());
         }
     }
@@ -83,7 +89,7 @@ public class DriveSub extends SubsystemBase {
         return 0.1;
     }
 
-    // method wheel radiua
+    // method wheel radius
     private double getWheelRadius() {
         return 0.05;
     }
