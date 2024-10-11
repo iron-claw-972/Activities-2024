@@ -12,10 +12,10 @@ public class BangBangDriveCommand extends Command{
     private final double finishDistance = .5;
     private final int rotateTime = 100;
 
-    public BangBangDriveCommand(Drivetrain drev, Pose2d setpoint){
-        driv = drev;
+    public BangBangDriveCommand(Drivetrain driv, Pose2d setpoint){
+        this.driv = driv;
         this.setpoint = setpoint;
-
+        addRequirements(driv);
     }
 
     @Override
