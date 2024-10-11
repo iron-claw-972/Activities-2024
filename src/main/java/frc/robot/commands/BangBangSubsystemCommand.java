@@ -18,20 +18,20 @@ public class BangBangSubsystemCommand extends Command{
     public void execute() {
         double currentPosition = subsystem.getPosition();
         if (currentPosition < setpoint) {
-            subsystem.motor.set(power); // drive forward
+            subsystem.setSpeed(power); // drive forward
         } else {
-            subsystem.motor.set(-power); // drive backward
+            subsystem.setSpeed(-power); // drive backward
         }
     }
 
     @Override
     public void end(boolean interrupted) {
-        subsystem.motor.set(0); // stop the motor
+        subsystem.setSpeed(0); // stop the motor
     }
 
     @Override
     public boolean isFinished() {
         double currentPosition = subsystem.getPosition();
-        return Math.abs(currentPosition - setpoint) < 0.1; // tolerance
+        return Math.abs(currentPosition - setpoint) < 1; // tolerance
     }
 }

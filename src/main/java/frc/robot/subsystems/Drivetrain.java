@@ -160,9 +160,20 @@ public class Drivetrain extends SubsystemBase {
   public double getAveragePosition(){
 
     return (getLeftPosition() + getRightPosition()) / 2;
-  }
+  } 
+  
+  public double getLeftSpeed() {
+      return 0;
+    }
+
+    public double getRightSpeed() {
+      return 0;
+    }
+
   public Rotation2d getGyroAngle(){
 
+    //TODO 6.2.1: Implement these 2 methods
+   
     if (RobotBase.isReal()){
       return ahrs.getRotation2d();
     }else{

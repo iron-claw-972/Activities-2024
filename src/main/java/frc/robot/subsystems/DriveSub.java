@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.smartdashboard.Mechanism2d;
 
 public class DriveSub extends SubsystemBase {
 
-    public CANSparkMax motor;
+    private CANSparkMax motor;
     private SingleJointedArmSim armSim;
     private Mechanism2d mech2d;
     private MechanismLigament2d wheelLigament;
