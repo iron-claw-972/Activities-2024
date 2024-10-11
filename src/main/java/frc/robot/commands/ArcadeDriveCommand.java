@@ -8,6 +8,7 @@ public class ArcadeDriveCommand extends Command {
     private Drivetrain drive;
     public ArcadeDriveCommand(Drivetrain drive){
         addRequirements(drive);
+        this.drive = drive;
         
     }
 
