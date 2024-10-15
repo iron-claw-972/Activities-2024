@@ -7,6 +7,7 @@ import com.revrobotics.CANSparkBase.IdleMode;
 
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
+import edu.wpi.first.math.VecBuilder;
 import edu.wpi.first.math.estimator.DifferentialDrivePoseEstimator;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -130,21 +131,32 @@ public class Drivetrain extends SubsystemBase {
 
   public void resetEncoders(){
     // TODO 3.3.7: Reset encoders
-    
-  }
+    if (Robot.isReal()){
+      leftMotor1.getEncoder().setPosition(0);
+      rightMotor1.getEncoder().setPosition(0);
+    }
+    else{
+      driveSim.setState(VecBuilder.fill(0, 0, driveSim.getHeading().getRadians(), driveSim.getLeftVelocityMetersPerSecond(), driveSim.getRightVelocityMetersPerSecond(), 0, 0));
+    }
+    poseEstimator.resetPosition(getGyroAngle(), 0, 0, getPose());
+
+      
+}
 
   // TODO 2.2.2: Implement these 4 methods
   public double getLeftPosition(){
     if (Robot.isReal()){
       return leftMotor1.getEncoder().getPosition()/DriveConstants.GEAR_RATIO * Math.PI * DriveConstants.WHEEL_DIAMETER;
-    } else {
+    } 
+    else {
     return driveSim.getLeftPositionMeters();
-  }
+    }
 }
   public double getRightPosition(){
     if (Robot.isReal()){
       return rightMotor1.getEncoder().getPosition()/DriveConstants.GEAR_RATIO * Math.PI * DriveConstants.WHEEL_DIAMETER;
-    } else {
+    } 
+    else {
       return driveSim.getRightPositionMeters();
     }
   }
