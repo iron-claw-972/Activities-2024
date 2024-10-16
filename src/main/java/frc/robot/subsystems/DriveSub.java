@@ -42,19 +42,11 @@ public class DriveSub extends SubsystemBase {
         // add the wheel ligament to the Mechanism2d
         mech2d.getRoot("pivot", 50, 50).append(wheelLigament);
 
-        // reset encoder to 0 if the robot is real
-        if (RobotBase.isReal()) {
-            motor.setPosition(0);
-        }
     }
 
     // method to get the Mechanism2d object
     public Mechanism2d getMechanism() {
         return mech2d;
-    }
-
-    public void setPosition(double rotations) {
-        motor.setPosition(rotations);
     }
 
     // method motor speed
@@ -97,13 +89,10 @@ public class DriveSub extends SubsystemBase {
     // periodic method
     @Override
     public void periodic() {
-        if (RobotBase.isReal()) {
-            setSpeed(0.05); // temp. speed setting for real robot
-        } else {
-            setSpeed(.005); // slower speed for sim
+        if (!RobotBase.isReal()) { 
+
             // update ligament angle based on the simulated wheel position
-            wheelLigament.setAngle(getPosition());
+            wheelLigament.setAngle(0);
         }
-        
     }
 }
