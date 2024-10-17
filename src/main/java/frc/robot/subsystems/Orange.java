@@ -39,11 +39,7 @@ public class Orange extends SubsystemBase {
         }
     }
     public void motorStop(){
-        if (Robot.isReal()){
-            motor.set(0);
-        } else {
-            armSim.setInput(0);
-        }
+        setMotor(0);
     }
     public double encoderPosition(){
         if (Robot.isReal()){
@@ -57,7 +53,7 @@ public class Orange extends SubsystemBase {
     }
     @Override
     public void periodic(){
-        setMotor(0.05);
+        //setMotor(0.05);
         armSim.update(Constants.LOOP_TIME);
         ligament2d.setAngle(encoderPosition());
 
