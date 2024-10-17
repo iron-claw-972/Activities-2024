@@ -1,16 +1,16 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix6.hardware.TalonFX;
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkLowLevel.MotorType;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.constants.Constants;
+
+import edu.wpi.first.math.VecBuilder;
 import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.simulation.SingleJointedArmSim;
-import edu.wpi.first.wpilibj.smartdashboard.MechanismLigament2d;
 import edu.wpi.first.wpilibj.smartdashboard.Mechanism2d;
+import edu.wpi.first.wpilibj.smartdashboard.MechanismLigament2d;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.constants.Constants;
 
 public class DriveSub extends SubsystemBase {
 
@@ -93,6 +93,15 @@ public class DriveSub extends SubsystemBase {
 
             // update ligament angle based on the simulated wheel position
             wheelLigament.setAngle(0);
+        }
+    }
+
+   // method to reset encoder
+    public void resetEncoder() {
+        if (RobotBase.isReal()) {
+            motor.setPosition(0); // reset encoder to 0
+        } else {
+            
         }
     }
 }
