@@ -71,10 +71,10 @@ public class DriveSub extends SubsystemBase {
             return motor.getPosition().getValue();
         } else {
 
-            // convert radians to degrees
-            return Units.radiansToDegrees(armSim.getAngleRads());
+            return armSim.getAngleRads() / (2 * Math.PI);
         }
     }
+
 
     // method interia
     private double getMomentOfInertia() {
@@ -91,17 +91,13 @@ public class DriveSub extends SubsystemBase {
     public void periodic() {
         if (!RobotBase.isReal()) { 
 
-            // update ligament angle based on the simulated wheel position
-            wheelLigament.setAngle(0);
+            // get simulated pos. in rotations
+            double rotations = getPosition();
+            
+            double degrees = rotations * 360;
+
+            wheelLigament.setAngle(degrees);
         }
     }
 
-   // method to reset encoder
-    public void resetEncoder() {
-        if (RobotBase.isReal()) {
-            motor.setPosition(0); // reset encoder to 0
-        } else {
-            
-        }
-    }
 }

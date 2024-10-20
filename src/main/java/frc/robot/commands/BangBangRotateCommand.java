@@ -22,8 +22,6 @@ public class BangBangRotateCommand extends BangBangSubsystemCommand {
 
     @Override
     public void initialize() {
-        subsystem.resetEncoder();
-        getPoint();
-
+      setPoint(subsystem.getPosition() + rotations * 360);
     }
 }

@@ -14,6 +14,10 @@ public class BangBangSubsystemCommand extends Command{
         addRequirements(subsystem);
     }
 
+    public void setPoint(double setpoint) {
+
+    }
+
     @Override
     public void execute() {
         double currentPosition = subsystem.getPosition();

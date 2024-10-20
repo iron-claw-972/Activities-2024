@@ -25,15 +25,15 @@ public class Drivetrain extends SubsystemBase {
   private CANSparkMax rightMotor1;
   private CANSparkMax rightMotor2;
 
-  DifferentialDrivetrainSim driveSim;
+  private DifferentialDrivetrainSim driveSim;
 
   // TODO 2.2.1: Create gyro (AHRS)
   private AHRS ahrs = new AHRS(SPI.Port.kMXP);
 
-  DifferentialDrivePoseEstimator drivePose;
+  private DifferentialDrivePoseEstimator drivePose;
 
     // TODO 2.2.3: Create DifferentialDriveKinematics
-  DifferentialDriveKinematics driveKinematics = new DifferentialDriveKinematics(DriveConstants.TRACK_WIDTH);
+  private DifferentialDriveKinematics driveKinematics = new DifferentialDriveKinematics(DriveConstants.TRACK_WIDTH);
 
   // TODO 2.2.4: Create DifferentialDrivePoseEstimator
   
@@ -144,10 +144,11 @@ public class Drivetrain extends SubsystemBase {
       return driveSim.getLeftPositionMeters();
     }
   }
+
   public double getRightPosition(){
 
     if (RobotBase.isReal()){
-      return rightMotor1.getEncoder().getPosition();
+      return rightMotor1.getEncoder().getPosition() / DriveConstants.GEAR_RATIO * DriveConstants.WHEEL_DIAMETER * Math.PI;
     }else{
       return driveSim.getRightPositionMeters();
     }
