@@ -109,6 +109,7 @@ public class Drivetrain extends SubsystemBase {
     }
     else {
       driveSim.setInputs(leftPower*0.25*Constants.ROBOT_VOLTAGE, rightPower*0.25*Constants.ROBOT_VOLTAGE);
+
     }
   }
 
@@ -121,7 +122,7 @@ public class Drivetrain extends SubsystemBase {
   public void arcadeDrive(double throttle, double turn) {
     // TODO 3.1.2: Implement arcadeDrive
     
-    tankDrive(throttle+turn, throttle-turn);
+    //tankDrive(throttle+turn, throttle-turn);
   }
 
   public Pose2d getPose(){

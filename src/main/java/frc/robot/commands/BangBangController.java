@@ -10,7 +10,7 @@ public class BangBangController extends Command {
     public BangBangController (Drivetrain drive, double setpoint){
          this.drive = drive;
          this.setpoint = setpoint;
-
+        addRequirements(drive);
     }
     
     @Override
@@ -21,7 +21,7 @@ public class BangBangController extends Command {
     @Override
     public void execute(){
         double position = drive.getAveragePosition();
-        double power = 0.25;
+        double power = 1.0;
         if (position < setpoint){
             drive.tankDrive(power,power);
         }
@@ -41,14 +41,9 @@ public class BangBangController extends Command {
         double position = drive.getAveragePosition();
         double error = Math.abs(position - setpoint);
 
-        // return (error < 0.02);
+        return (error < 0.02);
 
-        if (error < 0.02){
-            return true;
-        }
-        else{
-            return false;
-        }
+       
     
     }
 

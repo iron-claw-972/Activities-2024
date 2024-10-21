@@ -23,7 +23,7 @@ public class AutoTab extends ShuffleBoardTabs {
     public AutoTab(Drivetrain drive, Orange orange){
         this.drive = drive;
         this.orange = orange;
-        this.bangBangController = new BangBangController(drive,50);
+        this.bangBangController = new BangBangController(drive,5);
         this.bangBangSpinMotor = new BangBangSpinMotor(orange, 50);
     }
     
