@@ -3,15 +3,20 @@
     "types": {
       "/FMSInfo": "FMSInfo",
       "/Shuffleboard/Auto/SendableChooser[0]": "String Chooser",
+      "/Shuffleboard/Auto/rotate to 90": "Command",
+      "/Shuffleboard/Auto/spin": "Command",
       "/Shuffleboard/Drive/Characterize": "Command",
       "/Shuffleboard/Drive/Field": "Field2d",
-      "/Shuffleboard/Drive/flywheel": "Mechanism2d",
       "/Shuffleboard/Scheduler/Command Scheduler": "Scheduler",
-      "/Shuffleboard/Scheduler/Scheduler": "Scheduler",
-      "/Shuffleboard/Subsystem/TEST MECHANISM": "Mechanism2d",
+      "/Shuffleboard/Subsystem/Ting": "Mechanism2d",
       "/SmartDashboard/Command Scheduler": "Scheduler"
     },
     "windows": {
+      "/Shuffleboard/Auto/rotate to 90": {
+        "window": {
+          "visible": true
+        }
+      },
       "/Shuffleboard/Drive/Field": {
         "bottom": 1476,
         "height": 8.210550308227539,
@@ -19,6 +24,11 @@
         "right": 2961,
         "top": 79,
         "width": 16.541748046875,
+        "window": {
+          "visible": true
+        }
+      },
+      "/Shuffleboard/Subsystem/Ting": {
         "window": {
           "visible": true
         }
