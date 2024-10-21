@@ -29,7 +29,6 @@ public class DriveTab extends ShuffleBoardTabs {
         rotOdemetry = tab.add("chassis rotation", 0).withPosition(3, 3).getEntry();
 
         tab.add("Characterize", new SysIDDriveCommand(drive));
-        tab.add("spin", new TurnyCommand(5, drive));
     }
 
 

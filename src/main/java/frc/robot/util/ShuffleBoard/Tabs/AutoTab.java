@@ -9,7 +9,10 @@ import edu.wpi.first.wpilibj2.command.PrintCommand;
 import frc.robot.Robot;
 import frc.robot.commands.BangBangDriveCommand;
 import frc.robot.commands.FunnyCommand;
+import frc.robot.commands.TingBangBang;
+import frc.robot.commands.TurnyCommand;
 import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.Ting;
 import frc.robot.util.ShuffleBoard.ShuffleBoardTabs;
 
 public class AutoTab extends ShuffleBoardTabs {
@@ -38,6 +41,8 @@ public class AutoTab extends ShuffleBoardTabs {
         // TODO 3.3.11: Add your Bang-Bang command for your subsystem here
         
         tab.add(autoCommand);
+        tab.add("spin", new TurnyCommand(5, Robot.ting));
+        tab.add("rotate to 90", new TingBangBang(Robot.ting, 90));
     }
 
     public void update(){

@@ -1,29 +1,29 @@
 package frc.robot.commands;
 
-import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.geometry.Translation2d;
-import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.Ting;
 
-public class TurnyCommand extends BangBangDriveCommand{
-    int spins;
-
+public class TurnyCommand extends TingBangBang{
+    private int spins;
+    private Ting ting;
+    private int tim;
     
-    public TurnyCommand(int spins, Drivetrain driv){
-        super(driv, new Pose2d(new Translation2d(0, 0), new Rotation2d(0)));
+    public TurnyCommand(int spins, Ting ting){
+        super(ting,0);
         this.spins = spins;
+        this.ting = ting;
     }
 
     @Override
     public void initialize(){
-        driv.resetEncoders();
+        ting.stop();;
         tim = 50 * spins;
 
     }
 
     @Override
     public void execute(){
-        driv.arcadeDrive(0, 1);
+        ting.setMotor(1);
+        tim--;
     }
 
     @Override
@@ -32,5 +32,10 @@ public class TurnyCommand extends BangBangDriveCommand{
             return true;
         }
         return false;
+    }
+
+    @Override
+    public void end(boolean interrupted){
+        ting.stop();
     }
 }
