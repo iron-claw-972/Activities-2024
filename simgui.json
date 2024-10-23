@@ -43,6 +43,11 @@
           "visible": true
         }
       },
+      "/Shuffleboard/Subsystem/Motor Visualization": {
+        "window": {
+          "visible": true
+        }
+      },
       "/Shuffleboard/Subsystem/Spin Motor": {
         "window": {
           "visible": true

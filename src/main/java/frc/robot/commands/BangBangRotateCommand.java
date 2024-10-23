@@ -14,14 +14,9 @@ public class BangBangRotateCommand extends BangBangSubsystemCommand {
         this.subsystem = subsystem;
         this.rotations = rotations;
     }
-    
-
-        public double getPoint() {
-        return rotations;
-        }
 
     @Override
     public void initialize() {
-      setPoint(subsystem.getPosition() + rotations * 360);
+      setPoint(subsystem.getPosition() + rotations);
     }
 }

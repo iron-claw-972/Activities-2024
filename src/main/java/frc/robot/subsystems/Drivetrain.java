@@ -14,7 +14,6 @@ import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.simulation.DifferentialDrivetrainSim;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Robot;
 import frc.robot.constants.Constants;
 import frc.robot.constants.DriveConstants;
 

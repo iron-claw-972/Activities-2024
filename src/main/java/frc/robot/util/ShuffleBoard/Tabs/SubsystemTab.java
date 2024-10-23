@@ -22,8 +22,6 @@ public class SubsystemTab extends ShuffleBoardTabs {
         // TODO 2.4.7: Add Mechanism2d
         tab.add("Motor Visualization", driveSub.getMechanism());
 
-
-
         // TODO 3.3.13: Add command buttons
         tab.add("Spin Motor", new BangBangRotateCommand(driveSub, 5)); // spin motor 5 rotations
         tab.add("Bang Bang Command", new BangBangSubsystemCommand(driveSub, 5));

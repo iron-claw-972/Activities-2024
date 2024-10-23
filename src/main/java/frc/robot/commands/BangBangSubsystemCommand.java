@@ -5,8 +5,8 @@ import frc.robot.subsystems.DriveSub;
 
 public class BangBangSubsystemCommand extends Command{
     private final DriveSub subsystem;
-    private final double setpoint;
-    private final double power = 0.5;
+    private double setpoint;
+    private final double power = 0.01;
 
     public BangBangSubsystemCommand(DriveSub subsystem, double setpoint) {
         this.subsystem = subsystem;
@@ -15,7 +15,7 @@ public class BangBangSubsystemCommand extends Command{
     }
 
     public void setPoint(double setpoint) {
-
+        this.setpoint = setpoint;
     }
 
     @Override
@@ -36,6 +36,7 @@ public class BangBangSubsystemCommand extends Command{
     @Override
     public boolean isFinished() {
         double currentPosition = subsystem.getPosition();
-        return Math.abs(currentPosition - setpoint) < .5; // tolerance
+        return Math.abs(currentPosition - setpoint) < 1 / 360; // tolerance
     }
 }
+

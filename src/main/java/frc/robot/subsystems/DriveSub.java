@@ -2,9 +2,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix6.hardware.TalonFX;
 
-import edu.wpi.first.math.VecBuilder;
 import edu.wpi.first.math.system.plant.DCMotor;
-import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.simulation.SingleJointedArmSim;
 import edu.wpi.first.wpilibj.smartdashboard.Mechanism2d;
@@ -89,15 +87,18 @@ public class DriveSub extends SubsystemBase {
     // periodic method
     @Override
     public void periodic() {
+
         if (!RobotBase.isReal()) { 
 
             // get simulated pos. in rotations
             double rotations = getPosition();
-            
             double degrees = rotations * 360;
 
             wheelLigament.setAngle(degrees);
+
+            armSim.update(Constants.LOOP_TIME);
+
         }
     }
-
 }
+
