@@ -53,7 +53,6 @@ public class DriveSub extends SubsystemBase {
             motor.set(speed);
         } else {
             armSim.setInput(Constants.ROBOT_VOLTAGE * speed); // multiply robot voltage by speed
-            armSim.update(Constants.LOOP_TIME); // update simulation
         }
     }
 

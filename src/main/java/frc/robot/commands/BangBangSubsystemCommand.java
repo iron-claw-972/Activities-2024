@@ -2,6 +2,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.DriveSub;
+import edu.wpi.first.math.util.Units;
 
 public class BangBangSubsystemCommand extends Command{
     private final DriveSub subsystem;
@@ -36,7 +37,7 @@ public class BangBangSubsystemCommand extends Command{
     @Override
     public boolean isFinished() {
         double currentPosition = subsystem.getPosition();
-        return Math.abs(currentPosition - setpoint) < 1 / 360; // tolerance
+        return Math.abs(currentPosition - setpoint) < Units.rotationsToDegrees(1.0 / 360); // tolerance
     }
 }
 
