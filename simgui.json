@@ -33,11 +33,6 @@
           "visible": true
         }
       },
-      "/Shuffleboard/Scheduler/Command Scheduler": {
-        "window": {
-          "visible": true
-        }
-      },
       "/Shuffleboard/Subsystem/Bang Bang Command": {
         "window": {
           "visible": true

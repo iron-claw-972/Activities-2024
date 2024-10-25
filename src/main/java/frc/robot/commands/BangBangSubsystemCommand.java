@@ -37,7 +37,7 @@ public class BangBangSubsystemCommand extends Command{
     @Override
     public boolean isFinished() {
         double currentPosition = subsystem.getPosition();
-        return Math.abs(currentPosition - setpoint) < Units.rotationsToDegrees(1.0 / 360); // tolerance
+        return Math.abs(currentPosition - setpoint) < Units.rotationsToDegrees(1 / 360); // tolerance
     }
 }
 
