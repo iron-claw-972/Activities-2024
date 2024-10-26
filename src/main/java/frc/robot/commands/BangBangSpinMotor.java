@@ -5,11 +5,11 @@ import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Orange;
 
 public  class BangBangSpinMotor extends Command{
-    private Orange orange; 
+    private Drivetrain drive; 
     private double setpoint;
      
-    public BangBangSpinMotor (Orange orange, double setpoint) {
-         this.orange = orange;
+    public BangBangSpinMotor (Drivetrain drive, double setpoint) {
+         this.drive = drive;
          this.setpoint = setpoint;
 
     }
@@ -21,31 +21,28 @@ public  class BangBangSpinMotor extends Command{
 
     @Override
     public void execute(){
-        double position = orange.encoderPosition();
-        double speed = 0.25;
+        double position = drive.getGyroAngle().getDegrees();
+        double power = 0.25;
         if (position < setpoint){
-            orange.setMotor(speed);
+            drive.tankDrive(-power, power);
         }
         else{
-            orange.setMotor(-speed);
+            drive.tankDrive(power, -power);
         }   
 
     }
 
     @Override
     public void end(boolean interrupted){
-        orange.motorStop();
+        drive.tankDrive(0,0);
     }
 
     @Override
     public boolean isFinished(){
-        double position = orange.encoderPosition();
+        double position = drive.getGyroAngle().getDegrees();
         double error = Math.abs(position - setpoint);
 
-        return (error < 0.02);
-
-
-    
+        return (error < 0.5);
     }
 
 
