@@ -1,4 +1,16 @@
 {
+  "HALProvider": {
+    "Other Devices": {
+      "Talon FX (v6)[15]/Rev Limit": {
+        "header": {
+          "open": true
+        }
+      },
+      "window": {
+        "visible": false
+      }
+    }
+  },
   "NTProvider": {
     "types": {
       "/FMSInfo": "FMSInfo",
@@ -13,6 +25,11 @@
     },
     "windows": {
       "/Shuffleboard/Auto/rotate to 90": {
+        "window": {
+          "visible": true
+        }
+      },
+      "/Shuffleboard/Auto/spin": {
         "window": {
           "visible": true
         }
@@ -36,6 +53,12 @@
     }
   },
   "NetworkTables Info": {
+    "Clients": {
+      "open": true
+    },
     "visible": true
+  },
+  "NetworkTables View": {
+    "visible": false
   }
 }

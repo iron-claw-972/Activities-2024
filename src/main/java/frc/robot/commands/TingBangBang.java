@@ -20,9 +20,9 @@ public class TingBangBang extends Command{
     @Override
     public void execute(){
         if (turnDirection(this.targetAngle)){
-            ting.setMotor(-1);
+            ting.setMotor(-.05);
         }else{
-            ting.setMotor(1);
+            ting.setMotor(.05);
         }
     }
 

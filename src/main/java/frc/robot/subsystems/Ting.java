@@ -32,7 +32,6 @@ public class Ting extends SubsystemBase {
 
     public void periodic(){
         arm.update(Constants.LOOP_TIME);
-        setMotor(.05);
         ligma.setAngle(getPos());
     }
 
