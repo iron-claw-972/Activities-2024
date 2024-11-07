@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.RunCommand;
 import frc.robot.commands.ArcadeDriveCommand;
 import frc.robot.constants.DriveConstants;
 import frc.robot.controls.BaseDriverConfig;
@@ -16,6 +17,7 @@ import frc.robot.controls.Operator;
 import frc.robot.subsystems.DriveSub;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.util.ShuffleBoard.ShuffleBoardManager;
+
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -63,9 +65,12 @@ public class Robot extends TimedRobot {
     operator.configureControls();
 
     // TODO 3.1.6: Set the drivetrain's default command
-    drive.setDefaultCommand(new ArcadeDriveCommand(drive));
+    drive.setDefaultCommand(new RunCommand(
+      () -> drive.arcadeDrive(driver.getForwardTranslation(), driver.getTurn()), drive
+      ));
 
     // TODO 4.2.1: Change default command to use RunCommand with a lambda expression
+    
     // TODO 6.3.1: Change to Feedforward command
   }
 
