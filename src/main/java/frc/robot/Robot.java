@@ -8,11 +8,16 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.RunCommand;
+import frc.robot.commands.ArcadeDriveCommand;
+import frc.robot.constants.DriveConstants;
 import frc.robot.controls.BaseDriverConfig;
 import frc.robot.controls.GameControllerDriverConfig;
 import frc.robot.controls.Operator;
+import frc.robot.subsystems.DriveSub;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.util.ShuffleBoard.ShuffleBoardManager;
+
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -20,22 +25,30 @@ import frc.robot.util.ShuffleBoard.ShuffleBoardManager;
  * the package after creating this project, you must also update the build.gradle file in the
  * project.
  */
+
+
+
+
+
 public class Robot extends TimedRobot {
   private Command autoCommand;
   public static ShuffleBoardManager shuffleboard;
   public static Drivetrain drive;
+  public static DriveSub driveSub;
   // TODO 2.3.9: Create variable for your subsystem
   public static BaseDriverConfig driver;
   public static Operator operator;
-
   private static boolean isTestMode = false;
 
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
    */
+
   @Override
   public void robotInit() {
+
+    driveSub = new DriveSub(DriveConstants.SUB_SYSTEM_MOTOR);
 
     // This is really annoying so it's disabled
     DriverStation.silenceJoystickConnectionWarning(true);
@@ -44,16 +57,20 @@ public class Robot extends TimedRobot {
     drive = new Drivetrain();
     // TODO 2.3.10: Create your subsystem
     
-    shuffleboard = new ShuffleBoardManager(drive);
-    driver = new GameControllerDriverConfig(drive);
+    shuffleboard = new ShuffleBoardManager(drive, driveSub);
+    driver = new GameControllerDriverConfig(drive, driveSub);
     operator = new Operator();
 
     driver.configureControls();
     operator.configureControls();
 
     // TODO 3.1.6: Set the drivetrain's default command
+    drive.setDefaultCommand(new RunCommand(
+      () -> drive.arcadeDrive(driver.getForwardTranslation(), driver.getTurn()), drive
+      ));
 
     // TODO 4.2.1: Change default command to use RunCommand with a lambda expression
+    
     // TODO 6.3.1: Change to Feedforward command
   }
 

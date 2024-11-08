@@ -5,13 +5,23 @@
       "/Shuffleboard/Auto/SendableChooser[0]": "String Chooser",
       "/Shuffleboard/Drive/Characterize": "Command",
       "/Shuffleboard/Drive/Field": "Field2d",
-      "/Shuffleboard/Drive/flywheel": "Mechanism2d",
       "/Shuffleboard/Scheduler/Command Scheduler": "Scheduler",
-      "/Shuffleboard/Scheduler/Scheduler": "Scheduler",
-      "/Shuffleboard/Subsystem/TEST MECHANISM": "Mechanism2d",
+      "/Shuffleboard/Subsystem/Bang Bang Command": "Command",
+      "/Shuffleboard/Subsystem/Motor Visualization": "Mechanism2d",
+      "/Shuffleboard/Subsystem/Spin Motor": "Command",
       "/SmartDashboard/Command Scheduler": "Scheduler"
     },
     "windows": {
+      "/Shuffleboard/Auto/SendableChooser[0]": {
+        "window": {
+          "visible": true
+        }
+      },
+      "/Shuffleboard/Drive/Characterize": {
+        "window": {
+          "visible": true
+        }
+      },
       "/Shuffleboard/Drive/Field": {
         "bottom": 1476,
         "height": 8.210550308227539,
@@ -22,10 +32,37 @@
         "window": {
           "visible": true
         }
+      },
+      "/Shuffleboard/Subsystem/Bang Bang Command": {
+        "window": {
+          "visible": true
+        }
+      },
+      "/Shuffleboard/Subsystem/Motor Visualization": {
+        "window": {
+          "visible": true
+        }
+      },
+      "/Shuffleboard/Subsystem/Spin Motor": {
+        "window": {
+          "visible": true
+        }
       }
     }
   },
   "NetworkTables Info": {
+    "Connections": {
+      "open": true
+    },
+    "Server": {
+      "Publishers": {
+        "open": true
+      },
+      "open": true
+    },
     "visible": true
+  },
+  "NetworkTables View": {
+    "visible": false
   }
 }
