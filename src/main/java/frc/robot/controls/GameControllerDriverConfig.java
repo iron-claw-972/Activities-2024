@@ -25,8 +25,6 @@ public class GameControllerDriverConfig extends BaseDriverConfig {
   public GameControllerDriverConfig(Drivetrain drive, DriveSub sub) {
       super(drive);
       this.sub = sub;
-
-
   }
 
   @Override
