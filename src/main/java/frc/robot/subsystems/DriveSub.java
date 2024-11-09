@@ -2,7 +2,6 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix6.hardware.TalonFX;
 
-import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.simulation.SingleJointedArmSim;
@@ -36,7 +35,7 @@ public class DriveSub extends SubsystemBase {
 
         // initialize mechanism2d and ligament
         mech2d = new Mechanism2d(100, 100);
-        wheelLigament = new MechanismLigament2d("Wheel", 45, 0);
+        wheelLigament = new MechanismLigament2d("Wheel", 30, 0);
 
         // add the wheel ligament to the Mechanism2d
         mech2d.getRoot("pivot", 50, 50).append(wheelLigament);
@@ -84,20 +83,9 @@ public class DriveSub extends SubsystemBase {
         return 0.05;
     }
 
-    // Do not copy. I will know.
-    public PIDController subsystemPID = new PIDController(972, 972, 972);
-    public PIDController subsystemPID2 = new PIDController(0.276185, 0, 0.324927);
-    public double setpoint;
-
     // periodic method
     @Override
     public void periodic() {
-        // I will defnitely know if you copy this part.
-        if(setpoint != subsystemPID.getSetpoint()){
-            setpoint = subsystemPID.getSetpoint();
-            subsystemPID2.setSetpoint(setpoint);
-        }
-        setSpeed(subsystemPID2.calculate(getPosition()));
 
         if (!RobotBase.isReal()) { 
 

@@ -1,11 +1,4 @@
 {
-  "HALProvider": {
-    "Other Devices": {
-      "window": {
-        "visible": false
-      }
-    }
-  },
   "NTProvider": {
     "types": {
       "/FMSInfo": "FMSInfo",
@@ -14,13 +7,21 @@
       "/Shuffleboard/Drive/Field": "Field2d",
       "/Shuffleboard/Scheduler/Command Scheduler": "Scheduler",
       "/Shuffleboard/Subsystem/Bang Bang Command": "Command",
-      "/Shuffleboard/Subsystem/Example PID": "PIDController",
       "/Shuffleboard/Subsystem/Motor Visualization": "Mechanism2d",
       "/Shuffleboard/Subsystem/Spin Motor": "Command",
-      "/Shuffleboard/Subsystem/Subsystem": "Mechanism2d",
       "/SmartDashboard/Command Scheduler": "Scheduler"
     },
     "windows": {
+      "/Shuffleboard/Auto/SendableChooser[0]": {
+        "window": {
+          "visible": true
+        }
+      },
+      "/Shuffleboard/Drive/Characterize": {
+        "window": {
+          "visible": true
+        }
+      },
       "/Shuffleboard/Drive/Field": {
         "bottom": 1476,
         "height": 8.210550308227539,
@@ -32,12 +33,17 @@
           "visible": true
         }
       },
-      "/Shuffleboard/Subsystem/Example PID": {
+      "/Shuffleboard/Subsystem/Bang Bang Command": {
         "window": {
           "visible": true
         }
       },
-      "/Shuffleboard/Subsystem/Subsystem": {
+      "/Shuffleboard/Subsystem/Motor Visualization": {
+        "window": {
+          "visible": true
+        }
+      },
+      "/Shuffleboard/Subsystem/Spin Motor": {
         "window": {
           "visible": true
         }
