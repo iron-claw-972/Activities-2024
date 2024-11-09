@@ -14,7 +14,7 @@ import frc.robot.controls.BaseDriverConfig;
 import frc.robot.controls.GameControllerDriverConfig;
 import frc.robot.controls.Operator;
 import frc.robot.subsystems.Drivetrain;
-import frc.robot.subsystems.Orange;
+import frc.robot.subsystems.OrangeArm;
 import frc.robot.util.ShuffleBoard.ShuffleBoardManager;
 
 /**
@@ -30,7 +30,7 @@ public class Robot extends TimedRobot {
   // TODO 2.3.9: Create variable for your subsystem
   public static BaseDriverConfig driver;
   public static Operator operator;
-  public static Orange orange;
+  public static OrangeArm orange;
 
   private static boolean isTestMode = false;
 
@@ -47,7 +47,7 @@ public class Robot extends TimedRobot {
     // make subsystems
     drive = new Drivetrain();
     // TODO 2.3.10: Create your subsystem
-    orange = new Orange();
+    orange = new OrangeArm();
     shuffleboard = new ShuffleBoardManager(drive,orange);
     driver = new GameControllerDriverConfig(drive);
     operator = new Operator();

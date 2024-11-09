@@ -12,13 +12,13 @@ import frc.robot.constants.Constants;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
-public class Orange extends SubsystemBase {
+public class OrangeArm extends SubsystemBase {
     CANSparkMax motor;
     SingleJointedArmSim armSim;
     DCMotor dcMotor;
     Mechanism2d mechanism2d;
     MechanismLigament2d ligament2d;
-    public Orange (){
+    public OrangeArm (){
         motor = new CANSparkMax(0, MotorType.kBrushless);
         motor.getEncoder().setPosition(0);
         dcMotor = DCMotor.getFalcon500(1);

@@ -4,12 +4,12 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.OrangeArm;
 
-public  class BangBangSpinMotor extends Command{
-    private Drivetrain drive; 
+public  class BangBangSpinMotorReal extends Command{
+    private OrangeArm orange; 
     private double setpoint;
      
-    public BangBangSpinMotor (Drivetrain drive, double setpoint) {
-         this.drive = drive;
+    public BangBangSpinMotorReal (OrangeArm orange, double setpoint) {
+         this.orange = orange;
          this.setpoint = setpoint;
 
     }
@@ -21,25 +21,25 @@ public  class BangBangSpinMotor extends Command{
 
     @Override
     public void execute(){
-        double position = drive.getGyroAngle().getDegrees();
+        double position = orange.getGyroAngle().getDegrees();
         double power = 0.25;
         if (position < setpoint){
-            drive.tankDrive(-power, power);
+            orange.speed(-power);
         }
         else{
-            drive.tankDrive(power, -power);
+            orange.tankDrive(power, -power);
         }   
 
     }
 
     @Override
     public void end(boolean interrupted){
-        drive.tankDrive(0,0);
+        orange.power(0,0);
     }
 
     @Override
     public boolean isFinished(){
-        double position = drive.getGyroAngle().getDegrees();
+        double position = orange.getGyroAngle().getDegrees();
         double error = Math.abs(position - setpoint);
 
         return (error < 0.5);

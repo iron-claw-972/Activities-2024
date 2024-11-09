@@ -2,15 +2,15 @@
 package frc.robot.util.ShuffleBoard.Tabs;
 
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
-import frc.robot.subsystems.Orange;
+import frc.robot.subsystems.OrangeArm;
 import frc.robot.util.ShuffleBoard.ShuffleBoardTabs;
 
 
 public class SubsystemTab extends ShuffleBoardTabs {
     // TODO 2.3.11: Create variable for subsystem
-    private Orange orange;
+    private OrangeArm orange;
 
-    public SubsystemTab(Orange orange){
+    public SubsystemTab(OrangeArm orange){
         this.orange = orange;
     }
 

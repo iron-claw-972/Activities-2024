@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj2.command.PrintCommand;
 import frc.robot.commands.BangBangController;
 import frc.robot.commands.BangBangSpinMotor;
 import frc.robot.subsystems.Drivetrain;
-import frc.robot.subsystems.Orange;
+import frc.robot.subsystems.OrangeArm;
 import frc.robot.util.ShuffleBoard.ShuffleBoardTabs;
 
 public class AutoTab extends ShuffleBoardTabs {
@@ -15,12 +15,12 @@ public class AutoTab extends ShuffleBoardTabs {
     private final SendableChooser<Command> autoCommand = new SendableChooser<>();
 
     private Drivetrain drive;
-    private Orange orange;
+    private OrangeArm orange;
 
     private BangBangController bangBangController;
     private BangBangSpinMotor bangBangSpinMotor;
 
-    public AutoTab(Drivetrain drive, Orange orange){
+    public AutoTab(Drivetrain drive, OrangeArm orange){
         this.drive = drive;
         this.orange = orange;
         this.bangBangController = new BangBangController(drive,15);

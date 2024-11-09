@@ -8,6 +8,7 @@ import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
 import edu.wpi.first.math.VecBuilder;
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.estimator.DifferentialDrivePoseEstimator;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -23,9 +24,9 @@ import frc.robot.constants.DriveConstants;
 
 public class Drivetrain extends SubsystemBase {
   
-  CANSparkMax leftMotor1;
+  private CANSparkMax leftMotor1;
   private CANSparkMax leftMotor2;
-  CANSparkMax rightMotor1;
+  private CANSparkMax rightMotor1;
   private CANSparkMax rightMotor2;
   private DifferentialDrivetrainSim driveSim;
 
@@ -36,6 +37,7 @@ public class Drivetrain extends SubsystemBase {
   private DifferentialDriveKinematics driveKinematics = new DifferentialDriveKinematics(DriveConstants.TRACK_WIDTH);
   // TODO 2.2.4: Create DifferentialDrivePoseEstimator
   private DifferentialDrivePoseEstimator poseEstimator;
+  private PIDController pidController = new PIDController (0.99, 0, 0);
 
   // TODO 6.1.5: Create Feedforward and PID
 
@@ -192,4 +194,8 @@ public class Drivetrain extends SubsystemBase {
     // TODO 6.2.3: Calculate voltages and call tankDriveVolts()
 
   }
+  // 5.1
+  
+    
+  
 }
