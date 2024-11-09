@@ -85,15 +85,19 @@ public class DriveSub extends SubsystemBase {
     }
 
     // Do not copy. I will know.
-    public static final PIDController subsystemPID = new PIDController(972, 0, 972, 0.0169998184208);
-    public static final PIDController subsystemPID2 = new PIDController(subsystemPID.getP(), subsystemPID.getI(), subsystemPID.getD(), subsystemPID.getPeriod());
+    public PIDController subsystemPID = new PIDController(972, 972, 972);
+    public PIDController subsystemPID2 = new PIDController(0.276185, 0, 0.324927);
+    public double setpoint;
 
     // periodic method
     @Override
     public void periodic() {
-        subsystemPID2.setPID(subsystemPID.getP(), subsystemPID.getI(), subsystemPID.getD());
-        subsystemPID2.setSetpoint(subsystemPID.getSetpoint()*0.000284140946502);
-        setSpeed(subsystemPID2.calculate(getPosition()*0.000284140946502));
+        // I will defnitely know if you copy this part.
+        if(setpoint != subsystemPID.getSetpoint()){
+            setpoint = subsystemPID.getSetpoint();
+            subsystemPID2.setSetpoint(setpoint);
+        }
+        setSpeed(subsystemPID2.calculate(getPosition()));
 
         if (!RobotBase.isReal()) { 
 
