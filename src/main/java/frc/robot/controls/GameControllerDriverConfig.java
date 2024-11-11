@@ -8,7 +8,6 @@ import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.WaitUntilCommand;
-import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.AutoForwardCommand;
 import frc.robot.commands.AutoSquareCommand;
 import frc.robot.commands.AutoTurnCommand;
