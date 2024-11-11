@@ -38,7 +38,7 @@ public void configureControls() {
     controller.get(Button.LB).onTrue(new AutoForwardCommand(getDrivetrain(), -1.0, 3.0));
     controller.get(Button.RB).onTrue(new AutoForwardCommand(getDrivetrain(), 1.0, 3.0));
     controller.get(Button.B).onTrue(new AutoSquareCommand(getDrivetrain()));
-    controller.get(Button.X).onTrue(new AutoTurnCommand(getDrivetrain(), 152.17)); //turns 180 degrees**
+    controller.get(Button.X).onTrue(new AutoTurnCommand(getDrivetrain(), 152.17)); // turns 180 degrees**
 
     // TODO 4.1.3: Add Bang-Bang drive command
     controller.get(Button.START).onTrue(new BangBangSubsystemCommand(sub, 1.0));
@@ -53,10 +53,10 @@ public void configureControls() {
 
     // TODO 4.3.1: Add more triggers
 
-    // SequentialCommandGroup: Drive forward, then turn 45 degrees
+    // SequentialCommandGroup: Drive forward, then turn 90 degrees
     controller.get(Button.RIGHT_JOY).onTrue(new SequentialCommandGroup(
      new AutoForwardCommand(getDrivetrain(), 1.0, 3.0), // drive forward
-     new AutoTurnCommand(getDrivetrain(), 63), // turn 45 degrees**
+     new AutoTurnCommand(getDrivetrain(), 64), // turn 90 degrees**
      new InstantCommand(() -> getDrivetrain().arcadeDrive(0, 0), getDrivetrain())  // stop at the end
   ));
     // ParallelCommandGroup: Drive forward and rotate simultaneously
@@ -65,11 +65,13 @@ public void configureControls() {
         new BangBangRotateCommand(sub, 1.0)
     ));
 
-    // ConditionalCommand: Drive forward if LEFT_TRIGGER_BUTTON is pressed, otherwise turn
-    new ConditionalCommand(
-      new AutoForwardCommand(getDrivetrain(), 1.0, 2.0),
-      new AutoTurnCommand(getDrivetrain(), -90),
-      controller.LEFT_TRIGGER_BUTTON
+    // ConditionalCommand: Drive forward if LEFT_TRIGGER_BUTTON is pressed, otherwise turn 90 degrees
+    controller.get(controller.LEFT_TRIGGER_BUTTON).onTrue(
+      new ConditionalCommand(
+        new AutoForwardCommand(getDrivetrain(), 1.0, 2.0),
+        new AutoTurnCommand(getDrivetrain(), -64), // turn 90 degrees**
+        () -> getDrivetrain().getPose().getX() > 5
+    )
 );
 
     // PrintCommand: Print message when DPAD_UP is pressed
