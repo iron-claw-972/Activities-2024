@@ -10,7 +10,7 @@ import frc.robot.util.MathUtils;
  */
 public abstract class BaseDriverConfig {
 
-    protected final Drivetrain drive;
+    private final Drivetrain drive;
 
     /**
      * @param drive               the drivetrain instance

@@ -21,10 +21,11 @@ public class DriveSub extends SubsystemBase {
     public DriveSub(int motorID) {
 
         motor = new TalonFX(motorID);
-
+        
+        if(RobotBase.isSimulation()) {
         armSim = new SingleJointedArmSim(
             DCMotor.getFalcon500(1), // assuming Falcon500 motor
-    1.0,                     // gear ratio of 1:1
+            1.0,                     // gear ratio of 1:1
             getMomentOfInertia(),     //method for inertia
             getWheelRadius(),         // method for wheel radius
             Double.NEGATIVE_INFINITY, // min angle 
@@ -32,7 +33,7 @@ public class DriveSub extends SubsystemBase {
             false,      // sim gravity false
             0);   // disable gravity
 
-
+        }
         // initialize mechanism2d and ligament
         mech2d = new Mechanism2d(100, 100);
         wheelLigament = new MechanismLigament2d("Wheel", 30, 0);
