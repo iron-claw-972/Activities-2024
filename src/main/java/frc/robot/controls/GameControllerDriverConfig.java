@@ -66,12 +66,10 @@ public void configureControls() {
     ));
 
     // ConditionalCommand: Drive forward if LEFT_TRIGGER_BUTTON is pressed, otherwise turn
-  controller.get(controller.LEFT_TRIGGER_BUTTON).onTrue(
     new ConditionalCommand(
       new AutoForwardCommand(getDrivetrain(), 1.0, 2.0),
       new AutoTurnCommand(getDrivetrain(), -90),
-      controller.get(controller.LEFT_TRIGGER_BUTTON)
-    )
+      controller.LEFT_TRIGGER_BUTTON
 );
 
     // PrintCommand: Print message when DPAD_UP is pressed
