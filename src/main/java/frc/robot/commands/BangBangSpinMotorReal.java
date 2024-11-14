@@ -21,25 +21,25 @@ public  class BangBangSpinMotorReal extends Command{
 
     @Override
     public void execute(){
-        double position = orange.getGyroAngle().getDegrees();
+        double position = orange.encoderPosition();
         double power = 0.25;
         if (position < setpoint){
-            orange.speed(-power);
+            orange.setMotor(-power);
         }
         else{
-            orange.tankDrive(power, -power);
+            orange.setMotor(power);
         }   
 
     }
 
     @Override
     public void end(boolean interrupted){
-        orange.power(0,0);
+        orange.setMotor(0);
     }
 
     @Override
     public boolean isFinished(){
-        double position = orange.getGyroAngle().getDegrees();
+        double position = orange.encoderPosition();
         double error = Math.abs(position - setpoint);
 
         return (error < 0.5);

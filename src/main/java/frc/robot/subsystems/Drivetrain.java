@@ -25,9 +25,7 @@ import frc.robot.constants.DriveConstants;
 public class Drivetrain extends SubsystemBase {
   
   private CANSparkMax leftMotor1;
-  private CANSparkMax leftMotor2;
   private CANSparkMax rightMotor1;
-  private CANSparkMax rightMotor2;
   private DifferentialDrivetrainSim driveSim;
 
   // TODO 2.2.1: Create gyro (AHRS)
@@ -37,7 +35,21 @@ public class Drivetrain extends SubsystemBase {
   private DifferentialDriveKinematics driveKinematics = new DifferentialDriveKinematics(DriveConstants.TRACK_WIDTH);
   // TODO 2.2.4: Create DifferentialDrivePoseEstimator
   private DifferentialDrivePoseEstimator poseEstimator;
-  private PIDController pidController = new PIDController (0.99, 0, 0);
+  private PIDController pidController = new PIDController (0.003, 0, 0);
+  private double tolerance = 0.01; 
+  public boolean atSetpoint(){
+    return pidController.atSetpoint();
+  }
+
+  public void spinTo(){
+    pidController.reset();
+    pidController.setSetpoint(10);
+  }
+  public PIDController getPID(){
+   return pidController;
+  }
+
+  
 
   // TODO 6.1.5: Create Feedforward and PID
 
@@ -87,6 +99,8 @@ public class Drivetrain extends SubsystemBase {
     // TODO 3.1.1: Remove all of the tank drive code in this method
 
     // TODO 2.1.3: Update sim if in simulation
+    double power = pidController.calculate(getAveragePosition());
+    tankDrive(power, power);
 
     if (RobotBase.isSimulation()){
       driveSim.update(Constants.LOOP_TIME);
@@ -195,7 +209,6 @@ public class Drivetrain extends SubsystemBase {
 
   }
   // 5.1
-  
-    
-  
 }
+  
+
