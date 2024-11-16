@@ -6,6 +6,7 @@
       "/Shuffleboard/Drive/Characterize": "Command",
       "/Shuffleboard/Drive/Field": "Field2d",
       "/Shuffleboard/Drive/flywheel": "Mechanism2d",
+      "/Shuffleboard/PID/PIDController[1]": "PIDController",
       "/Shuffleboard/Scheduler/Command Scheduler": "Scheduler",
       "/Shuffleboard/Scheduler/Scheduler": "Scheduler",
       "/Shuffleboard/Subsystem/Getting mechanism2d": "Mechanism2d",
@@ -26,6 +27,11 @@
         "right": 2961,
         "top": 79,
         "width": 16.541748046875,
+        "window": {
+          "visible": true
+        }
+      },
+      "/Shuffleboard/PID/PIDController[1]": {
         "window": {
           "visible": true
         }

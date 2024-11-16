@@ -41,6 +41,7 @@ public class ShuffleBoardManager {
         // This doesn't need to be stored in its own class
         Shuffleboard.getTab("Scheduler").add("Command Scheduler", CommandScheduler.getInstance());
         SmartDashboard.putData("Command Scheduler", CommandScheduler.getInstance());
+        Shuffleboard.getTab("PID").add(orange.pidController);
     }
 
     public void update(){

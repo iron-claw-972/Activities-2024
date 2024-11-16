@@ -49,7 +49,7 @@ public class Robot extends TimedRobot {
     // TODO 2.3.10: Create your subsystem
     orange = new OrangeArm();
     shuffleboard = new ShuffleBoardManager(drive,orange);
-    driver = new GameControllerDriverConfig(drive);
+    driver = new GameControllerDriverConfig(drive, orange);
     operator = new Operator();
     
 

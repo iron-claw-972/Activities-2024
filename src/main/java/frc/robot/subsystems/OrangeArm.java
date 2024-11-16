@@ -1,4 +1,6 @@
 package frc.robot.subsystems;
+
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.simulation.SingleJointedArmSim;
@@ -18,51 +20,71 @@ public class OrangeArm extends SubsystemBase {
     DCMotor dcMotor;
     Mechanism2d mechanism2d;
     MechanismLigament2d ligament2d;
-    public OrangeArm (){
+    public PIDController pidController = new PIDController(0.003, 0, 0);
+
+    public OrangeArm() {
         motor = new CANSparkMax(0, MotorType.kBrushless);
         motor.getEncoder().setPosition(0);
         dcMotor = DCMotor.getFalcon500(1);
-        armSim = new SingleJointedArmSim(dcMotor, 1, 0.1, 0.05, 
-            Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY, false, 0);
+        armSim = new SingleJointedArmSim(dcMotor, 1, 0.1, 0.05,
+                Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY, false, 0);
         mechanism2d = new Mechanism2d(100, 100);
         ligament2d = new MechanismLigament2d("orange ligament", 25, 0);
         mechanism2d.getRoot("pivot", 50, 50).append(ligament2d);
+        pidController.setTolerance(0.1);
     }
-    
-    public void setMotor(double speed){
-        if(Robot.isReal()){
+
+    public void setMotor(double speed) {
+        if (Robot.isReal()) {
             // old code here
             motor.set(speed);
         } else {
             // new sim stuff here
-            armSim.setInput(speed*Constants.ROBOT_VOLTAGE);
+            armSim.setInput(speed * Constants.ROBOT_VOLTAGE);
         }
     }
-    public void motorStop(){
+
+    public void motorStop() {
         setMotor(0);
     }
-    public double encoderPosition(){
-        if (Robot.isReal()){
+
+    public double encoderPosition() {
+        if (Robot.isReal()) {
             return motor.getEncoder().getPosition() * 360;
         } else {
             return Units.radiansToDegrees(armSim.getAngleRads());
         }
     }
-    public Mechanism2d getMechanism2d(){
+
+    public Mechanism2d getMechanism2d() {
         return mechanism2d;
     }
+
     @Override
-    public void periodic(){
-        //setMotor(0.05);
+    public void periodic() {
+        // setMotor(0.05);
         armSim.update(Constants.LOOP_TIME);
         ligament2d.setAngle(encoderPosition());
+        setMotor(pidController.calculate(encoderPosition()));
+        
+
 
     }
-    
+
     
 
+    public boolean atSetpoint() {
+        return pidController.atSetpoint();
+    }
+
+    public void spinTo(double setpoint) {
+        pidController.reset();
+        pidController.setSetpoint(setpoint);
+    }
+
+    public PIDController getPID() {
+        return pidController;
+    }
+
+   
 }
-
-
-
-

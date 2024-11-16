@@ -35,19 +35,6 @@ public class Drivetrain extends SubsystemBase {
   private DifferentialDriveKinematics driveKinematics = new DifferentialDriveKinematics(DriveConstants.TRACK_WIDTH);
   // TODO 2.2.4: Create DifferentialDrivePoseEstimator
   private DifferentialDrivePoseEstimator poseEstimator;
-  private PIDController pidController = new PIDController (0.003, 0, 0);
-  private double tolerance = 0.01; 
-  public boolean atSetpoint(){
-    return pidController.atSetpoint();
-  }
-
-  public void spinTo(){
-    pidController.reset();
-    pidController.setSetpoint(10);
-  }
-  public PIDController getPID(){
-   return pidController;
-  }
 
   
 
@@ -99,9 +86,7 @@ public class Drivetrain extends SubsystemBase {
     // TODO 3.1.1: Remove all of the tank drive code in this method
 
     // TODO 2.1.3: Update sim if in simulation
-    double power = pidController.calculate(getAveragePosition());
-    tankDrive(power, power);
-
+    
     if (RobotBase.isSimulation()){
       driveSim.update(Constants.LOOP_TIME);
     }
