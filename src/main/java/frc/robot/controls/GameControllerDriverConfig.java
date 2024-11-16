@@ -13,6 +13,7 @@ import frc.robot.commands.AutoSquareCommand;
 import frc.robot.commands.AutoTurnCommand;
 import frc.robot.commands.BangBangRotateCommand;
 import frc.robot.commands.BangBangSubsystemCommand;
+import frc.robot.commands.SubsystemPIDCommand;
 import frc.robot.constants.Constants;
 import frc.robot.subsystems.DriveSub;
 import frc.robot.subsystems.Drivetrain;
@@ -41,8 +42,8 @@ public void configureControls() {
     controller.get(Button.X).onTrue(new AutoTurnCommand(getDrivetrain(), 152.17)); // turns 180 degrees**
 
     // TODO 4.1.3: Add Bang-Bang drive command
-    controller.get(Button.START).onTrue(new BangBangSubsystemCommand(sub, 1.0));
-    controller.get(Button.BACK).onTrue(new BangBangRotateCommand(sub, 3.0));
+    controller.get(Button.START).onTrue(new SubsystemPIDCommand(sub, 1.0));
+    controller.get(Button.BACK).onTrue(new SubsystemPIDCommand(sub, -1.0));
 
     // TODO 4.1.4: Add subsystem Bang-Bangs
     controller.get(Button.START).onFalse(new BangBangSubsystemCommand(sub, 0));

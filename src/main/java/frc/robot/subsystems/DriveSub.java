@@ -20,30 +20,30 @@ public class DriveSub extends SubsystemBase {
     private PIDController pidController;
 
     // Constructor
+
     public DriveSub(int motorID) {
 
         motor = new TalonFX(motorID);
-        
-        if(RobotBase.isSimulation()) {
-        armSim = new SingleJointedArmSim(
-            DCMotor.getFalcon500(1), // assuming Falcon500 motor
-            1.0,                     // gear ratio of 1:1
-            getMomentOfInertia(),     //method for inertia
-            getWheelRadius(),         // method for wheel radius
-            Double.NEGATIVE_INFINITY, // min angle 
-            Double.POSITIVE_INFINITY, // max angle 
-            false,      // sim gravity false
-            0);   // disable gravity
+
+        if (RobotBase.isSimulation()) {
+            armSim = new SingleJointedArmSim(
+                    DCMotor.getFalcon500(1), // assuming Falcon500 motor
+                    1.0, // gear ratio of 1:1
+                    getMomentOfInertia(), // method for inertia
+                    getWheelRadius(), // method for wheel radius
+                    Double.NEGATIVE_INFINITY, // min angle
+                    Double.POSITIVE_INFINITY, // max angle
+                    false, // sim gravity false
+                    0); // disable gravity
         }
 
         // initialize mechanism2d and ligament
         mech2d = new Mechanism2d(100, 100);
         wheelLigament = new MechanismLigament2d("Wheel", 30, 0);
 
-        //intialize pid
+        // intialize pid
         pidController = new PIDController(0.1, 0, 0);
         pidController.setTolerance(0.05);
-
 
         // add the wheel ligament to the Mechanism2d
         mech2d.getRoot("pivot", 50, 50).append(wheelLigament);
@@ -55,12 +55,11 @@ public class DriveSub extends SubsystemBase {
     }
 
     // method motor speed
-    public void setSpeed(double targetPosition) {
+    public void setSpeed(double speed) {
         if (RobotBase.isReal()) {
-            motor.set(targetPosition);
+            motor.set(speed);
         } else {
-            double output = pidController.calculate(getPosition(), targetPosition);
-            armSim.setInput(Constants.ROBOT_VOLTAGE * output);
+            armSim.setInput(Constants.ROBOT_VOLTAGE * speed);
         }
     }
 
@@ -71,7 +70,7 @@ public class DriveSub extends SubsystemBase {
 
     // method encoder position
     public double getPosition() {
-        
+
         if (RobotBase.isReal()) {
             return motor.getPosition().getValue();
         } else {
@@ -86,15 +85,15 @@ public class DriveSub extends SubsystemBase {
         pidController.setSetpoint(targetPosition);
     }
 
-        // method to check if motor is at setpoint
-        public boolean atSetpoint() {
-            return pidController.atSetpoint();
-        }
-    
-        // method to get PID controller
-        public PIDController getPID() {
-            return pidController;
-        }
+    // method to check if motor is at setpoint
+    public boolean atSetpoint() {
+        return pidController.atSetpoint();
+    }
+
+    // method to get PID controller
+    public PIDController getPID() {
+        return pidController;
+    }
 
     // method interia
     private double getMomentOfInertia() {
@@ -109,8 +108,7 @@ public class DriveSub extends SubsystemBase {
     // periodic method
     @Override
     public void periodic() {
-
-        if (!RobotBase.isReal()) { 
+        if (!RobotBase.isReal()) {
             // get the PID output and use it to set motor speed toward setpoint
             double output = pidController.calculate(getPosition());
             setSpeed(output);

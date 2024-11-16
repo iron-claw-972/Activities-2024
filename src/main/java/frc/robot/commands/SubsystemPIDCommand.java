@@ -3,12 +3,12 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.DriveSub;
 
-public class PIDCommand extends Command {
+public class SubsystemPIDCommand extends Command {
     private final DriveSub driveSub;
     private final double setpoint;
 
     // constructor
-    public PIDCommand(DriveSub driveSub, double setpoint) {
+    public SubsystemPIDCommand(DriveSub driveSub, double setpoint) {
         this.driveSub = driveSub;
         this.setpoint = setpoint;
         addRequirements(driveSub);
