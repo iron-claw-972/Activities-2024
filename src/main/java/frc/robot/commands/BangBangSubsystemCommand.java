@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.DriveSub;
 import edu.wpi.first.math.util.Units;
 
-public class BangBangSubsystemCommand extends Command{
+public class BangBangSubsystemCommand extends Command {
     private final DriveSub subsystem;
     private double setpoint;
     private final double power = 0.01;
@@ -40,4 +40,3 @@ public class BangBangSubsystemCommand extends Command{
         return Math.abs(currentPosition - setpoint) < Units.degreesToRotations(1); // tolerance
     }
 }
-

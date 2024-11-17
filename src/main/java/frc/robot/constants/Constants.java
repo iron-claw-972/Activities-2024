@@ -2,7 +2,7 @@ package frc.robot.constants;
 
 public class Constants {
 
-    // constants:   
+    // constants:
 
     public static final double GRAVITY_ACCELERATION = 9.8;
     public static final double ROBOT_VOLTAGE = 12.0;
@@ -21,14 +21,13 @@ public class Constants {
     public static final int BLINKIN_PORT = 0;
 
     // falcon constants:
- 
+
     public static final int FIRMWARE_VERSION = 5633; // version 22.1.1.0
     public static final boolean BREAK_ON_WRONG_FIRMWARE = false;
 
     public static final double RESOLUTION = 2048;
     // Kraken Speed
     public static double MAX_RPM = 5800.0; // Rotations per minute
-
 
     /*
      * Talon Stator / Supply Limits explanation

@@ -29,12 +29,12 @@ public class GameControllerDriverConfig extends BaseDriverConfig {
   private final DriveSub sub;
 
   public GameControllerDriverConfig(Drivetrain drive, DriveSub sub) {
-      super(drive);
-      this.sub = sub;
+    super(drive);
+    this.sub = sub;
   }
 
-    @Override
-public void configureControls() {
+  @Override
+  public void configureControls() {
     // TODO 4.1.1: Change to your auto command
     controller.get(Button.LB).onTrue(new AutoForwardCommand(getDrivetrain(), -1.0, 3.0));
     controller.get(Button.RB).onTrue(new AutoForwardCommand(getDrivetrain(), 1.0, 3.0));
@@ -56,37 +56,34 @@ public void configureControls() {
 
     // SequentialCommandGroup: Drive forward, then turn 90 degrees
     controller.get(Button.RIGHT_JOY).onTrue(new SequentialCommandGroup(
-     new AutoForwardCommand(getDrivetrain(), 1.0, 3.0), // drive forward
-     new AutoTurnCommand(getDrivetrain(), 64), // turn 90 degrees**
-     new InstantCommand(() -> getDrivetrain().arcadeDrive(0, 0), getDrivetrain())  // stop at the end
-  ));
+        new AutoForwardCommand(getDrivetrain(), 1.0, 3.0), // drive forward
+        new AutoTurnCommand(getDrivetrain(), 64), // turn 90 degrees**
+        new InstantCommand(() -> getDrivetrain().arcadeDrive(0, 0), getDrivetrain()) // stop at the end
+    ));
     // ParallelCommandGroup: Drive forward and rotate simultaneously
     controller.get(Button.LEFT_JOY).onTrue(new ParallelCommandGroup(
         new AutoForwardCommand(getDrivetrain(), 1.0, 2.0),
-        new BangBangRotateCommand(sub, 1.0)
-    ));
+        new BangBangRotateCommand(sub, 1.0)));
 
-    // ConditionalCommand: Drive forward if LEFT_TRIGGER_BUTTON is pressed, otherwise turn 90 degrees
+    // ConditionalCommand: Drive forward if LEFT_TRIGGER_BUTTON is pressed,
+    // otherwise turn 90 degrees
     controller.get(controller.LEFT_TRIGGER_BUTTON).onTrue(
-      new ConditionalCommand(
-        new AutoForwardCommand(getDrivetrain(), 1.0, 2.0),
-        new AutoTurnCommand(getDrivetrain(), -64), // turn 90 degrees**
-        () -> getDrivetrain().getPose().getX() > 5
-    )
-);
+        new ConditionalCommand(
+            new AutoForwardCommand(getDrivetrain(), 1.0, 2.0),
+            new AutoTurnCommand(getDrivetrain(), -64), // turn 90 degrees**
+            () -> getDrivetrain().getPose().getX() > 5));
 
     // PrintCommand: Print message when DPAD_UP is pressed
     controller.get(GameController.DPad.UP).onTrue(new PrintCommand("DPAD_UP button pressed!"));
 
     // WaitCommand: Wait for 1 second, then drive forward
     controller.get(GameController.DPad.LEFT).onTrue(new WaitCommand(1.0)
-     .andThen(new AutoForwardCommand(getDrivetrain(), 1.0, 2.0)));
+        .andThen(new AutoForwardCommand(getDrivetrain(), 1.0, 2.0)));
 
     // WaitUntilCommand: Wait until RIGHT_TRIGGER_BUTTON is pressed, then turn
     controller.get(GameController.DPad.DOWN).onTrue(new WaitUntilCommand(
         controller.get(controller.RIGHT_TRIGGER_BUTTON))
-      .andThen(new AutoTurnCommand(getDrivetrain(), 152.17))
-    );
+        .andThen(new AutoTurnCommand(getDrivetrain(), 152.17)));
   }
 
   @Override
@@ -94,6 +91,7 @@ public void configureControls() {
     // - because down is positive
     return -controller.get(Axis.LEFT_Y);
   }
+
   @Override
   public double getRawRightTranslation() {
     // - because down is positive

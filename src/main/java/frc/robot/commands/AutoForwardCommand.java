@@ -5,17 +5,17 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.Drivetrain;
 
 public class AutoForwardCommand extends Command {
-    private final Drivetrain drivetrain; 
+    private final Drivetrain drivetrain;
     private final double speed; // speed forward
     private final double duration; // time forward sec
     private final Timer timer = new Timer(); // time track command duration
-    
+
     // constructor
-    public AutoForwardCommand(Drivetrain drivetrain, double speed, double duration)  { 
+    public AutoForwardCommand(Drivetrain drivetrain, double speed, double duration) {
         this.drivetrain = drivetrain;
         this.speed = speed;
         this.duration = duration;
-        addRequirements(drivetrain); //reserve drivetrain for this command
+        addRequirements(drivetrain); // reserve drivetrain for this command
     }
 
     // called when comman is initally sceduled

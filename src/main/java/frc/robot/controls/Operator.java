@@ -18,10 +18,11 @@ public class Operator {
     public void configureControls() {
     }
 
-    public Trigger getRightTrigger(){
+    public Trigger getRightTrigger() {
         return new Trigger(controller.RIGHT_TRIGGER_BUTTON);
     }
-    public Trigger getLeftTrigger(){
+
+    public Trigger getLeftTrigger() {
         return new Trigger(controller.LEFT_TRIGGER_BUTTON);
     }
 }

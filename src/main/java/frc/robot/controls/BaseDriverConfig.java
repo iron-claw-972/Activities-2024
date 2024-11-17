@@ -46,7 +46,7 @@ public abstract class BaseDriverConfig {
      */
     public abstract void configureControls();
 
-    public double getRawForwardTranslation(){
+    public double getRawForwardTranslation() {
         return getRawLeftTranslation();
     }
 

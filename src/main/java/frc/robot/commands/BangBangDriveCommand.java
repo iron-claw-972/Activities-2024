@@ -3,7 +3,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.Drivetrain;
 
-public class BangBangDriveCommand extends Command{
+public class BangBangDriveCommand extends Command {
     private final Drivetrain drivetrain;
     private final double setpoint; // target distance to drive (meters)
     private final double power = 0.5; // motor power for Bang-Bang control
@@ -16,7 +16,7 @@ public class BangBangDriveCommand extends Command{
 
     @Override
     public void initialize() {
-        drivetrain.resetEncoders(); //reset encoders at start
+        drivetrain.resetEncoders(); // reset encoders at start
     }
 
     @Override

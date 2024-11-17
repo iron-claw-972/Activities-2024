@@ -13,32 +13,28 @@ public class SysIDDriveCommand extends SequentialCommandGroup {
 
     private Config config = new Config();
     private SysId sysId;
+
     public SysIDDriveCommand(Drivetrain drive) {
         config = new Config(
-            Units.Volts.of(0.5).per(Units.Seconds.of(1)),
-            Units.Volts.of(3),
-            Units.Seconds.of(6),
-            (x)->SignalLogger.writeString("state", x.toString())
-        );
+                Units.Volts.of(0.5).per(Units.Seconds.of(1)),
+                Units.Volts.of(3),
+                Units.Seconds.of(6),
+                (x) -> SignalLogger.writeString("state", x.toString()));
         sysId = new SysId(
-            "Drivetrain",
-            x ->{
+                "Drivetrain",
+                x -> {
                     drive.tankDriveVolts(x.magnitude(), x.magnitude());
                 },
-            drive,
-            config
-        );
+                drive,
+                config);
         addCommands(
-            sysId.runQuasisStatic(Direction.kForward),
-            new WaitCommand(0.5),
-            sysId.runQuasisStatic(Direction.kReverse),
-            new WaitCommand(0.5),
-            sysId.runDynamic(Direction.kForward),
-            new WaitCommand(0.5),
-            sysId.runDynamic(Direction.kReverse)
-        );
+                sysId.runQuasisStatic(Direction.kForward),
+                new WaitCommand(0.5),
+                sysId.runQuasisStatic(Direction.kReverse),
+                new WaitCommand(0.5),
+                sysId.runDynamic(Direction.kForward),
+                new WaitCommand(0.5),
+                sysId.runDynamic(Direction.kReverse));
     }
-
-    
 
 }

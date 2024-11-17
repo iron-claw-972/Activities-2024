@@ -6,17 +6,16 @@ import frc.robot.commands.BangBangSubsystemCommand;
 import frc.robot.subsystems.DriveSub;
 import frc.robot.util.ShuffleBoard.ShuffleBoardTabs;
 
-
 public class SubsystemTab extends ShuffleBoardTabs {
     // TODO 2.3.11: Create variable for subsystem
-    
+
     private DriveSub driveSub;
 
-    public SubsystemTab(DriveSub driveSub){
+    public SubsystemTab(DriveSub driveSub) {
         this.driveSub = driveSub;
     }
-    
-    public void createEntries(){
+
+    public void createEntries() {
         tab = Shuffleboard.getTab("Subsystem");
 
         // TODO 2.4.7: Add Mechanism2d
@@ -29,6 +28,6 @@ public class SubsystemTab extends ShuffleBoardTabs {
 
     }
 
-
-    public void update(){}
+    public void update() {
+    }
 }

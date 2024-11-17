@@ -23,7 +23,8 @@ public class AutoTurnCommand extends Command {
 
     @Override
     public void execute() {
-        // turn the robot to the left at a constant speed until it reaches the target angle
+        // turn the robot to the left at a constant speed until it reaches the target
+        // angle
         drivetrain.arcadeDrive(0, -0.5); // negative value for turning left (you can adjust speed here)
     }
 
