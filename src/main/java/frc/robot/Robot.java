@@ -8,8 +8,11 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import frc.robot.commands.ArcadeDriveCommand;
+import frc.robot.commands.DriveTwoMeters;
+import frc.robot.commands.MoveOrangeArm;
 import frc.robot.controls.BaseDriverConfig;
 import frc.robot.controls.GameControllerDriverConfig;
 import frc.robot.controls.Operator;
@@ -63,6 +66,7 @@ public class Robot extends TimedRobot {
 
     // TODO 4.2.1: Change default command to use RunCommand with a lambda expression
     drive.setDefaultCommand(new RunCommand(() -> drive.arcadeDrive(Robot.driver.getForwardTranslation(), Robot.driver.getTurn()), drive));
+   // drive.setDefaultCommand(new ParallelCommandGroup(() -> new DriveTwoMeters(drive)), new MoveOrangeArm(orange, kDefaultPeriod) );
 
     // TODO 6.3.1: Change to Feedforward command
   }

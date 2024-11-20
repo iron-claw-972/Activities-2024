@@ -20,7 +20,7 @@ public class OrangeArm extends SubsystemBase {
     DCMotor dcMotor;
     Mechanism2d mechanism2d;
     MechanismLigament2d ligament2d;
-    public PIDController pidController = new PIDController(0.003, 0, 0);
+    public PIDController pidController = new PIDController(0.02, 0, 0.005);
 
     public OrangeArm() {
         motor = new CANSparkMax(0, MotorType.kBrushless);
