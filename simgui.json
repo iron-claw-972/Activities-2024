@@ -7,8 +7,11 @@
       "/Shuffleboard/Drive/Field": "Field2d",
       "/Shuffleboard/Scheduler/Command Scheduler": "Scheduler",
       "/Shuffleboard/Subsystem/Bang Bang Command": "Command",
+      "/Shuffleboard/Subsystem/Bang-Bang Spin Motor": "Command",
       "/Shuffleboard/Subsystem/Motor Visualization": "Mechanism2d",
       "/Shuffleboard/Subsystem/PID Command": "Command",
+      "/Shuffleboard/Subsystem/PID Controller": "PIDController",
+      "/Shuffleboard/Subsystem/PID Spin Motor": "Command",
       "/Shuffleboard/Subsystem/Spin Motor": "Command",
       "/SmartDashboard/Command Scheduler": "Scheduler"
     },
@@ -44,12 +47,7 @@
           "visible": true
         }
       },
-      "/Shuffleboard/Subsystem/PID Command": {
-        "window": {
-          "visible": true
-        }
-      },
-      "/Shuffleboard/Subsystem/Spin Motor": {
+      "/Shuffleboard/Subsystem/PID Controller": {
         "window": {
           "visible": true
         }

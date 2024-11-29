@@ -22,10 +22,10 @@ public class SubsystemTab extends ShuffleBoardTabs {
         tab.add("Motor Visualization", driveSub.getMechanism());
 
         // TODO 3.3.13: Add command buttons
-        tab.add("Spin Motor", new BangBangRotateCommand(driveSub, 5)); // spin motor 5 rotations
+        tab.add("Bang-Bang Spin Motor", new BangBangRotateCommand(driveSub, 5)); // spin motor 5 rotations
         tab.add("Bang Bang Command", new BangBangSubsystemCommand(driveSub, 5));
         // TODO 5.3.1: Add PID
-
+        tab.add("PID Controller", driveSub.getPID());
     }
 
     public void update() {

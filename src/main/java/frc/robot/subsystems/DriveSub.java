@@ -42,7 +42,7 @@ public class DriveSub extends SubsystemBase {
         wheelLigament = new MechanismLigament2d("Wheel", 30, 0);
 
         // intialize pid
-        pidController = new PIDController(0.1, 0, 0);
+        pidController = new PIDController(0.03, 0, 0.11);
         pidController.setTolerance(0.05);
 
         // add the wheel ligament to the Mechanism2d
@@ -108,11 +108,11 @@ public class DriveSub extends SubsystemBase {
     // periodic method
     @Override
     public void periodic() {
-        if (!RobotBase.isReal()) {
-            // get the PID output and use it to set motor speed toward setpoint
-            double output = pidController.calculate(getPosition());
-            setSpeed(output);
+        // get the PID output and use it to set motor speed toward setpoint
+        double output = pidController.calculate(getPosition());
+        setSpeed(output);
 
+        if (!RobotBase.isReal()) {
             // get simulated pos. in rotations, convert to degrees
             double rotations = getPosition();
             double degrees = rotations * 360;
