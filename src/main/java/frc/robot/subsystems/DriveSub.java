@@ -42,7 +42,7 @@ public class DriveSub extends SubsystemBase {
         wheelLigament = new MechanismLigament2d("Wheel", 30, 0);
 
         // intialize pid
-        pidController = new PIDController(0.03, 0, 0.11);
+        pidController = new PIDController(0.5, 0, 0.5);
         pidController.setTolerance(0.05);
 
         // add the wheel ligament to the Mechanism2d
