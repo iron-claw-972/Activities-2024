@@ -1,6 +1,8 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix6.hardware.TalonFX;
+
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.RobotBase;
@@ -15,6 +17,8 @@ public class Ting extends SubsystemBase {
     SingleJointedArmSim arm;
     Mechanism2d ting1;
     MechanismLigament2d ligma;
+    PIDController piddy;
+
     public Ting(int motorId){
         motor = new TalonFX(motorId);
         motor.setPosition(0);
@@ -22,6 +26,9 @@ public class Ting extends SubsystemBase {
         ting1 = new Mechanism2d(100, 100);
         ligma = new MechanismLigament2d(getName(), 35, 0);
         ting1.getRoot("pivot", 50, 50).append(ligma);
+        piddy = new PIDController(.0003, 0, 0);
+        piddy.disableContinuousInput();
+        piddy.setTolerance(.01, .01);
 
 
     }
@@ -33,6 +40,7 @@ public class Ting extends SubsystemBase {
     public void periodic(){
         arm.update(Constants.LOOP_TIME);
         ligma.setAngle(getPos());
+        setMotor(piddy.calculate(getPos()));
     }
 
     public void setMotor(double speed){
@@ -56,7 +64,18 @@ public class Ting extends SubsystemBase {
         }
     }
 
+    public void setTarget(double angle){
+        piddy.reset();
+        piddy.setSetpoint(angle);
+    }
 
+    public boolean atSetpoint(){
+        return piddy.atSetpoint();
+    }
+
+    public PIDController getPID(){
+        return piddy;
+    }
 
 
 }
