@@ -12,7 +12,6 @@ import frc.robot.commands.FunnyCommand;
 import frc.robot.commands.TingBangBang;
 import frc.robot.commands.TurnyCommand;
 import frc.robot.subsystems.Drivetrain;
-import frc.robot.subsystems.Ting;
 import frc.robot.util.ShuffleBoard.ShuffleBoardTabs;
 
 public class AutoTab extends ShuffleBoardTabs {

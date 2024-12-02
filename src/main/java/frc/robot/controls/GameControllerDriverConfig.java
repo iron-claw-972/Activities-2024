@@ -9,12 +9,11 @@ import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.WaitUntilCommand;
-import frc.robot.commands.ArcadeDriveCommand;
 import frc.robot.commands.BangBangDriveCommand;
-import frc.robot.commands.DoNothing;
 import frc.robot.commands.FunnyCommand;
 import frc.robot.commands.TingBangBang;
 import frc.robot.commands.TurnyCommand;
+import frc.robot.commands.TingPID;
 import frc.robot.constants.Constants;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Ting;
@@ -40,7 +39,7 @@ public class GameControllerDriverConfig extends BaseDriverConfig {
     // TODO 4.1.3: Add Bang-Bang drive command
     controller.get(Button.A).onTrue(new BangBangDriveCommand(getDrivetrain(), new Pose2d(10,10,new Rotation2d(0))));
     // TODO 4.1.4: Add subsystem Bang-Bangs
-    controller.get(Button.X).onTrue(new TingBangBang(new Ting(13), (double) 45)).onFalse(new TingBangBang(new Ting(13), (double) 0));
+    controller.get(Button.X).onTrue(new TingPID(new Ting(16), 45)).onFalse(new TingBangBang(new Ting(13), (double) 0));
     controller.get(Button.Y).whileTrue(new TurnyCommand(1, new Ting(16)));
     // TODO 4.2.2: Make robot spin while a button is pressed
     controller.get(Button.LB).whileTrue(new RunCommand(() -> {getDrivetrain().tankDrive(-1, 1);}, getDrivetrain()));
