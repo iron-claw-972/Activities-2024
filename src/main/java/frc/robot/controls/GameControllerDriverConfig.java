@@ -2,7 +2,13 @@ package frc.robot.controls;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.wpilibj2.command.ConditionalCommand;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import edu.wpi.first.wpilibj2.command.PrintCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
+import edu.wpi.first.wpilibj2.command.WaitUntilCommand;
 import frc.robot.commands.ArcadeDriveCommand;
 import frc.robot.commands.BangBangDriveCommand;
 import frc.robot.commands.DoNothing;
@@ -15,6 +21,7 @@ import frc.robot.subsystems.Ting;
 import lib.controllers.GameController;
 import lib.controllers.GameController.Axis;
 import lib.controllers.GameController.Button;
+import lib.controllers.GameController.DPad;
 
 /**
  * Driver controls for the generic game controller.
@@ -38,6 +45,14 @@ public class GameControllerDriverConfig extends BaseDriverConfig {
     // TODO 4.2.2: Make robot spin while a button is pressed
     controller.get(Button.LB).whileTrue(new RunCommand(() -> {getDrivetrain().tankDrive(-1, 1);}, getDrivetrain()));
     // TODO 4.3.1: Add more triggers
+    controller.get(Button.START).onTrue(new ParallelCommandGroup(new TurnyCommand(1, new Ting(16)), new RunCommand(() -> {getDrivetrain().tankDrive(1, 1);}, getDrivetrain())));
+    controller.get(DPad.DOWN).onTrue(new SequentialCommandGroup());
+    controller.get(DPad.UP).onTrue(new ConditionalCommand(null, null, () -> (getDrivetrain().getLeftSpeed() >= 0)));
+    controller.get(DPad.LEFT).onTrue(new PrintCommand("hello there!"));
+    controller.get(DPad.RIGHT).onTrue(new WaitCommand(6));
+    controller.get(controller.LEFT_TRIGGER_BUTTON).onTrue(new WaitUntilCommand(40));
+
+
   }
 
   @Override
