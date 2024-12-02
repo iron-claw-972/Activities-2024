@@ -46,11 +46,10 @@ public class GameControllerDriverConfig extends BaseDriverConfig {
     // TODO 4.3.1: Add more triggers
     controller.get(Button.START).onTrue(new ParallelCommandGroup(new TurnyCommand(1, new Ting(16)), new RunCommand(() -> {getDrivetrain().tankDrive(1, 1);}, getDrivetrain())));
     controller.get(DPad.DOWN).onTrue(new SequentialCommandGroup());
-    controller.get(DPad.UP).onTrue(new ConditionalCommand(null, null, () -> (getDrivetrain().getLeftSpeed() >= 0)));
+    controller.get(DPad.UP).onTrue(new ConditionalCommand(new TingPID(new Ting(84), 270), new TingPID(new Ting(84), 90), () -> (getDrivetrain().getLeftSpeed() >= 0)));
     controller.get(DPad.LEFT).onTrue(new PrintCommand("hello there!"));
     controller.get(DPad.RIGHT).onTrue(new WaitCommand(6));
     controller.get(controller.LEFT_TRIGGER_BUTTON).onTrue(new WaitUntilCommand(40));
-
 
   }
 

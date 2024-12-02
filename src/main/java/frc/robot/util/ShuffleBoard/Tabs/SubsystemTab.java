@@ -22,7 +22,7 @@ public class SubsystemTab extends ShuffleBoardTabs {
         // TODO 3.3.13: Add command buttons
 
         // TODO 5.3.1: Add PID
-
+        tab.add("pid", ting.getMechanism2d());
     }
 
 

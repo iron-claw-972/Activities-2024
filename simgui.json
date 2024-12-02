@@ -21,6 +21,7 @@
       "/Shuffleboard/Drive/Field": "Field2d",
       "/Shuffleboard/Scheduler/Command Scheduler": "Scheduler",
       "/Shuffleboard/Subsystem/Ting": "Mechanism2d",
+      "/Shuffleboard/Subsystem/pid": "Mechanism2d",
       "/SmartDashboard/Command Scheduler": "Scheduler"
     },
     "windows": {
