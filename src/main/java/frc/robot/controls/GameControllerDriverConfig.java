@@ -36,7 +36,7 @@ public class GameControllerDriverConfig extends BaseDriverConfig {
     controller.get(Button.X).onTrue(new TingBangBang(new Ting(13), (double) 45)).onFalse(new TingBangBang(new Ting(13), (double) 0));
     controller.get(Button.Y).whileTrue(new TurnyCommand(1, new Ting(16)));
     // TODO 4.2.2: Make robot spin while a button is pressed
-    controller.get(Button.LB).whileTrue(RunCommand());
+    controller.get(Button.LB).whileTrue(new RunCommand(() -> {getDrivetrain().tankDrive(-1, 1);}, getDrivetrain()));
     // TODO 4.3.1: Add more triggers
   }
 
