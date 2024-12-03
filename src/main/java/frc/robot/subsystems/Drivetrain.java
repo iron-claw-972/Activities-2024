@@ -1,5 +1,7 @@
 package frc.robot.subsystems;
 
+import javax.xml.crypto.dsig.SignatureMethod;
+
 import com.ctre.phoenix6.hardware.Pigeon2;
 import com.kauailabs.navx.frc.AHRS;
 import com.revrobotics.CANSparkMax;
@@ -176,7 +178,13 @@ public class Drivetrain extends SubsystemBase {
 
   public void tankDriveVolts(double left, double right){
     // TODO 6.1.1: Implement this
-    
+    if (Robot.isReal()){
+      leftMotor1.setVoltage(left);
+      rightMotor1.setVoltage(right);
+    }
+    else{
+      driveSim.setInputs(left, right);
+    }
   }
 
   // TODO 6.2.1: Implement these 2 methods

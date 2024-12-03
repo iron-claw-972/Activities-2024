@@ -1,9 +1,12 @@
 package frc.robot.controls;
 
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitUntilCommand;
 import frc.robot.commands.BangBangController;
 import frc.robot.commands.BangBangSpinMotor;
 import frc.robot.commands.DoNothing;
+import frc.robot.commands.DriveTwoMeters;
 import frc.robot.commands.MoveOrangeArm;
 import frc.robot.constants.Constants;
 import frc.robot.subsystems.Drivetrain;
@@ -30,14 +33,17 @@ public class GameControllerDriverConfig extends BaseDriverConfig {
   public void configureControls() {
     // TODO 4.1.1: Change to your auto command
     controller.get(Button.A).onTrue(new MoveOrangeArm(orange, 90));
+    controller.get(Button.A).onTrue(new ParallelCommandGroup(new BangBangSpinMotor(getDrivetrain(), 10), new DriveTwoMeters(getDrivetrain())));
     // TODO 4.1.3: Add Bang-Bang drive command
 
     // TODO 4.1.4: Add subsystem Bang-Bangs
-    controller.get(Button.B).onTrue(new MoveOrangeArm(orange, 5));
-    controller.get(Button.B).onFalse(new MoveOrangeArm(orange, -5));
+    //controller.get(Button.B).onTrue(new MoveOrangeArm(orange, 5));
+    //controller.get(Button.B).onFalse(new MoveOrangeArm(orange, -5));
+    controller.get(Button.B).onTrue(new SequentialCommandGroup(new MoveOrangeArm(orange, 20), new DriveTwoMeters(getDrivetrain())));
     // 4.1.5 Make robot spin
     controller.get(Button.Y).onTrue(new BangBangSpinMotor(getDrivetrain(), 90));
-    controller.get(Button.Y).onFalse(new BangBangSpinMotor(getDrivetrain(), 0));
+    //controller.get(Button.Y).onFalse(new BangBangSpinMotor(getDrivetrain(), 0));
+    controller.get(Button.Y).onFalse(new SequentialCommandGroup(new BangBangController(getDrivetrain(), 10), new WaitUntilCommand(10), new BangBangController(getDrivetrain(), -10)));
     // TODO 4.2.2: Make robot spin while a button is pressed
     // controller.get(Button.X).whileTrue(new BangBangSpinMotor(getDrivetrain(), 200));
     //controller.get(Button.X).whileFalse(new BangBangSpinMotor(getDrivetrain(), 0));
