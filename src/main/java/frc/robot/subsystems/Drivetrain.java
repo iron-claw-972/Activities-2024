@@ -57,7 +57,7 @@ public class Drivetrain extends SubsystemBase {
 
     // TODO 1.2.4: Invert motors if necessary
         leftMotor1.setInverted(false);
-        rightMotor1.setInverted(false);
+        rightMotor1.setInverted(true);
     }
     // TODO 2.1.1: Create DifferentialDriveSim if the robot isn't real
     else{
