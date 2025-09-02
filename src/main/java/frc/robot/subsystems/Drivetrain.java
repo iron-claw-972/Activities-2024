@@ -5,6 +5,7 @@ import com.revrobotics.CANSparkMax;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.constants.DriveConstants;
 
 public class Drivetrain extends SubsystemBase {
   
@@ -27,11 +28,20 @@ public class Drivetrain extends SubsystemBase {
   public Drivetrain() {
 
     // TODO 1.1.2: Initialize motors
-
+    this.leftMotor1 = new CANSparkMax(DriveConstants.LEFT_MOTOR_1_ID, CANSparkMax.MotorType.kBrushless);
+    this.leftMotor2 = new CANSparkMax(DriveConstants.LEFT_MOTOR_2_ID, CANSparkMax.MotorType.kBrushless);
+    this.rightMotor1 = new CANSparkMax(DriveConstants.RIGHT_MOTOR_1_ID, CANSparkMax.MotorType.kBrushless);
+    this.rightMotor2 = new CANSparkMax(DriveConstants.RIGHT_MOTOR_2_ID, CANSparkMax.MotorType.kBrushless);
+    
     // TODO 1.1.3: Set motors to brake mode
-  
+    leftMotor1.setIdleMode(CANSparkMax.IdleMode.kBrake);
+    leftMotor2.setIdleMode(CANSparkMax.IdleMode.kBrake);
+    rightMotor1.setIdleMode(CANSparkMax.IdleMode.kBrake);
+    rightMotor2.setIdleMode(CANSparkMax.IdleMode.kBrake);
+    
     // TODO 1.1.4: Make motor2s follow motor1s
-
+    leftMotor2.follow(leftMotor1);
+    rightMotor2.follow(leftMotor1);
     // TODO 1.2.4: Invert motors if necessary
 
     // TODO 2.1.1: Define DifferentialDrivetrainSim if the robot isn't real
@@ -62,7 +72,7 @@ public class Drivetrain extends SubsystemBase {
    */
   public void tankDrive(double leftPower, double rightPower) {
     // TODO 1.2.1: Implement tankDrive
-
+    
     // TODO 2.1.2: If in sim, set sim inputs
 
   }
