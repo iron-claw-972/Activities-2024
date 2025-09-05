@@ -1,6 +1,11 @@
 package frc.robot.subsystems;
 
+import frc.robot.Robot;
+import frc.robot.constants.DriveConstants;
+import com.ctre.phoenix6.hardware.TalonFX;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkBase.IdleMode;
+import com.revrobotics.CANSparkLowLevel.MotorType;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -27,8 +32,16 @@ public class Drivetrain extends SubsystemBase {
   public Drivetrain() {
 
     // TODO 1.1.2: Initialize motors
+      leftMotor1 = new CANSparkMax(DriveConstants.LEFT_MOTOR_1_ID, MotorType.kBrushless);
+      leftMotor2 = new CANSparkMax(DriveConstants.LEFT_MOTOR_2_ID, MotorType.kBrushless);
+      rightMotor1 = new CANSparkMax(DriveConstants.RIGHT_MOTOR_1_ID, MotorType.kBrushless);
+      rightMotor2 = new CANSparkMax(DriveConstants.RIGHT_MOTOR_2_ID, MotorType.kBrushless);
 
     // TODO 1.1.3: Set motors to brake mode
+    leftMotor1.setIdleMode(IdleMode.kBrake);
+    leftMotor2.setIdleMode(IdleMode.kBrake);
+    rightMotor1.setIdleMode(IdleMode.kBrake);
+    rightMotor2.setIdleMode(IdleMode.kBrake);
   
     // TODO 1.1.4: Make motor2s follow motor1s
 
@@ -46,6 +59,8 @@ public class Drivetrain extends SubsystemBase {
     // TODO 2.2.5: Update odometry
 
     // TODO 1.2.2: Call tankDrive()
+    double p = 0.25;
+    tankDrive(Robot.driver.getLeftTranslation()*p, Robot.driver.getRightTranslation()*p);
 
     // TODO 3.1.1: Remove all of the tank drive code in this method
 
@@ -62,6 +77,8 @@ public class Drivetrain extends SubsystemBase {
    */
   public void tankDrive(double leftPower, double rightPower) {
     // TODO 1.2.1: Implement tankDrive
+    leftMotor1.set(leftPower);
+    rightMotor1.set(rightPower);
 
     // TODO 2.1.2: If in sim, set sim inputs
 
