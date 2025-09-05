@@ -12,6 +12,7 @@ import frc.robot.controls.BaseDriverConfig;
 import frc.robot.controls.GameControllerDriverConfig;
 import frc.robot.controls.Operator;
 import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.MySubsystem;
 import frc.robot.util.ShuffleBoard.ShuffleBoardManager;
 
 /**
@@ -24,6 +25,7 @@ public class Robot extends TimedRobot {
   private Command autoCommand;
   public static ShuffleBoardManager shuffleboard;
   public static Drivetrain drive;
+  public static MySubsystem brianSubsystem;
   // TODO 2.3.9: Create variable for your subsystem
   public static BaseDriverConfig driver;
   public static Operator operator;
@@ -43,6 +45,8 @@ public class Robot extends TimedRobot {
     // make subsystems
     drive = new Drivetrain();
     // TODO 2.3.10: Create your subsystem
+    brianSubsystem = new MySubsystem();
+
     
     shuffleboard = new ShuffleBoardManager(drive);
     driver = new GameControllerDriverConfig(drive);

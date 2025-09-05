@@ -59,7 +59,7 @@ public class Drivetrain extends SubsystemBase {
     // TODO 2.2.5: Update odometry
 
     // TODO 1.2.2: Call tankDrive()
-    double p = 0.25;
+    final double p = 0.25;
     tankDrive(Robot.driver.getLeftTranslation()*p, Robot.driver.getRightTranslation()*p);
 
     // TODO 3.1.1: Remove all of the tank drive code in this method
