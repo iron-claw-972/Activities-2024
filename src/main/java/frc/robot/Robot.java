@@ -8,10 +8,12 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.commands.ArcadeDriveCommand;
 import frc.robot.controls.BaseDriverConfig;
 import frc.robot.controls.GameControllerDriverConfig;
 import frc.robot.controls.Operator;
 import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.MotorSubsystem;
 import frc.robot.util.ShuffleBoard.ShuffleBoardManager;
 
 /**
@@ -25,11 +27,13 @@ public class Robot extends TimedRobot {
   public static ShuffleBoardManager shuffleboard;
   public static Drivetrain drive;
   // TODO 2.3.9: Create variable for your subsystem
+  public static MotorSubsystem motor;
   public static BaseDriverConfig driver;
   public static Operator operator;
 
   private static boolean isTestMode = false;
-
+  private static Command ArcadeDriveCommand;
+  private MotorSubsystem motorSubsystem;
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
@@ -43,16 +47,17 @@ public class Robot extends TimedRobot {
     // make subsystems
     drive = new Drivetrain();
     // TODO 2.3.10: Create your subsystem
+    motor = new MotorSubsystem();
     
-    shuffleboard = new ShuffleBoardManager(drive);
-    driver = new GameControllerDriverConfig(drive);
+    shuffleboard = new ShuffleBoardManager(drive, motor);
+    driver = new GameControllerDriverConfig(drive, motorSubsystem);
     operator = new Operator();
 
     driver.configureControls();
     operator.configureControls();
 
     // TODO 3.1.6: Set the drivetrain's default command
-
+    drive.setDefaultCommand(ArcadeDriveCommand);
     // TODO 4.2.1: Change default command to use RunCommand with a lambda expression
     // TODO 6.3.1: Change to Feedforward command
   }

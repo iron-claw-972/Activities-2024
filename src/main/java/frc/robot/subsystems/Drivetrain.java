@@ -1,9 +1,17 @@
 package frc.robot.subsystems;
+import frc.robot.Robot;
+import frc.robot.constants.*;
 
+import com.ctre.phoenix6.controls.Follower;
+import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkBase.IdleMode;
+import com.revrobotics.CANSparkLowLevel.MotorType;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.wpilibj.RobotBase;
+import edu.wpi.first.wpilibj.simulation.DifferentialDrivetrainSim;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Drivetrain extends SubsystemBase {
@@ -13,7 +21,7 @@ public class Drivetrain extends SubsystemBase {
   private CANSparkMax rightMotor1;
   private CANSparkMax rightMotor2;
 
-  // TODO 2.1.1: Create DifferentialDrivetrainSim object (don't define it here)
+
 
   // TODO 2.2.1: Create gyro (AHRS)
 
@@ -25,17 +33,34 @@ public class Drivetrain extends SubsystemBase {
 
 
   public Drivetrain() {
+ 
+      // TODO 1.1.2: Initialize motors
+      this.leftMotor1 = new CANSparkMax(DriveConstants.LEFT_MOTOR_1_ID, MotorType.kBrushless);
+      this.leftMotor2 = new CANSparkMax(DriveConstants.LEFT_MOTOR_2_ID, MotorType.kBrushless);
+      this.rightMotor1 = new CANSparkMax(DriveConstants.RIGHT_MOTOR_1_ID, MotorType.kBrushless);
+      this.rightMotor2 = new CANSparkMax(DriveConstants.RIGHT_MOTOR_2_ID, MotorType.kBrushless);
+   
+      // TODO 1.1.3: Set motors to brake mode
+      leftMotor1.setIdleMode(IdleMode.kBrake);
+      leftMotor2.setIdleMode(IdleMode.kBrake);
+      rightMotor1.setIdleMode(IdleMode.kBrake);
+     rightMotor2.setIdleMode(IdleMode.kBrake);
 
-    // TODO 1.1.2: Initialize motors
+     // TODO 1.1.4: Make motor2s follow motor1s
+     rightMotor2.follow(rightMotor1);
+     leftMotor2.follow(leftMotor1);
 
-    // TODO 1.1.3: Set motors to brake mode
-  
-    // TODO 1.1.4: Make motor2s follow motor1s
-
-    // TODO 1.2.4: Invert motors if necessary
-
+     // TODO 1.2.4: Invert motors if necessary
+     leftMotor1.setInverted(false);
+     leftMotor2.setInverted(false);
+     rightMotor1.setInverted(false);
+     rightMotor2.setInverted(false);
+    
+   
+    
     // TODO 2.1.1: Define DifferentialDrivetrainSim if the robot isn't real
 
+    
   }
 
    /**
@@ -46,7 +71,7 @@ public class Drivetrain extends SubsystemBase {
     // TODO 2.2.5: Update odometry
 
     // TODO 1.2.2: Call tankDrive()
-
+   
     // TODO 3.1.1: Remove all of the tank drive code in this method
 
     // TODO 2.1.3: Update sim if in simulation
@@ -62,6 +87,8 @@ public class Drivetrain extends SubsystemBase {
    */
   public void tankDrive(double leftPower, double rightPower) {
     // TODO 1.2.1: Implement tankDrive
+    leftMotor1.set(leftPower);
+    rightMotor1.set(rightPower);
 
     // TODO 2.1.2: If in sim, set sim inputs
 
@@ -75,7 +102,7 @@ public class Drivetrain extends SubsystemBase {
    */
   public void arcadeDrive(double throttle, double turn) {
     // TODO 3.1.2: Implement arcadeDrive
-    
+    tankDrive(throttle + turn, throttle - turn);
   }
 
   public Pose2d getPose(){
