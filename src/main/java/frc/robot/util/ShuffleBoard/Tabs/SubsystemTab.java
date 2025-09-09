@@ -2,14 +2,15 @@
 package frc.robot.util.ShuffleBoard.Tabs;
 
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import frc.robot.subsystems.motorSubsystem;
 import frc.robot.util.ShuffleBoard.ShuffleBoardTabs;
 
 
 public class SubsystemTab extends ShuffleBoardTabs {
-    // TODO 2.3.11: Create variable for subsystem
-
-    public SubsystemTab(){
-        
+    public motorSubsystem motor;
+    // TODO 2.3.11: Createvariable for subsystem
+    public SubsystemTab(motorSubsystem motor){
+        this.motor = motor;
     }
 
     public void createEntries(){

@@ -17,7 +17,7 @@ public class DriveConstants {
   public static final int LEFT_MOTOR_2_ID = 7;
   public static final int RIGHT_MOTOR_1_ID = 8;
   public static final int RIGHT_MOTOR_2_ID = 9;
-
+  public static final int MOTOR_67_ID = 67;
   // TODO 6.1.3: Add FF and PID constants
 
 

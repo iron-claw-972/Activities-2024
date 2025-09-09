@@ -58,7 +58,7 @@ public class Drivetrain extends SubsystemBase {
     // TODO 1.2.2: Call tankDrive()
 
     // TODO 3.1.1: Remove all of the tank drive code in this method
-
+    
     // TODO 2.1.3: Update sim if in simulation
     
   }
@@ -72,7 +72,8 @@ public class Drivetrain extends SubsystemBase {
    */
   public void tankDrive(double leftPower, double rightPower) {
     // TODO 1.2.1: Implement tankDrive
-    
+      leftMotor1.set(leftPower);
+      rightMotor1.set(rightPower);
     // TODO 2.1.2: If in sim, set sim inputs
 
   }
@@ -85,7 +86,7 @@ public class Drivetrain extends SubsystemBase {
    */
   public void arcadeDrive(double throttle, double turn) {
     // TODO 3.1.2: Implement arcadeDrive
-    
+    tankDrive(throttle+turn, throttle-turn);
   }
 
   public Pose2d getPose(){
