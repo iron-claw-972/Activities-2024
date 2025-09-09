@@ -54,18 +54,12 @@ public class Drivetrain extends SubsystemBase {
    /**
    * This will be called every 20ms, or 50 times per second
    */
+
   @Override
   public void periodic(){
     // TODO 2.2.5: Update odometry
 
     // TODO 1.2.2: Call tankDrive()
-    final double p = 0.25;
-    tankDrive(Robot.driver.getLeftTranslation()*p, Robot.driver.getRightTranslation()*p);
-
-    // TODO 3.1.1: Remove all of the tank drive code in this method
-
-    // TODO 2.1.3: Update sim if in simulation
-    
   }
 
   /**
@@ -92,7 +86,7 @@ public class Drivetrain extends SubsystemBase {
    */
   public void arcadeDrive(double throttle, double turn) {
     // TODO 3.1.2: Implement arcadeDrive
-    
+    tankDrive(throttle+turn, throttle-turn);
   }
 
   public Pose2d getPose(){
