@@ -27,13 +27,12 @@ public class Robot extends TimedRobot {
   public static ShuffleBoardManager shuffleboard;
   public static Drivetrain drive;
   // TODO 2.3.9: Create variable for your subsystem
-  public static MotorSubsystem motor;
+  public static MotorSubsystem motorSubsystem;
   public static BaseDriverConfig driver;
   public static Operator operator;
 
   private static boolean isTestMode = false;
   private static Command ArcadeDriveCommand;
-  private MotorSubsystem motorSubsystem;
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
@@ -47,9 +46,9 @@ public class Robot extends TimedRobot {
     // make subsystems
     drive = new Drivetrain();
     // TODO 2.3.10: Create your subsystem
-    motor = new MotorSubsystem();
+    motorSubsystem = new MotorSubsystem();
     
-    shuffleboard = new ShuffleBoardManager(drive, motor);
+    shuffleboard = new ShuffleBoardManager(drive, motorSubsystem);
     driver = new GameControllerDriverConfig(drive, motorSubsystem);
     operator = new Operator();
 
