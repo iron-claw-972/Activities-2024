@@ -13,10 +13,10 @@ import edu.wpi.first.math.util.Units;
 public class DriveConstants {
 
   // TODO 1.1.1: Set these
-  public static final int LEFT_MOTOR_1_ID = -1;
-  public static final int LEFT_MOTOR_2_ID = -1;
-  public static final int RIGHT_MOTOR_1_ID = -1;
-  public static final int RIGHT_MOTOR_2_ID = -1;
+  public static final int LEFT_MOTOR_1_ID = 1;
+  public static final int LEFT_MOTOR_2_ID = 2;
+  public static final int RIGHT_MOTOR_1_ID = 3;
+  public static final int RIGHT_MOTOR_2_ID = 4;
 
   // TODO 6.1.3: Add FF and PID constants
 

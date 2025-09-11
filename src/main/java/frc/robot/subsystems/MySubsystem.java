@@ -9,8 +9,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class MySubsystem extends SubsystemBase{
     private CANSparkMax motor;
-    final private int motorId=-1;
-    private final SingleJointedArmSim wheel_sim = new SingleJointedArmSim(DCMotor.getFalcon500(1), );
+    final private int motorId = 100;
+    //private final SingleJointedArmSim wheel_sim = new SingleJointedArmSim(DCMotor.getFalcon500(1), );
 
     public MySubsystem(){
         final int motorId=-1;

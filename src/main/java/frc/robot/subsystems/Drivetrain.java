@@ -1,7 +1,10 @@
 package frc.robot.subsystems;
 
 import frc.robot.Robot;
+import frc.robot.constants.Constants;
 import frc.robot.constants.DriveConstants;
+
+import com.ctre.phoenix6.configs.DifferentialConstantsConfigs;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkBase.IdleMode;
@@ -9,6 +12,8 @@ import com.revrobotics.CANSparkLowLevel.MotorType;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.simulation.DifferentialDrivetrainSim;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Drivetrain extends SubsystemBase {
@@ -19,6 +24,7 @@ public class Drivetrain extends SubsystemBase {
   private CANSparkMax rightMotor2;
 
   // TODO 2.1.1: Create DifferentialDrivetrainSim object (don't define it here)
+  private DifferentialDrivetrainSim driveSim;
 
   // TODO 2.2.1: Create gyro (AHRS)
 
@@ -48,7 +54,8 @@ public class Drivetrain extends SubsystemBase {
     // TODO 1.2.4: Invert motors if necessary
 
     // TODO 2.1.1: Define DifferentialDrivetrainSim if the robot isn't real
-
+    driveSim = new DifferentialDrivetrainSim(DriveConstants.DRIVETRAIN_PLANT, DriveConstants.MOTOR, DriveConstants.GEAR_RATIO, DriveConstants.TRACK_WIDTH, DriveConstants.WHEEL_DIAMETER/2.0, DriveConstants.MEASUREMENT_STD_DEVS);
+    
   }
 
    /**
@@ -60,6 +67,11 @@ public class Drivetrain extends SubsystemBase {
     // TODO 2.2.5: Update odometry
 
     // TODO 1.2.2: Call tankDrive()
+    //arcadeDrive(Robot.driver.getForwardTranslation(), Robot.driver.getTurn());
+    tankDrive(Robot.driver.getLeftTranslation(), Robot.driver.getRightTranslation());
+    if(!Robot.isReal()){
+      driveSim.update(Constants.LOOP_TIME);
+    }
   }
 
   /**
@@ -70,11 +82,15 @@ public class Drivetrain extends SubsystemBase {
    * @param rightPower the commanded power to the right motors (-1 to 1)
    */
   public void tankDrive(double leftPower, double rightPower) {
+    
     // TODO 1.2.1: Implement tankDrive
-    leftMotor1.set(leftPower);
-    rightMotor1.set(rightPower);
-
-    // TODO 2.1.2: If in sim, set sim inputs
+    if(Robot.isReal()){
+    leftMotor1.set(leftPower*0.25);
+    rightMotor1.set(rightPower*0.25);
+    }
+    else{
+    driveSim.setInputs(leftPower*Constants.ROBOT_VOLTAGE*0.25,rightPower*Constants.ROBOT_VOLTAGE*0.25);
+    }
 
   }
 
