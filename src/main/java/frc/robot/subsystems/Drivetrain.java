@@ -6,14 +6,20 @@ import frc.robot.constants.DriveConstants;
 
 import com.ctre.phoenix6.configs.DifferentialConstantsConfigs;
 import com.ctre.phoenix6.hardware.TalonFX;
+import com.kauailabs.navx.frc.AHRS;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
+import edu.wpi.first.math.estimator.DifferentialDrivePoseEstimator;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.simulation.DifferentialDrivetrainSim;
+import edu.wpi.first.wpilibj.smartdashboard.Field2d;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Drivetrain extends SubsystemBase {
@@ -27,10 +33,14 @@ public class Drivetrain extends SubsystemBase {
   private DifferentialDrivetrainSim driveSim;
 
   // TODO 2.2.1: Create gyro (AHRS)
+  private AHRS gyro;
 
   // TODO 2.2.3: Create DifferentialDriveKinematics
+  private DifferentialDriveKinematics kinematics;
 
   // TODO 2.2.4: Create DifferentialDrivePoseEstimator
+  private DifferentialDrivePoseEstimator pose;
+  private Field2d m_field;
 
   // TODO 6.1.5: Create Feedforward and PIDs
 
@@ -55,7 +65,16 @@ public class Drivetrain extends SubsystemBase {
 
     // TODO 2.1.1: Define DifferentialDrivetrainSim if the robot isn't real
     driveSim = new DifferentialDrivetrainSim(DriveConstants.DRIVETRAIN_PLANT, DriveConstants.MOTOR, DriveConstants.GEAR_RATIO, DriveConstants.TRACK_WIDTH, DriveConstants.WHEEL_DIAMETER/2.0, DriveConstants.MEASUREMENT_STD_DEVS);
+
+    gyro = new AHRS(SPI.Port.kMXP);
+
+    kinematics = new DifferentialDriveKinematics(DriveConstants.TRACK_WIDTH);
+
+    pose = new DifferentialDrivePoseEstimator(kinematics, getGyroAngle(), getLeftPosition(), getAveragePosition(), new Pose2d(2.0,2.0,new Rotation2d()));
     
+    m_field = new Field2d();
+
+    SmartDashboard.putData("Field", m_field);
   }
 
    /**
@@ -65,15 +84,32 @@ public class Drivetrain extends SubsystemBase {
   @Override
   public void periodic(){
     // TODO 2.2.5: Update odometry
+    pose.update(getGyroAngle(), getLeftPosition(), getRightPosition());
+    m_field.setRobotPose(pose.getEstimatedPosition());
 
     // TODO 1.2.2: Call tankDrive()
     //arcadeDrive(Robot.driver.getForwardTranslation(), Robot.driver.getTurn());
-    tankDrive(Robot.driver.getLeftTranslation(), Robot.driver.getRightTranslation());
+    //tankDrive(Robot.driver.getLeftTranslation(), Robot.driver.getRightTranslation());
     if(!Robot.isReal()){
       driveSim.update(Constants.LOOP_TIME);
     }
   }
 
+  public void simulationPeriodic() {
+    // Set the inputs to the system. Note that we need to convert
+    // the [-1, 1] PWM signal to voltage by multiplying it by the
+    // robot controller voltage.
+
+
+    //arcadeDrive(Robot.driver.getForwardTranslation(), Robot.driver.getTurn());
+
+    //tankDrive(Robot.driver.getLeftTranslation(), Robot.driver.getRightTranslation());
+    // Advance the model by 20 ms. Note that if you are running this
+    // subsystem in a separate thread or have changed the nominal timestep
+    // of TimedRobot, this value needs to match it.
+    driveSim.update(0.02);
+    // Update all of our sensors.
+  }
   /**
    * Drives the robot using tank drive controls. Tank drive is slightly easier to code but less
    * intuitive to control than arcade drive.
@@ -107,7 +143,7 @@ public class Drivetrain extends SubsystemBase {
 
   public Pose2d getPose(){
     // TODO 2.2.6: Implement this method
-    return new Pose2d();
+    return pose.getEstimatedPosition();
   }
 
   public void resetEncoders(){
@@ -117,16 +153,16 @@ public class Drivetrain extends SubsystemBase {
 
   // TODO 2.2.2: Implement these 4 methods
   public double getLeftPosition(){
-    return 0;
+    return driveSim.getLeftPositionMeters();
   }
   public double getRightPosition(){
-    return 0;
+    return driveSim.getRightPositionMeters();
   }
   public double getAveragePosition(){
     return 0;
   }
   public Rotation2d getGyroAngle(){
-    return null;
+    return driveSim.getHeading();
   }
 
   public void tankDriveVolts(double left, double right){
