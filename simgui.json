@@ -20,6 +20,9 @@
         "header": {
           "open": true
         }
+      },
+      "window": {
+        "visible": false
       }
     }
   },
@@ -61,6 +64,24 @@
       "/SmartDashboard/Command Scheduler": {
         "window": {
           "visible": true
+        }
+      }
+    }
+  },
+  "NetworkTables": {
+    "transitory": {
+      "Shuffleboard": {
+        "Auto": {
+          "SendableChooser[0]": {
+            "open": true
+          },
+          "open": true
+        },
+        "open": true
+      },
+      "SmartDashboard": {
+        "Command Scheduler": {
+          "open": true
         }
       }
     }

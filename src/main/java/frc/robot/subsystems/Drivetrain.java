@@ -11,6 +11,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.estimator.DifferentialDrivePoseEstimator;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -43,6 +44,8 @@ public class Drivetrain extends SubsystemBase {
   private Field2d m_field;
 
   // TODO 6.1.5: Create Feedforward and PIDs
+  // Creates a PIDController with gains kP, kI, and kD
+ PIDController pid;
 
 
   public Drivetrain() {
@@ -75,6 +78,9 @@ public class Drivetrain extends SubsystemBase {
     m_field = new Field2d();
 
     SmartDashboard.putData("Field", m_field);
+
+    double kP = 0.1, kI = 0, kD = 0;
+    pid = new PIDController(kP, kI, kD);
   }
 
    /**
