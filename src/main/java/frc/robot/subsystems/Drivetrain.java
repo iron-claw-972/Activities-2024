@@ -4,6 +4,8 @@ import com.revrobotics.CANSparkMax;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.wpilibj.RobotBase;
+import edu.wpi.first.wpilibj.simulation.DifferentialDrivetrainSim;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.constants.DriveConstants;
 
@@ -15,7 +17,7 @@ public class Drivetrain extends SubsystemBase {
   private CANSparkMax rightMotor2;
 
   // TODO 2.1.1: Create DifferentialDrivetrainSim object (don't define it here)
-
+  private DifferentialDrivetrainSim driveSim;
   // TODO 2.2.1: Create gyro (AHRS)
 
   // TODO 2.2.3: Create DifferentialDriveKinematics
@@ -26,7 +28,9 @@ public class Drivetrain extends SubsystemBase {
 
 
   public Drivetrain() {
-
+    if (RobotBase.isReal()) {
+      
+    }
     // TODO 1.1.2: Initialize motors
     this.leftMotor1 = new CANSparkMax(DriveConstants.LEFT_MOTOR_1_ID, CANSparkMax.MotorType.kBrushless);
     this.leftMotor2 = new CANSparkMax(DriveConstants.LEFT_MOTOR_2_ID, CANSparkMax.MotorType.kBrushless);
@@ -45,7 +49,7 @@ public class Drivetrain extends SubsystemBase {
     // TODO 1.2.4: Invert motors if necessary
 
     // TODO 2.1.1: Define DifferentialDrivetrainSim if the robot isn't real
-
+    
   }
 
    /**
