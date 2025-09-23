@@ -79,8 +79,6 @@ public class Drivetrain extends SubsystemBase {
 
     SmartDashboard.putData("Field", m_field);
 
-    double kP = 0.1, kI = 0, kD = 0;
-    pid = new PIDController(kP, kI, kD);
   }
 
    /**
@@ -94,7 +92,7 @@ public class Drivetrain extends SubsystemBase {
     m_field.setRobotPose(pose.getEstimatedPosition());
 
     // TODO 1.2.2: Call tankDrive()
-    //arcadeDrive(Robot.driver.getForwardTranslation(), Robot.driver.getTurn());
+    arcadeDrive(Robot.driver.getForwardTranslation(), Robot.driver.getTurn());
     //tankDrive(Robot.driver.getLeftTranslation(), Robot.driver.getRightTranslation());
     if(!Robot.isReal()){
       driveSim.update(Constants.LOOP_TIME);
@@ -135,6 +133,7 @@ public class Drivetrain extends SubsystemBase {
     }
 
   }
+
 
   /**
    * Drives the robot using arcade controls.
