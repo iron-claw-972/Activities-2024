@@ -43,7 +43,7 @@ public class ShuffleBoardManager {
     }
 
     public void update(){
-        for (ShuffleBoardTabs tab : tabs){
+        for (ShuffleBoardTabs tab: tabs){
             tab.update();
         }
         feild.updateFeild();

@@ -18,11 +18,12 @@ public class SubsystemTab extends ShuffleBoardTabs {
         tab = Shuffleboard.getTab("Subsystem");
 
         // TODO 2.4.7: Add Mechanism2d
+        tab.add("wheel", MySubsystem.getMech2d());
 
         // TODO 3.3.13: Add command buttons
 
         // TODO 5.3.1: Add PID
-
+        tab.add("pid", MySubsystem.getPID());
     }
 
 

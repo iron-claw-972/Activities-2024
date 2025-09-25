@@ -1,8 +1,11 @@
 package frc.robot.controls;
 
+
 import frc.robot.commands.DoNothing;
+import frc.robot.commands.PIDCommandWheel;
 import frc.robot.constants.Constants;
 import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.MySubsystem;
 import lib.controllers.GameController;
 import lib.controllers.GameController.Axis;
 import lib.controllers.GameController.Button;
@@ -12,9 +15,11 @@ import lib.controllers.GameController.Button;
  */
 public class GameControllerDriverConfig extends BaseDriverConfig {
   private final GameController controller = new GameController(Constants.DRIVER_JOY);
+  MySubsystem wheel;
 
-  public GameControllerDriverConfig(Drivetrain drive) {
+  public GameControllerDriverConfig(Drivetrain drive, MySubsystem wheel) {
     super(drive);
+    this.wheel = wheel;
   }
 
   @Override
@@ -22,7 +27,7 @@ public class GameControllerDriverConfig extends BaseDriverConfig {
     // TODO 4.1.1: Change to your auto command
     controller.get(Button.A).onTrue(new DoNothing());
     // TODO 4.1.3: Add Bang-Bang drive command
-
+    controller.get(Button.B).onTrue(new PIDCommandWheel(wheel, 90.0));
     // TODO 4.1.4: Add subsystem Bang-Bangs
 
     // TODO 4.2.2: Make robot spin while a button is pressed

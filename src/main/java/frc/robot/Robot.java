@@ -51,7 +51,7 @@ public class Robot extends TimedRobot {
 
     
     shuffleboard = new ShuffleBoardManager(drive, brianSubsystem);
-    driver = new GameControllerDriverConfig(drive);
+    driver = new GameControllerDriverConfig(drive, brianSubsystem);
     operator = new Operator();
 
     driver.configureControls();
